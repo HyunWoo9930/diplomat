@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import publicdata.hackathon.diplomats.domain.dto.request.FreeBoardUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardCommentResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardDetailResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardImageResponse;
@@ -45,12 +46,10 @@ public class FreeBoardService {
 			.build();
 		freeBoardRepository.save(freeBoard);
 
-		// 이미지 저장
 		if (images != null && !images.isEmpty()) {
 			for (int i = 0; i < images.size(); i++) {
 				MultipartFile image = images.get(i);
 				if (!image.isEmpty()) {
-					// 파일 저장
 					String savedFileName = fileStorageUtil.saveFile(image);
 
 					FreeBoardImage freeBoardImage = FreeBoardImage.builder()
@@ -126,5 +125,45 @@ public class FreeBoardService {
 			.createdAt(freeBoard.getCreatedAt())
 			.updatedAt(freeBoard.getUpdatedAt())
 			.build();
+	}
+
+	public void updateFreeBoard(String username, Long id, FreeBoardUpdateRequest request) {
+		FreeBoard freeBoard = freeBoardRepository.findById(id)
+			.orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
+
+		// 작성자 확인
+		if (!freeBoard.getUser().getUserId().equals(username)) {
+			throw new RuntimeException("게시글 수정 권한이 없습니다.");
+		}
+
+		// 게시글 수정
+		freeBoard.setTitle(request.getTitle());
+		freeBoard.setContent(request.getContent());
+		freeBoard.setUpdatedAt(LocalDateTime.now());
+
+		freeBoardRepository.save(freeBoard);
+	}
+
+	public void deleteFreeBoard(String username, Long id) {
+		FreeBoard freeBoard = freeBoardRepository.findById(id)
+			.orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
+
+		// 작성자 확인
+		if (!freeBoard.getUser().getUserId().equals(username)) {
+			throw new RuntimeException("게시글 삭제 권한이 없습니다.");
+		}
+
+		// 연관된 이미지들도 함께 삭제 (Cascade로 처리되지만 파일도 삭제)
+		List<FreeBoardImage> images = freeBoardImageRepository.findAllByFreeBoard(freeBoard);
+		for (FreeBoardImage image : images) {
+			// 실제 파일 삭제 (optional)
+			try {
+				fileStorageUtil.deleteFile(image.getSavedFileName());
+			} catch (Exception e) {
+				// 파일 삭제 실패해도 DB는 삭제 진행
+			}
+		}
+
+		freeBoardRepository.delete(freeBoard);
 	}
 }

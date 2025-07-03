@@ -42,4 +42,13 @@ public class FileStorageUtil {
 			throw new RuntimeException("파일 저장에 실패했습니다.", e);
 		}
 	}
+
+	public void deleteFile(String savedFileName) {
+		try {
+			Path filePath = Paths.get(uploadDir + savedFileName);
+			Files.deleteIfExists(filePath);
+		} catch (IOException e) {
+			throw new RuntimeException("파일 삭제에 실패했습니다.", e);
+		}
+	}
 }
