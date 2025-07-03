@@ -19,10 +19,11 @@ public class FreeBoardDetailResponse {
 	private String title;
 	private String content;
 	private int likes;
+	private int viewCount;
 
 	@Builder
 	public FreeBoardDetailResponse(List<FreeBoardCommentResponse> freeBoardComments, List<FreeBoardImageResponse> freeBoardImages, LocalDateTime updatedAt,
-		LocalDateTime createdAt, String userId, String title, String content, int likes) {
+		LocalDateTime createdAt, String userId, String title, String content, int likes, int viewCount) {
 		this.freeBoardComments = freeBoardComments;
 		this.freeBoardImages = freeBoardImages;
 		this.updatedAt = updatedAt;
@@ -31,5 +32,6 @@ public class FreeBoardDetailResponse {
 		this.title = title;
 		this.content = content;
 		this.likes = likes;
+		this.viewCount = viewCount;
 	}
 }

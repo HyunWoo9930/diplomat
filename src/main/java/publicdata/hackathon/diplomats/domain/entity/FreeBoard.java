@@ -22,6 +22,7 @@ public class FreeBoard {
 	private String title;
 	private String content;
 	private int likes;
+	private int viewCount;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -37,5 +38,6 @@ public class FreeBoard {
 		this.createdAt = LocalDateTime.now();
 		this.updatedAt = LocalDateTime.now();
 		this.likes = 0;
+		this.viewCount = 0;
 	}
 }

@@ -56,10 +56,13 @@ public class FreeBoardController {
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<?> getFreeBoards(Authentication authentication, int page, int size) {
+	public ResponseEntity<?> getFreeBoards(Authentication authentication, 
+		@RequestParam(defaultValue = "0") int page, 
+		@RequestParam(defaultValue = "10") int size,
+		@RequestParam(defaultValue = "latest") String sortBy) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-		Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
-		return ResponseEntity.ok(freeBoardService.getFreeBoards(customUserDetails.getUsername(), pageable));
+		Pageable pageable = PageRequest.of(page, size);
+		return ResponseEntity.ok(freeBoardService.getFreeBoards(customUserDetails.getUsername(), pageable, sortBy));
 	}
 
 	@GetMapping("/{id}")

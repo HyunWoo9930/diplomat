@@ -16,17 +16,19 @@ public class FreeBoardResponse {
 	private String title;
 	private String content;
 	private int likes;
+	private int viewCount;
 	private String userId;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
 	@Builder
-	public FreeBoardResponse(Long id, String title, String content, int likes, String userId, LocalDateTime createdAt,
+	public FreeBoardResponse(Long id, String title, String content, int likes, int viewCount, String userId, LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.likes = likes;
+		this.viewCount = viewCount;
 		this.userId = userId;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;

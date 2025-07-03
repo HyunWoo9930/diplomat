@@ -11,5 +11,12 @@ import publicdata.hackathon.diplomats.domain.entity.FreeBoard;
 
 @Repository
 public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long> {
+	// 최신순 정렬
 	Page<FreeBoard> findAllByOrderByCreatedAtDesc(Pageable pageable);
+	
+	// 조회수순 정렬 (높은 순)
+	Page<FreeBoard> findAllByOrderByViewCountDesc(Pageable pageable);
+	
+	// 좋아요순 정렬 (높은 순)
+	Page<FreeBoard> findAllByOrderByLikesDesc(Pageable pageable);
 }

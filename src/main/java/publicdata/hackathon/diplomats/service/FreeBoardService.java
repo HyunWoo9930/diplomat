@@ -3,6 +3,7 @@ package publicdata.hackathon.diplomats.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,13 +70,31 @@ public class FreeBoardService {
 		}
 	}
 
-	public List<FreeBoardResponse> getFreeBoards(String username, Pageable pageable) {
-		return freeBoardRepository.findAllByOrderByCreatedAtDesc(pageable)
-			.stream()
+	public List<FreeBoardResponse> getFreeBoards(String username, Pageable pageable, String sortBy) {
+		Page<FreeBoard> freeBoardPage;
+		
+		// 정렬 기준에 따라 다른 메서드 호출
+		switch (sortBy.toLowerCase()) {
+			case "views":
+			case "viewcount":
+				freeBoardPage = freeBoardRepository.findAllByOrderByViewCountDesc(pageable);
+				break;
+			case "likes":
+				freeBoardPage = freeBoardRepository.findAllByOrderByLikesDesc(pageable);
+				break;
+			case "latest":
+			case "created":
+			default:
+				freeBoardPage = freeBoardRepository.findAllByOrderByCreatedAtDesc(pageable);
+				break;
+		}
+		
+		return freeBoardPage.stream()
 			.map(freeBoard -> FreeBoardResponse.builder()
 				.id(freeBoard.getId())
 				.title(freeBoard.getTitle())
 				.likes(freeBoard.getLikes())
+				.viewCount(freeBoard.getViewCount())
 				.content(freeBoard.getContent())
 				.createdAt(freeBoard.getCreatedAt())
 				.updatedAt(freeBoard.getUpdatedAt())
@@ -87,6 +106,11 @@ public class FreeBoardService {
 	public FreeBoardDetailResponse getFreeBoardDetails(String username, Long id) {
 		FreeBoard freeBoard = freeBoardRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("FreeBoard not found"));
+		
+		// 조회수 증가
+		freeBoard.setViewCount(freeBoard.getViewCount() + 1);
+		freeBoardRepository.save(freeBoard);
+		
 		List<FreeBoardCommentResponse> freeBoardComments = freeBoardCommentRepository.findAllByFreeBoard(freeBoard)
 			.stream()
 			.map(freeBoardComment -> FreeBoardCommentResponse.builder()
@@ -119,6 +143,7 @@ public class FreeBoardService {
 			.freeBoardComments(freeBoardComments)
 			.freeBoardImages(images)
 			.likes(freeBoard.getLikes())
+			.viewCount(freeBoard.getViewCount())
 			.title(freeBoard.getTitle())
 			.content(freeBoard.getContent())
 			.userId(freeBoard.getUser().getUserId())
