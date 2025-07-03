@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import publicdata.hackathon.diplomats.domain.dto.request.CommentRequest;
 import publicdata.hackathon.diplomats.jwt.CustomUserDetails;
+import publicdata.hackathon.diplomats.service.FreeBoardCommentService;
 import publicdata.hackathon.diplomats.service.FreeBoardService;
 
 @RestController
@@ -27,6 +30,7 @@ import publicdata.hackathon.diplomats.service.FreeBoardService;
 public class FreeBoardController {
 
 	private final FreeBoardService freeBoardService;
+	private final FreeBoardCommentService freeBoardCommentService;
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> createFreeBoard(Authentication authentication, @RequestParam("title") String title,
@@ -58,5 +62,13 @@ public class FreeBoardController {
 	public ResponseEntity<?> getFreeBoard(Authentication authentication, @PathVariable Long id) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 		return ResponseEntity.ok(freeBoardService.getFreeBoardDetails(customUserDetails.getUsername(), id));
+	}
+
+	@PostMapping("/{id}/comment")
+	public ResponseEntity<?> commentFreeBoard(Authentication authentication, @PathVariable Long id,
+		@RequestBody CommentRequest commentRequest) {
+		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
+		freeBoardCommentService.commentFreeBoard(customUserDetails.getUsername(), id, commentRequest);
+		return ResponseEntity.ok("success");
 	}
 }

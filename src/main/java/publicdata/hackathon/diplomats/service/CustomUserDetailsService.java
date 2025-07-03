@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 
 	public User findByUserName(String userName) {
-		return userRepository.findByName(userName).orElse(null);
+		return userRepository.findByUserId(userName).orElse(null);
 	}
 	
 	public User findByUserId(String userId) {

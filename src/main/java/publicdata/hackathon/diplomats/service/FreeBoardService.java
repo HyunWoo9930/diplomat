@@ -35,7 +35,7 @@ public class FreeBoardService {
 	private final ImageUtil imageUtil;
 
 	public void createFreeBoard(String username, String title, String content, List<MultipartFile> images) {
-		User user = userRepository.findByName(username)
+		User user = userRepository.findByUserId(username)
 			.orElseThrow(() -> new EntityNotFoundException("User not found"));
 
 		FreeBoard freeBoard = FreeBoard.builder()
