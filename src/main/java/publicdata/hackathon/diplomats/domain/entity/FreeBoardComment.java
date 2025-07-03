@@ -26,4 +26,8 @@ public class FreeBoardComment {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "free_board_id")
+	private FreeBoard freeBoard;
 }
