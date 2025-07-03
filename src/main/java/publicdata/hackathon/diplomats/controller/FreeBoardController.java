@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -37,7 +36,8 @@ public class FreeBoardController {
 	private final FreeBoardCommentService freeBoardCommentService;
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<String> createFreeBoard(Authentication authentication, @RequestParam("title") String title,
+	public ResponseEntity<String> createFreeBoard(Authentication authentication,
+		@RequestParam("title") String title,
 		@RequestParam("content") String content,
 		@RequestPart(value = "images", required = false) List<MultipartFile> images) {
 
@@ -56,8 +56,8 @@ public class FreeBoardController {
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<?> getFreeBoards(Authentication authentication, 
-		@RequestParam(defaultValue = "0") int page, 
+	public ResponseEntity<?> getFreeBoards(Authentication authentication,
+		@RequestParam(defaultValue = "0") int page,
 		@RequestParam(defaultValue = "10") int size,
 		@RequestParam(defaultValue = "latest") String sortBy) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();

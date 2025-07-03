@@ -94,7 +94,6 @@ public class FreeBoardService {
 				.id(freeBoard.getId())
 				.title(freeBoard.getTitle())
 				.likes(freeBoard.getLikes())
-				.viewCount(freeBoard.getViewCount())
 				.content(freeBoard.getContent())
 				.createdAt(freeBoard.getCreatedAt())
 				.updatedAt(freeBoard.getUpdatedAt())
@@ -106,11 +105,6 @@ public class FreeBoardService {
 	public FreeBoardDetailResponse getFreeBoardDetails(String username, Long id) {
 		FreeBoard freeBoard = freeBoardRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("FreeBoard not found"));
-		
-		// 조회수 증가
-		freeBoard.setViewCount(freeBoard.getViewCount() + 1);
-		freeBoardRepository.save(freeBoard);
-		
 		List<FreeBoardCommentResponse> freeBoardComments = freeBoardCommentRepository.findAllByFreeBoard(freeBoard)
 			.stream()
 			.map(freeBoardComment -> FreeBoardCommentResponse.builder()
@@ -143,7 +137,6 @@ public class FreeBoardService {
 			.freeBoardComments(freeBoardComments)
 			.freeBoardImages(images)
 			.likes(freeBoard.getLikes())
-			.viewCount(freeBoard.getViewCount())
 			.title(freeBoard.getTitle())
 			.content(freeBoard.getContent())
 			.userId(freeBoard.getUser().getUserId())

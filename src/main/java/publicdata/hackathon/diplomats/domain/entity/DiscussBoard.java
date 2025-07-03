@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import publicdata.hackathon.diplomats.domain.enums.DiscussType;
@@ -22,6 +23,7 @@ public class DiscussBoard {
 	private String title;
 	private String content;
 	private int likes;
+	private int viewCount;
 
 	private DiscussType discussType;
 
@@ -30,4 +32,17 @@ public class DiscussBoard {
 	private User user;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+
+	@Builder
+
+	public DiscussBoard(String title, String content, DiscussType discussType, User user) {
+		this.title = title;
+		this.content = content;
+		this.discussType = discussType;
+		this.user = user;
+		this.createdAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
+		this.likes = 0;
+		this.viewCount = 0;
+	}
 }
