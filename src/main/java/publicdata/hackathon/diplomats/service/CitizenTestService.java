@@ -126,7 +126,7 @@ public class CitizenTestService {
 		return typeScores.entrySet().stream()
 			.max(Map.Entry.comparingByValue())
 			.map(Map.Entry::getKey)
-			.orElse("CULTURAL_DIPLOMACY"); // 기본값
+			.orElse("CULTURAL_DIPLOMACY");
 	}
 
 	// CitizenTestService.java에 추가
