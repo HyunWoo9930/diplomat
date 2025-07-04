@@ -1,11 +1,11 @@
 package publicdata.hackathon.diplomats.service;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +17,8 @@ import publicdata.hackathon.diplomats.domain.dto.response.CitizenTestQuestionsRe
 import publicdata.hackathon.diplomats.domain.dto.response.CitizenTestResultResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.QuestionOptionResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.QuestionResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.RecommendedDiplomacyProgram;
+import publicdata.hackathon.diplomats.domain.dto.response.RecommendedPressRelease;
 import publicdata.hackathon.diplomats.domain.entity.CitizenType;
 import publicdata.hackathon.diplomats.domain.entity.Question;
 import publicdata.hackathon.diplomats.domain.entity.QuestionOption;
@@ -35,6 +37,8 @@ public class CitizenTestService {
 	private final QuestionOptionRepository questionOptionRepository;
 	private final CitizenTypeRepository citizenTypeRepository;
 	private final UserRepository userRepository;
+	private final PressReleaseService pressReleaseService;
+	private final PublicDiplomacyService publicDiplomacyService;
 
 	public CitizenTestQuestionsResponse getAllQuestions() {
 		List<Question> questions = questionRepository.findAllWithOptionsOrderByQuestionOrder();
@@ -87,13 +91,20 @@ public class CitizenTestService {
 		user.setCitizenType(resultTypeName);
 		userRepository.save(user);
 
+		// 6. 유형 정보 조회 및 추천 보도자료 가져오기
 		CitizenType citizenType = citizenTypeRepository.findByTypeName(resultTypeName)
 			.orElseThrow(() -> new EntityNotFoundException("시민력 유형을 찾을 수 없습니다."));
+
+		List<RecommendedPressRelease> recommendedNews = pressReleaseService.getRecommendedPressReleases(resultTypeName);
+		List<RecommendedDiplomacyProgram> recommendedPrograms = publicDiplomacyService.getRecommendedPrograms(
+			resultTypeName);
 
 		return CitizenTestResultResponse.builder()
 			.resultType(citizenType.getTypeName())
 			.displayName(citizenType.getDisplayName())
 			.description(citizenType.getDescription())
+			.recommendedNews(recommendedNews)
+			.recommendedPrograms(recommendedPrograms)  // 추가
 			.message("시민력 테스트가 완료되었습니다!")
 			.build();
 	}
@@ -116,5 +127,39 @@ public class CitizenTestService {
 			.max(Map.Entry.comparingByValue())
 			.map(Map.Entry::getKey)
 			.orElse("CULTURAL_DIPLOMACY"); // 기본값
+	}
+
+	// CitizenTestService.java에 추가
+	public CitizenTestResultResponse getMyTestResult(String username) {
+		User user = userRepository.findByUserId(username)
+			.orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
+
+		if (user.getCitizenType() == null || user.getCitizenType().isEmpty()) {
+			// 테스트를 하지 않은 경우
+			return CitizenTestResultResponse.builder()
+				.resultType(null)
+				.displayName(null)
+				.description(null)
+				.recommendedNews(Collections.emptyList())
+				.message("아직 시민력 테스트를 완료하지 않았습니다. 테스트를 통해 나만의 시민력 유형을 확인해보세요!")
+				.build();
+		}
+
+		CitizenType citizenType = citizenTypeRepository.findByTypeName(user.getCitizenType())
+			.orElseThrow(() -> new EntityNotFoundException("시민력 유형을 찾을 수 없습니다."));
+
+		List<RecommendedPressRelease> recommendedNews = pressReleaseService.getRecommendedPressReleases(
+			user.getCitizenType());
+		List<RecommendedDiplomacyProgram> recommendedPrograms = publicDiplomacyService.getRecommendedPrograms(
+			user.getCitizenType());
+
+		return CitizenTestResultResponse.builder()
+			.resultType(citizenType.getTypeName())
+			.displayName(citizenType.getDisplayName())
+			.description(citizenType.getDescription())
+			.recommendedNews(recommendedNews)
+			.recommendedPrograms(recommendedPrograms)  // 추가
+			.message("시민력 테스트가 완료되었습니다!")
+			.build();
 	}
 }

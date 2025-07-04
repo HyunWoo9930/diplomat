@@ -1,5 +1,7 @@
 package publicdata.hackathon.diplomats.controller;
 
+import java.util.Collections;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,6 +89,26 @@ public class CitizenTestController {
 					.displayName(null)
 					.description(null)
 					.message("테스트 제출 실패: " + e.getMessage())
+					.build()
+			);
+		}
+	}
+
+	@GetMapping("/my-result")
+	@Operation(summary = "내 시민력 테스트 결과 조회", description = "사용자의 시민력 테스트 결과와 추천 보도자료를 조회합니다.")
+	public ResponseEntity<CitizenTestResultResponse> getMyTestResult(Authentication authentication) {
+		try {
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			CitizenTestResultResponse response = citizenTestService.getMyTestResult(userDetails.getUsername());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(
+				CitizenTestResultResponse.builder()
+					.resultType(null)
+					.displayName(null)
+					.description(null)
+					.recommendedNews(Collections.emptyList())
+					.message("테스트 결과를 불러오는 중 오류가 발생했습니다: " + e.getMessage())
 					.build()
 			);
 		}
