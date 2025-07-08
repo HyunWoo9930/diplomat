@@ -12,4 +12,7 @@ import publicdata.hackathon.diplomats.domain.entity.DiaryComment;
 public interface DiaryCommentRepository extends JpaRepository<DiaryComment, Long> {
 	
 	List<DiaryComment> findAllByDiary(Diary diary);
+	
+	// 댓글 수 조회
+	long countByDiary(Diary diary);
 }

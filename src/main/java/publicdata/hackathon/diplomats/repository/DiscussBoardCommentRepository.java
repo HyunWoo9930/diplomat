@@ -12,4 +12,7 @@ import publicdata.hackathon.diplomats.domain.entity.DiscussBoardComment;
 public interface DiscussBoardCommentRepository extends JpaRepository<DiscussBoardComment, Long> {
 	
 	List<DiscussBoardComment> findAllByDiscussBoard(DiscussBoard discussBoard);
+	
+	// 댓글 수 조회
+	long countByDiscussBoard(DiscussBoard discussBoard);
 }

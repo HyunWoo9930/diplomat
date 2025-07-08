@@ -11,4 +11,7 @@ import publicdata.hackathon.diplomats.domain.entity.FreeBoardComment;
 @Repository
 public interface FreeBoardCommentRepository extends JpaRepository<FreeBoardComment, Long> {
 	List<FreeBoardComment> findAllByFreeBoard(FreeBoard freeBoard);
+	
+	// 댓글 수 조회
+	long countByFreeBoard(FreeBoard freeBoard);
 }

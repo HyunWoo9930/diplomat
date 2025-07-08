@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import publicdata.hackathon.diplomats.domain.entity.Diary;
+import publicdata.hackathon.diplomats.domain.entity.User;
 
 @Repository
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
@@ -24,4 +25,7 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
 	List<Diary> findTopDiariesByMonth(@Param("startDate") LocalDateTime startDate, 
 									  @Param("endDate") LocalDateTime endDate, 
 									  Pageable pageable);
+	
+	// 내 일지 조회
+	Page<Diary> findByWriterOrderByCreatedAtDesc(User writer, Pageable pageable);
 }
