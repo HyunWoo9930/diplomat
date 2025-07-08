@@ -51,7 +51,7 @@ public class FreeBoardService {
 			for (int i = 0; i < images.size(); i++) {
 				MultipartFile image = images.get(i);
 				if (!image.isEmpty()) {
-					String savedFileName = fileStorageUtil.saveFile(image);
+					String savedFileName = fileStorageUtil.saveFreeBoardFile(image);
 
 					FreeBoardImage freeBoardImage = FreeBoardImage.builder()
 						.freeBoard(freeBoard)
@@ -176,7 +176,7 @@ public class FreeBoardService {
 		for (FreeBoardImage image : images) {
 			// 실제 파일 삭제 (optional)
 			try {
-				fileStorageUtil.deleteFile(image.getSavedFileName());
+				fileStorageUtil.deleteFreeBoardFile(image.getSavedFileName());
 			} catch (Exception e) {
 				// 파일 삭제 실패해도 DB는 삭제 진행
 			}

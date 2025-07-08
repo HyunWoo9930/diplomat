@@ -45,11 +45,11 @@ public class DiscussBoardService {
 			for (int i = 0; i < images.size(); i++) {
 				MultipartFile image = images.get(i);
 				if (!image.isEmpty()) {
-					String savedFileName = fileStorageUtil.saveFile(image);
+					String savedFileName = fileStorageUtil.saveDiscussBoardFile(image);
 
-					DiscussBoardImage freeBoardImage = DiscussBoardImage.builder()
+					DiscussBoardImage discussBoardImage = DiscussBoardImage.builder()
 						.discussBoard(discussBoard)
-						.imagePath("/uploads/discuss-board/" + savedFileName)
+						.imagePath("/uploads/discussboard/" + savedFileName)
 						.originalFileName(image.getOriginalFilename())
 						.savedFileName(savedFileName)
 						.fileSize(image.getSize())
@@ -58,7 +58,7 @@ public class DiscussBoardService {
 						.uploadedAt(LocalDateTime.now())
 						.build();
 
-					discussBoardImageRepository.save(freeBoardImage);
+					discussBoardImageRepository.save(discussBoardImage);
 				}
 			}
 		}

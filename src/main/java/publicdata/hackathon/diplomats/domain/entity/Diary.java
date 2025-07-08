@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,12 +27,13 @@ public class Diary { // 외교 실천 일지
 
 	private String title;
 	private String description;
-	private String Action; //실천내용
+	private String action; //실천내용
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
 	private Integer likes; // 좋아요 개수
+	private Integer viewCount; // 조회수
 
 	@JoinColumn(name = "user_id")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -39,4 +41,16 @@ public class Diary { // 외교 실천 일지
 
 	@OneToMany(mappedBy = "diary", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DiaryImage> images = new ArrayList<>();
+
+	@Builder
+	public Diary(String title, String description, String action, User writer) {
+		this.title = title;
+		this.description = description;
+		this.action = action;
+		this.writer = writer;
+		this.createdAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
+		this.likes = 0;
+		this.viewCount = 0;
+	}
 }

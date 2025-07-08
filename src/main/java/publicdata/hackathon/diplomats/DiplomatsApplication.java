@@ -10,4 +10,10 @@ public class DiplomatsApplication {
 		SpringApplication.run(DiplomatsApplication.class, args);
 	}
 
+	//TODO 외교 일지
+	//TODO 투표
+	//TODO 메인페이지
+	//TODO 마이페이지
+	//TODO 토론게시판
+	//TODO 커뮤니티
 }
