@@ -5,10 +5,10 @@ FROM --platform=linux/amd64 openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the Spring Boot jar file into the container
-COPY build/libs/diplomat-0.0.1-SNAPSHOT.jar .
+COPY build/libs/diplomats-0.0.1-SNAPSHOT.jar .
 
 # Expose the port the app runs on
 EXPOSE 8080
 
 # Run the jar file
-ENTRYPOINT ["java", "-jar", "diplomat-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "diplomats-0.0.1-SNAPSHOT.jar"]
