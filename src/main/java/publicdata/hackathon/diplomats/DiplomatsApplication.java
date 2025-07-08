@@ -14,5 +14,4 @@ public class DiplomatsApplication {
 	//TODO 투표
 	//TODO 메인페이지
 	//TODO 마이페이지
-	//TODO 커뮤니티
 }

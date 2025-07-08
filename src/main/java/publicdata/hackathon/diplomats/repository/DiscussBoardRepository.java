@@ -1,5 +1,7 @@
 package publicdata.hackathon.diplomats.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +17,6 @@ public interface DiscussBoardRepository extends JpaRepository<DiscussBoard, Long
 	Page<DiscussBoard> findAllByOrderByViewCountDesc(Pageable pageable);
 	Page<DiscussBoard> findAllByOrderByLikesDesc(Pageable pageable);
 	
-	// 커뮤니티용 - 좋아요순 상위 3개
 	List<DiscussBoard> findTop3ByOrderByLikesDesc();
 	
 	// 내 게시글 조회
