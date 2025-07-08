@@ -108,4 +108,10 @@ public class DiaryController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+
+	@GetMapping("/top-monthly")
+	@Operation(summary = "이번 달 인기 일지", description = "이번 달 인기 일지 상위 10개를 조회합니다.")
+	public ResponseEntity<?> getTopMonthlyDiaries() {
+		return ResponseEntity.ok(diaryService.getTopMonthlyDiaries());
+	}
 }

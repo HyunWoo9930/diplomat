@@ -1,9 +1,11 @@
 package publicdata.hackathon.diplomats.service;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -149,5 +151,30 @@ public class DiaryService {
 			.diaryComments(diaryComments)
 			.diaryImages(images)
 			.build();
+	}
+
+	/**
+	 * 이번 달 인기 일지 상위 10개 조회
+	 */
+	public List<DiaryResponse> getTopMonthlyDiaries() {
+		YearMonth currentMonth = YearMonth.now();
+		LocalDateTime startOfMonth = currentMonth.atDay(1).atStartOfDay();
+		LocalDateTime endOfMonth = currentMonth.atEndOfMonth().atTime(23, 59, 59);
+		
+		Pageable top10 = PageRequest.of(0, 10);
+		List<Diary> topDiaries = diaryRepository.findTopDiariesByMonth(startOfMonth, endOfMonth, top10);
+		
+		return topDiaries.stream()
+			.map(diary -> DiaryResponse.builder()
+				.id(diary.getId())
+				.title(diary.getTitle())
+				.description(diary.getDescription())
+				.action(diary.getAction())
+				.likes(diary.getLikes())
+				.createdAt(diary.getCreatedAt())
+				.updatedAt(diary.getUpdatedAt())
+				.userId(diary.getWriter().getUserId())
+				.build())
+			.toList();
 	}
 }
