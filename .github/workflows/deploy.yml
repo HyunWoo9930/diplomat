@@ -36,7 +36,7 @@ jobs:
 
       # 3. Docker 이미지 빌드
       - name: docker image build
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/diplomat .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/diplomats .
 
       # 4. DockerHub 로그인
       - name: docker login
@@ -47,7 +47,7 @@ jobs:
 
       # 5. Docker Hub 이미지 푸시
       - name: docker Hub push
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/diplomat
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/diplomats
 
   run-docker-image-on-ec2:
     needs: build-docker-image
@@ -55,16 +55,16 @@ jobs:
 
     steps:
       - name: docker pull
-        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/diplomat
+        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/diplomats
 
       - name: docker stop container
         run: |
-          if [ $(sudo docker ps -q -f name=diplomat) ]; then
-            sudo docker stop diplomat
+          if [ $(sudo docker ps -q -f name=diplomats) ]; then
+            sudo docker stop diplomats
           fi
 
       - name: docker run new container
-        run: sudo docker run --name diplomat --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/diplomat
+        run: sudo docker run --name diplomats --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/diplomats
 
       - name: delete old docker image
         run: sudo docker system prune -f
