@@ -13,11 +13,15 @@ public class CustomUserDetails implements UserDetails {
 
 	private final String id;
 	private final String password;
+	private final String name;
+	private final String citizenType;
 	private final Collection<? extends GrantedAuthority> authorities;
 
 	public CustomUserDetails(User user) {
 		this.password = user.getPassword();
 		this.id = user.getUserId();
+		this.name = user.getName();
+		this.citizenType = user.getCitizenType();
 		this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")); // 권한 설정 필요 시 추가
 	}
 
@@ -34,6 +38,14 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public String getUsername() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getCitizenType() {
+		return citizenType;
 	}
 
 	@Override

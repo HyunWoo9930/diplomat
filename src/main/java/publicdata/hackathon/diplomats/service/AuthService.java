@@ -23,6 +23,10 @@ public class AuthService {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtTokenProvider jwtTokenProvider;
 
+	public String register(JoinRequest joinRequest) {
+		return join(joinRequest);
+	}
+
 	public String join(JoinRequest joinRequest) {
 		log.info("회원가입 시작: userId={}", joinRequest.getUserId());
 
