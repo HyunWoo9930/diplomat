@@ -33,7 +33,7 @@ import publicdata.hackathon.diplomats.service.DiscussBoardService;
 @RestController
 @RequestMapping("/api/v1/discuss-board")
 @RequiredArgsConstructor
-@Tag(name = "토론게시판", description = "토론게시판 관련 API")
+@Tag(name = "💬 커뮤니티", description = "토론게시판 관련 API")
 public class DiscussBoardController {
 	
 	private final DiscussBoardService discussBoardService;

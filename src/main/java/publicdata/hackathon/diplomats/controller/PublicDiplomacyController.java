@@ -20,7 +20,7 @@ import publicdata.hackathon.diplomats.service.PublicDiplomacyService;
 @RestController
 @RequestMapping("/api/v1/admin/public-diplomacy")
 @RequiredArgsConstructor
-@Tag(name = "공공외교 프로그램 관리", description = "공공외교 프로그램 관리자 API")
+@Tag(name = "🌍 ODA/공공외교", description = "공공외교 프로그램 관리 API")
 public class PublicDiplomacyController {
 
 	private final PublicDiplomacyService publicDiplomacyService;

@@ -14,7 +14,7 @@ import publicdata.hackathon.diplomats.service.CommunityService;
 @RestController
 @RequestMapping("/api/v1/community")
 @RequiredArgsConstructor
-@Tag(name = "커뮤니티", description = "커뮤니티 메인페이지 관련 API")
+@Tag(name = "💬 커뮤니티", description = "커뮤니티 통합 관리 API")
 public class CommunityController {
 
 	private final CommunityService communityService;

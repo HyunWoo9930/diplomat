@@ -19,7 +19,7 @@ import publicdata.hackathon.diplomats.service.OdaVoteService;
 @RestController
 @RequestMapping("/api/v1/oda-vote")
 @RequiredArgsConstructor
-@Tag(name = "ODA 투표", description = "ODA(공적개발원조) 사업 투표 관련 API - 매월 의미있는 ODA 사업에 시민이 직접 투표")
+@Tag(name = "🗳️ 투표", description = "ODA 프로젝트 투표 관련 API")
 public class OdaVoteController {
 
 	private final OdaVoteService odaVoteService;

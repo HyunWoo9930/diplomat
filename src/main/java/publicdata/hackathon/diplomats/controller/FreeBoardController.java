@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentUpdateRequest;
@@ -30,12 +32,14 @@ import publicdata.hackathon.diplomats.service.FreeBoardService;
 @RestController
 @RequestMapping("/api/v1/free-board")
 @RequiredArgsConstructor
+@Tag(name = "💬 커뮤니티", description = "자유게시판 관련 API")
 public class FreeBoardController {
 
 	private final FreeBoardService freeBoardService;
 	private final FreeBoardCommentService freeBoardCommentService;
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "자유게시판 글 작성", description = "자유게시판에 새 글을 작성합니다. 이미지는 최대 3장까지 업로드 가능합니다.")
 	public ResponseEntity<String> createFreeBoard(Authentication authentication,
 		@RequestParam("title") String title,
 		@RequestParam("content") String content,
@@ -56,6 +60,7 @@ public class FreeBoardController {
 	}
 
 	@GetMapping("/")
+	@Operation(summary = "자유게시판 글 목록 조회", description = "자유게시판 글 목록을 페이징하여 조회합니다.")
 	public ResponseEntity<?> getFreeBoards(Authentication authentication,
 		@RequestParam(defaultValue = "0") int page,
 		@RequestParam(defaultValue = "10") int size,
@@ -66,6 +71,7 @@ public class FreeBoardController {
 	}
 
 	@GetMapping("/{id}")
+	@Operation(summary = "자유게시판 글 상세 조회", description = "특정 자유게시판 글의 상세 내용을 조회합니다.")
 	public ResponseEntity<?> getFreeBoard(Authentication authentication, @PathVariable Long id) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 		return ResponseEntity.ok(freeBoardService.getFreeBoardDetails(customUserDetails.getUsername(), id));

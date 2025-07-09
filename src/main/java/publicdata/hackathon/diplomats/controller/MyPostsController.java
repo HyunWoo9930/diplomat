@@ -20,7 +20,7 @@ import publicdata.hackathon.diplomats.service.MyPostsService;
 @RestController
 @RequestMapping("/api/v1/my-posts")
 @RequiredArgsConstructor
-@Tag(name = "내 게시글", description = "사용자가 작성한 게시글 모아보기 API")
+@Tag(name = "👤 마이페이지", description = "내 게시글 관리 API")
 public class MyPostsController {
 
 	private final MyPostsService myPostsService;

@@ -16,7 +16,7 @@ import publicdata.hackathon.diplomats.service.CustomUserDetailsService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
-@Tag(name = "사용자", description = "사용자 관련 API")
+@Tag(name = "🔐 인증/사용자", description = "사용자 프로필 및 정보 관리 API")
 public class UserController {
 
 	private final CustomUserDetailsService userDetailsService;

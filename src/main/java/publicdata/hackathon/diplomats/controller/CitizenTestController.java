@@ -22,7 +22,7 @@ import publicdata.hackathon.diplomats.service.CitizenTestService;
 @RestController
 @RequestMapping("/api/v1/citizen-test")
 @RequiredArgsConstructor
-@Tag(name = "시민력 테스트", description = "시민력 테스트 관련 API")
+@Tag(name = "📊 테스트/설문", description = "시민의식 테스트 관련 API")
 public class CitizenTestController {
 
 	private final CitizenTestService citizenTestService;

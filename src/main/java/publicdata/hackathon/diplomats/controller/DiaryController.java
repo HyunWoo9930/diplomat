@@ -31,7 +31,7 @@ import publicdata.hackathon.diplomats.service.DiaryService;
 @RestController
 @RequestMapping("/api/v1/diary")
 @RequiredArgsConstructor
-@Tag(name = "외교일지", description = "외교일지 관련 API")
+@Tag(name = "💬 커뮤니티", description = "외교실천일지 관련 API")
 public class DiaryController {
 	private final DiaryService diaryService;
 	private final DiaryCommentService diaryCommentService;

@@ -22,7 +22,7 @@ import publicdata.hackathon.diplomats.service.NewsService;
 @RestController
 @RequestMapping("/api/v1/news")
 @RequiredArgsConstructor
-@Tag(name = "외교 뉴스", description = "외교부 보도자료 조회 API")
+@Tag(name = "📰 뉴스/보도자료", description = "외교부 뉴스 조회 API")
 public class NewsController {
 
 	private final NewsService newsService;

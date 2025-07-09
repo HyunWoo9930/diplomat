@@ -25,7 +25,7 @@ import publicdata.hackathon.diplomats.service.NewsScrapService;
 @RestController
 @RequestMapping("/api/v1/news/scrap")
 @RequiredArgsConstructor
-@Tag(name = "뉴스 스크랩", description = "뉴스 스크랩 관련 API")
+@Tag(name = "👍 좋아요/스크랩", description = "뉴스 스크랩 기능 관련 API")
 public class NewsScrapController {
 
 	private final NewsScrapService newsScrapService;

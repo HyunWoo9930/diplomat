@@ -16,7 +16,7 @@ import publicdata.hackathon.diplomats.service.OdaProjectService;
 @RestController
 @RequestMapping("/api/v1/oda-project")
 @RequiredArgsConstructor
-@Tag(name = "ODA 프로젝트 관리", description = "ODA(공적개발원조) 프로젝트 데이터 관리 API")
+@Tag(name = "🌍 ODA/공공외교", description = "ODA 프로젝트 관리 API")
 public class OdaProjectController {
 
 	private final OdaProjectService odaProjectService;

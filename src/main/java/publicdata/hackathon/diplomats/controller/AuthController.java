@@ -17,7 +17,7 @@ import publicdata.hackathon.diplomats.service.AuthService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/auth")
-@Tag(name = "인증", description = "회원가입 및 로그인 API")
+@Tag(name = "🔐 인증/사용자", description = "회원가입, 로그인 및 사용자 인증 API")
 public class AuthController {
 
 	private final AuthService authService;

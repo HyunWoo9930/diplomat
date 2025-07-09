@@ -20,7 +20,7 @@ import publicdata.hackathon.diplomats.service.LikeService;
 @RestController
 @RequestMapping("/api/v1/like")
 @RequiredArgsConstructor
-@Tag(name = "좋아요", description = "범용 좋아요 API")
+@Tag(name = "👍 좋아요/스크랩", description = "좋아요 기능 관련 API")
 public class LikeController {
     
     private final LikeService likeService;

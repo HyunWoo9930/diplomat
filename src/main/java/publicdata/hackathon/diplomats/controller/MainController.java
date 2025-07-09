@@ -16,7 +16,7 @@ import publicdata.hackathon.diplomats.service.MonthlyVoteService;
 @RestController
 @RequestMapping("/api/v1/main")
 @RequiredArgsConstructor
-@Tag(name = "메인페이지", description = "메인페이지 관련 API")
+@Tag(name = "📱 메인", description = "메인페이지 관련 API")
 public class MainController {
 
 	private final MonthlyVoteService monthlyVoteService;

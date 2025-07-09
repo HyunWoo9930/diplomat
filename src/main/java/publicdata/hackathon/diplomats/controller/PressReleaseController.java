@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import publicdata.hackathon.diplomats.service.PressReleaseService;
 
 @RestController
 @RequestMapping("/api/v1/admin/press-release")
 @RequiredArgsConstructor
+@Tag(name = "📰 뉴스/보도자료", description = "보도자료 관리 API")
 public class PressReleaseController {
 
 	private final PressReleaseService pressReleaseService;
