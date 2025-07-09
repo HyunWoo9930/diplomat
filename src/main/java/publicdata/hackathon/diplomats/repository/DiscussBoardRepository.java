@@ -19,6 +19,9 @@ public interface DiscussBoardRepository extends JpaRepository<DiscussBoard, Long
 	
 	List<DiscussBoard> findTop3ByOrderByLikesDesc();
 	
+	// 메인페이지용 - 좋아요순 정렬 후 최신순 서브정렬
+	List<DiscussBoard> findAllByOrderByLikesDescCreatedAtDesc(Pageable pageable);
+	
 	// 내 게시글 조회
 	Page<DiscussBoard> findByUserOrderByCreatedAtDesc(User user, Pageable pageable);
 }

@@ -24,6 +24,9 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Long> {
 	// 커뮤니티용 - 좋아요순 상위 3개
 	List<FreeBoard> findTop3ByOrderByLikesDesc();
 	
+	// 메인페이지용 - 좋아요순 정렬 후 최신순 서브정렬
+	List<FreeBoard> findAllByOrderByLikesDescCreatedAtDesc(Pageable pageable);
+	
 	// 내 게시글 조회
 	Page<FreeBoard> findByUserOrderByCreatedAtDesc(User user, Pageable pageable);
 }

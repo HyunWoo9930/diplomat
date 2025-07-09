@@ -58,4 +58,6 @@ public interface PressReleaseRepository extends JpaRepository<PressRelease, Long
 		"LOWER(pr.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
 		"LOWER(pr.content) LIKE LOWER(CONCAT('%', :keyword, '%'))")
 	long countByKeywordContaining(@Param("keyword") String keyword);
+
+	List<PressRelease> findAllByOrderByPublishDateDesc(Pageable pageable);
 }
