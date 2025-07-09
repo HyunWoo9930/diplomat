@@ -5,7 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.response.LikeResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.entity.DiscussBoard;
 import publicdata.hackathon.diplomats.domain.entity.Diary;
 import publicdata.hackathon.diplomats.domain.entity.FreeBoard;
@@ -20,6 +22,7 @@ import publicdata.hackathon.diplomats.repository.UserRepository;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class LikeService {
     
     private final LikeRepository likeRepository;
@@ -27,6 +30,7 @@ public class LikeService {
     private final FreeBoardRepository freeBoardRepository;
     private final DiscussBoardRepository discussBoardRepository;
     private final DiaryRepository diaryRepository;
+    private final StampService stampService;
     
     public LikeResponse toggleLike(String username, String targetType, Long targetId) {
         User user = userRepository.findByUserId(username)
@@ -64,6 +68,22 @@ public class LikeService {
             
             likeRepository.save(like);
             updateLikeCount(targetType, targetId, 1);
+            
+            // 🎯 실천일기에 좋아요를 받았을 때 작성자에게 스탬프 지급
+            if ("Diary".equals(targetType)) {
+                try {
+                    Diary diary = diaryRepository.findById(targetId)
+                        .orElseThrow(() -> new EntityNotFoundException("일지를 찾을 수 없습니다."));
+                    
+                    StampEarnedResponse stampResponse = stampService.earnDiaryLikeStamp(diary.getWriter(), diary.getId());
+                    if (stampResponse.isSuccess()) {
+                        log.info("실천일기 좋아요 받기 스탬프 지급 완료: authorId={}, diaryId={}, likerId={}, leveledUp={}", 
+                            diary.getWriter().getUserId(), diary.getId(), username, stampResponse.isLeveledUp());
+                    }
+                } catch (Exception e) {
+                    log.error("실천일기 좋아요 받기 스탬프 지급 실패: targetId={}, likerId={}", targetId, username, e);
+                }
+            }
             
             long likeCount = likeRepository.countByTargetTypeAndTargetId(targetType, targetId);
             return LikeResponse.builder()

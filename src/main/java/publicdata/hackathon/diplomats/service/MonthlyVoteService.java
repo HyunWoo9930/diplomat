@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.VoteRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.MonthlyVoteResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.UserVoteResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.VoteBannerResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.VoteCandidateResponse;
@@ -32,6 +34,7 @@ import publicdata.hackathon.diplomats.repository.VoteCandidateRepository;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class MonthlyVoteService {
 
 	private final MonthlyVoteRepository monthlyVoteRepository;
@@ -39,6 +42,7 @@ public class MonthlyVoteService {
 	private final UserVoteRepository userVoteRepository;
 	private final DiaryRepository diaryRepository;
 	private final UserRepository userRepository;
+	private final StampService stampService;
 
 	/**
 	 * 월별 투표 생성 (이번 달 인기 일지 상위 10개로)
@@ -162,6 +166,17 @@ public class MonthlyVoteService {
 		// 후보 득표수 증가
 		candidate.addVote();
 		voteCandidateRepository.save(candidate);
+
+		// 🎯 투표 참여 스탬프 지급
+		try {
+			StampEarnedResponse stampResponse = stampService.earnVoteStamp(user, currentVote.getId(), "MONTHLY_VOTE");
+			if (stampResponse.isSuccess()) {
+				log.info("월별 투표 참여 스탬프 지급 완료: userId={}, voteId={}, leveledUp={}", 
+					username, currentVote.getId(), stampResponse.isLeveledUp());
+			}
+		} catch (Exception e) {
+			log.error("월별 투표 참여 스탬프 지급 실패: userId={}, voteId={}", username, currentVote.getId(), e);
+		}
 
 		return "투표가 완료되었습니다.";
 	}

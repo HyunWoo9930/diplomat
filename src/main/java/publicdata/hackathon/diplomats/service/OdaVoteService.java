@@ -15,6 +15,7 @@ import publicdata.hackathon.diplomats.domain.dto.request.OdaVoteRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.OdaVoteResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.OdaVoteCandidateResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.OdaProjectResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.entity.OdaProject;
 import publicdata.hackathon.diplomats.domain.entity.OdaVote;
 import publicdata.hackathon.diplomats.domain.entity.OdaVoteCandidate;
@@ -38,6 +39,7 @@ public class OdaVoteService {
 	private final UserOdaVoteRepository userOdaVoteRepository;
 	private final OdaProjectRepository odaProjectRepository;
 	private final UserRepository userRepository;
+	private final StampService stampService;
 
 	/**
 	 * 월별 ODA 투표를 생성합니다.
@@ -152,6 +154,17 @@ public class OdaVoteService {
 		userOdaVoteRepository.save(userOdaVote);
 		candidate.incrementVoteCount();
 		odaVoteCandidateRepository.save(candidate);
+
+		// 🎯 ODA 투표 참여 스탬프 지급
+		try {
+			StampEarnedResponse stampResponse = stampService.earnVoteStamp(user, currentVote.getId(), "ODA_VOTE");
+			if (stampResponse.isSuccess()) {
+				log.info("ODA 투표 참여 스탬프 지급 완료: userId={}, voteId={}, leveledUp={}", 
+					userId, currentVote.getId(), stampResponse.isLeveledUp());
+			}
+		} catch (Exception e) {
+			log.error("ODA 투표 참여 스탬프 지급 실패: userId={}, voteId={}", userId, currentVote.getId(), e);
+		}
 
 		return "투표가 완료되었습니다.";
 	}

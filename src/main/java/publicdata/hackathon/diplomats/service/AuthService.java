@@ -37,10 +37,11 @@ public class AuthService {
 		}
 
 		// 사용자 생성
-		User user = new User();
-		user.setUserId(joinRequest.getUserId());
-		user.setPassword(passwordEncoder.encode(joinRequest.getPassword()));
-		user.setName(joinRequest.getName());
+		User user = User.builder()
+			.userId(joinRequest.getUserId())
+			.password(passwordEncoder.encode(joinRequest.getPassword()))
+			.name(joinRequest.getName())
+			.build();
 
 		User savedUser = userRepository.save(user);
 		log.info("사용자 저장 완료: userId={}, id={}", savedUser.getUserId(), savedUser.getId());

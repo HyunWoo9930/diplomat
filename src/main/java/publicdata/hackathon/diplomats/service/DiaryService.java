@@ -8,14 +8,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryCommentResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryDetailResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryImageResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.entity.Diary;
 import publicdata.hackathon.diplomats.domain.entity.DiaryImage;
 import publicdata.hackathon.diplomats.domain.entity.User;
@@ -28,6 +31,8 @@ import publicdata.hackathon.diplomats.utils.ImageUtil;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class DiaryService {
 
 	private final DiaryRepository diaryRepository;
@@ -36,6 +41,7 @@ public class DiaryService {
 	private final UserRepository userRepository;
 	private final FileStorageUtil fileStorageUtil;
 	private final ImageUtil imageUtil;
+	private final StampService stampService;
 
 	public void createDiary(String username, String title, String content, String action,
 		List<MultipartFile> images) {
@@ -50,6 +56,17 @@ public class DiaryService {
 			.build();
 
 		diaryRepository.save(diary);
+
+		// 실천일기 작성 스탬프 지급
+		try {
+			StampEarnedResponse stampResponse = stampService.earnDiaryWriteStamp(user, diary.getId());
+			if (stampResponse.isSuccess()) {
+				log.info("실천일기 작성 스탬프 지급 완료: userId={}, diaryId={}, leveledUp={}", 
+						username, diary.getId(), stampResponse.isLeveledUp());
+			}
+		} catch (Exception e) {
+			log.error("실천일기 작성 스탬프 지급 실패: userId={}, diaryId={}", username, diary.getId(), e);
+		}
 
 		if (images != null && !images.isEmpty()) {
 			for (int i = 0; i < images.size(); i++) {
@@ -76,7 +93,7 @@ public class DiaryService {
 
 	public List<DiaryResponse> getDiaries(String username, Pageable pageable, String sortBy) {
 		Page<Diary> diaryPage;
-		
+
 		// 정렬 기준에 따라 다른 메서드 호출
 		switch (sortBy.toLowerCase()) {
 			case "views":
@@ -92,7 +109,7 @@ public class DiaryService {
 				diaryPage = diaryRepository.findAllByOrderByCreatedAtDesc(pageable);
 				break;
 		}
-		
+
 		return diaryPage.stream()
 			.map(diary -> DiaryResponse.builder()
 				.id(diary.getId())
@@ -110,7 +127,7 @@ public class DiaryService {
 	public DiaryDetailResponse getDiaryDetails(String username, Long id) {
 		Diary diary = diaryRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("Diary not found"));
-		
+
 		List<DiaryCommentResponse> diaryComments = diaryCommentRepository.findAllByDiary(diary)
 			.stream()
 			.map(diaryComment -> DiaryCommentResponse.builder()
@@ -160,10 +177,10 @@ public class DiaryService {
 		YearMonth currentMonth = YearMonth.now();
 		LocalDateTime startOfMonth = currentMonth.atDay(1).atStartOfDay();
 		LocalDateTime endOfMonth = currentMonth.atEndOfMonth().atTime(23, 59, 59);
-		
+
 		Pageable top10 = PageRequest.of(0, 10);
 		List<Diary> topDiaries = diaryRepository.findTopDiariesByMonth(startOfMonth, endOfMonth, top10);
-		
+
 		return topDiaries.stream()
 			.map(diary -> DiaryResponse.builder()
 				.id(diary.getId())
