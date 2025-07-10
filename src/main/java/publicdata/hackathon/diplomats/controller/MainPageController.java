@@ -1,6 +1,7 @@
 package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import publicdata.hackathon.diplomats.service.MainPageService;
 @RequestMapping("/api/v1/main")
 @RequiredArgsConstructor
 @Tag(name = "📱 메인", description = "메인페이지 관련 API")
+@CrossOrigin(origins = "*")
 public class MainPageController {
 
     private final MainPageService mainPageService;

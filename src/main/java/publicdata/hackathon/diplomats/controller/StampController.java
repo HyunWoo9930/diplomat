@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import publicdata.hackathon.diplomats.service.StampService;
 @RequestMapping("/api/v1/stamp")
 @RequiredArgsConstructor
 @Tag(name = "👤 마이페이지", description = "스탬프 및 레벨 관리 API")
+@CrossOrigin(origins = "*")
 public class StampController {
 
     private final StampService stampService;

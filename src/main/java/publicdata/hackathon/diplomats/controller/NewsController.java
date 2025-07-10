@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import publicdata.hackathon.diplomats.service.NewsService;
 @RequestMapping("/api/v1/news")
 @RequiredArgsConstructor
 @Tag(name = "📰 뉴스/보도자료", description = "외교부 뉴스 조회 API")
+@CrossOrigin(origins = "*")
 public class NewsController {
 
 	private final NewsService newsService;

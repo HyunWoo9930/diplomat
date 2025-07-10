@@ -3,6 +3,7 @@ package publicdata.hackathon.diplomats.controller;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import publicdata.hackathon.diplomats.service.OdaProjectService;
 @RequestMapping("/api/v1/oda-project")
 @RequiredArgsConstructor
 @Tag(name = "🌍 ODA/공공외교", description = "ODA 프로젝트 관리 API")
+@CrossOrigin(origins = "*")
 public class OdaProjectController {
 
 	private final OdaProjectService odaProjectService;

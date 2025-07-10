@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ import publicdata.hackathon.diplomats.service.DiaryService;
 @RequestMapping("/api/v1/diary")
 @RequiredArgsConstructor
 @Tag(name = "💬 커뮤니티", description = "외교실천일지 관련 API")
+@CrossOrigin(origins = "*")
 public class DiaryController {
 	private final DiaryService diaryService;
 	private final DiaryCommentService diaryCommentService;

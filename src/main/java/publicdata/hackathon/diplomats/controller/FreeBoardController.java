@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ import publicdata.hackathon.diplomats.service.FreeBoardService;
 @RequestMapping("/api/v1/free-board")
 @RequiredArgsConstructor
 @Tag(name = "💬 커뮤니티", description = "자유게시판 관련 API")
+@CrossOrigin(origins = "*")
 public class FreeBoardController {
 
 	private final FreeBoardService freeBoardService;

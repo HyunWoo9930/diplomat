@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import publicdata.hackathon.diplomats.service.PressReleaseService;
 @RequestMapping("/api/v1/admin/press-release")
 @RequiredArgsConstructor
 @Tag(name = "📰 뉴스/보도자료", description = "보도자료 관리 API")
+@CrossOrigin(origins = "*")
 public class PressReleaseController {
 
 	private final PressReleaseService pressReleaseService;

@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import publicdata.hackathon.diplomats.service.NewsScrapService;
 @RequestMapping("/api/v1/news/scrap")
 @RequiredArgsConstructor
 @Tag(name = "👍 좋아요/스크랩", description = "뉴스 스크랩 기능 관련 API")
+@CrossOrigin(origins = "*")
 public class NewsScrapController {
 
 	private final NewsScrapService newsScrapService;

@@ -1,6 +1,7 @@
 package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import publicdata.hackathon.diplomats.service.AuthService;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/auth")
 @Tag(name = "🔐 인증/사용자", description = "회원가입, 로그인 및 사용자 인증 API")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
 	private final AuthService authService;

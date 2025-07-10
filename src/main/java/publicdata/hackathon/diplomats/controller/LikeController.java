@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import publicdata.hackathon.diplomats.service.LikeService;
 @RequestMapping("/api/v1/like")
 @RequiredArgsConstructor
 @Tag(name = "👍 좋아요/스크랩", description = "좋아요 기능 관련 API")
+@CrossOrigin(origins = "*")
 public class LikeController {
     
     private final LikeService likeService;

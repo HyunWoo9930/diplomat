@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import publicdata.hackathon.diplomats.service.MonthlyVoteService;
 @RequestMapping("/api/v1/monthly-vote")
 @RequiredArgsConstructor
 @Tag(name = "🗳️ 투표", description = "월별 외교실천일지 투표 관련 API")
+@CrossOrigin(origins = "*")
 public class MonthlyVoteController {
 
 	private final MonthlyVoteService monthlyVoteService;

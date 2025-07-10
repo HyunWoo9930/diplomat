@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ import publicdata.hackathon.diplomats.service.CitizenTestService;
 @RequestMapping("/api/v1/citizen-test")
 @RequiredArgsConstructor
 @Tag(name = "📊 테스트/설문", description = "시민의식 테스트 관련 API")
+@CrossOrigin(origins = "*")
 public class CitizenTestController {
 
 	private final CitizenTestService citizenTestService;

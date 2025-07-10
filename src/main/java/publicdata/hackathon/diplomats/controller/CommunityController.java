@@ -1,6 +1,7 @@
 package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import publicdata.hackathon.diplomats.service.CommunityService;
 @RequestMapping("/api/v1/community")
 @RequiredArgsConstructor
 @Tag(name = "💬 커뮤니티", description = "커뮤니티 통합 관리 API")
+@CrossOrigin(origins = "*")
 public class CommunityController {
 
 	private final CommunityService communityService;

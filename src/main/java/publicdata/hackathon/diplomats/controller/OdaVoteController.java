@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import publicdata.hackathon.diplomats.service.OdaVoteService;
 @RequestMapping("/api/v1/oda-vote")
 @RequiredArgsConstructor
 @Tag(name = "🗳️ 투표", description = "ODA 프로젝트 투표 관련 API")
+@CrossOrigin(origins = "*")
 public class OdaVoteController {
 
 	private final OdaVoteService odaVoteService;

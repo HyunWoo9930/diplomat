@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import publicdata.hackathon.diplomats.service.PublicDiplomacyService;
 @RequestMapping("/api/v1/admin/public-diplomacy")
 @RequiredArgsConstructor
 @Tag(name = "🌍 ODA/공공외교", description = "공공외교 프로그램 관리 API")
+@CrossOrigin(origins = "*")
 public class PublicDiplomacyController {
 
 	private final PublicDiplomacyService publicDiplomacyService;
