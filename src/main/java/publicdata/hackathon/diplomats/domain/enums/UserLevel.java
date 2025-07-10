@@ -1,5 +1,6 @@
 package publicdata.hackathon.diplomats.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 @Getter
@@ -20,6 +21,11 @@ public enum UserLevel {
         this.displayName = displayName;
         this.minStamps = minStamps;
         this.maxStamps = maxStamps;
+    }
+
+    @JsonValue
+    public String getDisplayName() {
+        return displayName;
     }
 
     /**

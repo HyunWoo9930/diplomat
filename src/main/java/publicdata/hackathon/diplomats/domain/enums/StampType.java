@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum StampType {
-    DIARY_WRITE("실천일기 작성", 1),
-    DIARY_LIKE_RECEIVED("실천일기 좋아요 받기", 1),
-    VOTE_PARTICIPATE("투표 참여", 1);
+    DIARY_WRITE("실천일지 작성", 1),
+    VOTE("투표", 1),
+    LIKE("좋아요", 1);
 
     private final String description;
     private final int stampCount;

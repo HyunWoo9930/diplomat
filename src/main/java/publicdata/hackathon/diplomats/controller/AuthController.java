@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import publicdata.hackathon.diplomats.domain.dto.request.CheckUserIdRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.JoinRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.LoginRequest;
+import publicdata.hackathon.diplomats.domain.dto.response.CheckUserIdResponse;
 import publicdata.hackathon.diplomats.jwt.JwtAuthenticationResponse;
 import publicdata.hackathon.diplomats.service.AuthService;
 
@@ -32,6 +34,17 @@ public class AuthController {
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
 			return ResponseEntity.badRequest().build();
+		}
+	}
+
+	@PostMapping("/check-userid")
+	@Operation(summary = "아이디 중복체크", description = "사용자 아이디의 중복 여부를 확인합니다.")
+	public ResponseEntity<?> checkUserId(@RequestBody CheckUserIdRequest checkUserIdRequest) {
+		try {
+			boolean isAvailable = authService.checkUserIdAvailable(checkUserIdRequest.getUserId());
+			return ResponseEntity.ok(new CheckUserIdResponse(isAvailable));
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().build();
 		}
 	}
 

@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 				return new UsernameNotFoundException("User not found with userId: " + userId);
 			});
 		
-		log.info("사용자 찾기 성공: userId={}, name={}", user.getUserId(), user.getName());
+		log.info("사용자 찾기 성공: userId={}, name={}", user.getUserId(), user.getUserId());
 		return new CustomUserDetails(user);
 	}
 

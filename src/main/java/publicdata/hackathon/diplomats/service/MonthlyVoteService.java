@@ -281,7 +281,7 @@ public class MonthlyVoteService {
 			.diaryTitle(diary.getTitle())
 			.diaryDescription(diary.getDescription())
 			.diaryAction(diary.getAction())
-			.authorName(diary.getWriter().getName())
+			.authorName(diary.getWriter().getUserId())
 			.diaryCreatedAt(diary.getCreatedAt())
 			.diaryLikes(diary.getLikes())
 			.diaryViewCount(diary.getViewCount())

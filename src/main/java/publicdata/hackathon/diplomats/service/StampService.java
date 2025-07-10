@@ -107,14 +107,14 @@ public class StampService {
      * 실천일기 좋아요 받기 스탬프
      */
     public StampEarnedResponse earnDiaryLikeStamp(User user, Long diaryId) {
-        return earnStamp(user, StampType.DIARY_LIKE_RECEIVED, "DIARY_LIKE", diaryId);
+        return earnStamp(user, StampType.DIARY_WRITE, "DIARY_LIKE", diaryId);
     }
 
     /**
      * 투표 참여 스탬프
      */
     public StampEarnedResponse earnVoteStamp(User user, Long voteId, String voteType) {
-        return earnStamp(user, StampType.VOTE_PARTICIPATE, voteType, voteId);
+        return earnStamp(user, StampType.VOTE, voteType, voteId);
     }
 
     /**
@@ -126,7 +126,7 @@ public class StampService {
         List<UserLevelHistory> levelHistory = userLevelHistoryRepository.findTop5ByUserOrderByLevelUpAtDesc(user);
 
         return UserLevelResponse.builder()
-            .userName(user.getName())
+            .userName(user.getUserId())
             .totalStamps(user.getTotalStamps())
             .currentLevel(user.getCurrentLevel())
             .currentLevelDisplay(user.getCurrentLevel().getDisplayName())
@@ -152,7 +152,7 @@ public class StampService {
         List<DailyStampHistoryResponse> dailyHistory = createDailyStampHistory(user);
 
         return UserLevelResponse.builder()
-            .userName(user.getName())
+            .userName(user.getUserId())
             .totalStamps(user.getTotalStamps())
             .currentLevel(user.getCurrentLevel())
             .currentLevelDisplay(user.getCurrentLevel().getDisplayName())
@@ -271,8 +271,8 @@ public class StampService {
         for (UserStamp stamp : allStamps) {
             switch (stamp.getStampType()) {
                 case DIARY_WRITE -> diaryWriteCount++;
-                case DIARY_LIKE_RECEIVED -> diaryLikeCount++;
-                case VOTE_PARTICIPATE -> voteCount++;
+                case LIKE -> diaryLikeCount++;
+                case VOTE -> voteCount++;
             }
         }
         

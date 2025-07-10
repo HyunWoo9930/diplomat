@@ -40,7 +40,6 @@ public class AuthService {
 		User user = User.builder()
 			.userId(joinRequest.getUserId())
 			.password(passwordEncoder.encode(joinRequest.getPassword()))
-			.name(joinRequest.getName())
 			.build();
 
 		User savedUser = userRepository.save(user);
@@ -55,6 +54,11 @@ public class AuthService {
 		return authenticateUser(loginRequest.getUserId(), loginRequest.getPassword());
 	}
 
+	public boolean checkUserIdAvailable(String userId) {
+		log.info("아이디 중복체크: userId={}", userId);
+		return !userRepository.existsByUserId(userId);
+	}
+
 	private String authenticateUser(String userId, String password) {
 		log.info("인증 시작: userId={}", userId);
 
@@ -66,7 +70,7 @@ public class AuthService {
 					return new RuntimeException("사용자를 찾을 수 없습니다.");
 				});
 
-			log.info("사용자 찾기 성공: userId={}, name={}", user.getUserId(), user.getName());
+			log.info("사용자 찾기 성공: userId={}", user.getUserId());
 
 			// 비밀번호 직접 검증
 			if (!passwordEncoder.matches(password, user.getPassword())) {
