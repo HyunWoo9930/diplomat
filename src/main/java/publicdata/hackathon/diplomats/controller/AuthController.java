@@ -28,9 +28,9 @@ public class AuthController {
 
 	@PostMapping("/join")
 	@Operation(summary = "회원가입", description = "새로운 사용자를 등록하고 자동으로 로그인합니다.")
-	public ResponseEntity<?> join(@RequestBody JoinRequest joinRequest) {
+	public ResponseEntity<JwtAuthenticationResponse> join(@RequestBody JoinRequest joinRequest) {
 		try {
-			String response = authService.join(joinRequest);
+			JwtAuthenticationResponse response = authService.join(joinRequest);
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
 			return ResponseEntity.badRequest().build();
@@ -39,7 +39,7 @@ public class AuthController {
 
 	@PostMapping("/check-userid")
 	@Operation(summary = "아이디 중복체크", description = "사용자 아이디의 중복 여부를 확인합니다.")
-	public ResponseEntity<?> checkUserId(@RequestBody CheckUserIdRequest checkUserIdRequest) {
+	public ResponseEntity<CheckUserIdResponse> checkUserId(@RequestBody CheckUserIdRequest checkUserIdRequest) {
 		try {
 			boolean isAvailable = authService.checkUserIdAvailable(checkUserIdRequest.getUserId());
 			return ResponseEntity.ok(new CheckUserIdResponse(isAvailable));
@@ -50,9 +50,9 @@ public class AuthController {
 
 	@PostMapping("/login")
 	@Operation(summary = "로그인", description = "사용자 인증 후 JWT 토큰을 발급합니다.")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody LoginRequest loginRequest) {
 		try {
-			String response = authService.login(loginRequest);
+			JwtAuthenticationResponse response = authService.login(loginRequest);
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
 			return ResponseEntity.badRequest().build();
