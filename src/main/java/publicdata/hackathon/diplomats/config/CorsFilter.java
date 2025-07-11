@@ -24,12 +24,13 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        // CORS 헤더 설정
+        // COR
+        // 헤더 설정 - 개발환경용 완전 개방
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
-        response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, X-Requested-With, accept, Origin, Access-Control-Request-Method, Access-Control-Request-Headers");
-        response.setHeader("Access-Control-Expose-Headers", "Authorization, Content-Type");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Expose-Headers", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "false");  // credentials 비활성화
         response.setHeader("Access-Control-Max-Age", "3600");
 
         // OPTIONS 요청에 대한 처리

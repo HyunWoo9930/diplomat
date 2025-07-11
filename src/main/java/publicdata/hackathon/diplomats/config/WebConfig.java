@@ -11,11 +11,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*")  // 개발환경용, 운영시 구체적 도메인 지정
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
-                .allowedHeaders("*")
+                .allowedOriginPatterns("*")  // 모든 도메인 허용
+                .allowedMethods("*")         // 모든 HTTP 메소드 허용
+                .allowedHeaders("*")         // 모든 헤더 허용
                 .exposedHeaders("Authorization", "Content-Type")
-                .allowCredentials(true)
+                .allowCredentials(false)     // credentials 비활성화로 완전히 열어놓기
                 .maxAge(3600);
     }
 
