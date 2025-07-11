@@ -46,6 +46,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
+			.cors(cors -> cors.configurationSource(corsConfigurationSource()))  // CORS 설정 추가
 			.csrf(AbstractHttpConfigurer::disable)
 			.sessionManagement(
 				sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -101,10 +102,15 @@ public class SecurityConfig {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(List.of("*"));
-		configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		
+		// 개발환경에서는 모든 origin 허용, 운영환경에서는 구체적인 도메인 지정 필요
+		configuration.setAllowedOriginPatterns(List.of("*"));  // allowedOrigins 대신 allowedOriginPatterns 사용
+		configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
 		configuration.setAllowedHeaders(List.of("*"));
-		configuration.setAllowCredentials(false);  // allowedOrigins에 "*"를 사용할 때는 false로 설정
+		configuration.setExposedHeaders(List.of("Authorization", "Content-Type"));
+		configuration.setAllowCredentials(true);  // JWT 토큰 사용시 필요
+		configuration.setMaxAge(3600L);  // preflight 요청 캐시 시간
+		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;

@@ -1187,3 +1187,7 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2025-07-11 18:07:36.712 [http-nio-8080-exec-5] WARN  p.h.d.j.JwtAuthenticationEntryPoint - Unauthorized access attempt: GET /api/v1/discuss-board/
 2025-07-11 18:07:36.712 [http-nio-8080-exec-5] DEBUG p.h.d.j.JwtAuthenticationEntryPoint - Authentication exception: Full authentication is required to access this resource
 2025-07-11 18:07:36.712 [http-nio-8080-exec-5] WARN  p.h.d.j.JwtAuthenticationEntryPoint - No Authorization header provided
+2025-07-11 19:06:49.289 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s576ms).
+2025-07-11 19:18:48.155 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m58s868ms).
+2025-07-11 19:21:51.982 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m33s819ms).
+2025-07-11 19:37:26.085 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m34s104ms).
