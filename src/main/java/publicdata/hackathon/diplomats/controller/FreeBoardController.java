@@ -26,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.FreeBoardUpdateRequest;
+import publicdata.hackathon.diplomats.domain.dto.response.ApiResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.CreatePostResponse;
 import publicdata.hackathon.diplomats.jwt.CustomUserDetails;
 import publicdata.hackathon.diplomats.service.FreeBoardCommentService;
 import publicdata.hackathon.diplomats.service.FreeBoardService;
@@ -42,7 +44,7 @@ public class FreeBoardController {
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(summary = "자유게시판 글 작성", description = "자유게시판에 새 글을 작성합니다. 이미지는 최대 3장까지 업로드 가능합니다.")
-	public ResponseEntity<String> createFreeBoard(Authentication authentication,
+	public ResponseEntity<ApiResponse<CreatePostResponse>> createFreeBoard(Authentication authentication,
 		@RequestParam("title") String title,
 		@RequestParam("content") String content,
 		@RequestPart(value = "images", required = false) List<MultipartFile> images) {
@@ -50,14 +52,18 @@ public class FreeBoardController {
 		try {
 			// 이미지 개수 검증
 			if (images != null && images.size() > 3) {
-				return ResponseEntity.badRequest().body("이미지는 최대 3장까지 업로드 가능합니다.");
+				return ResponseEntity.badRequest().body(
+					ApiResponse.error("이미지는 최대 3장까지 업로드 가능합니다.", null)
+				);
 			}
 
 			CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-			freeBoardService.createFreeBoard(customUserDetails.getUsername(), title, content, images);
-			return ResponseEntity.ok("게시글이 성공적으로 생성되었습니다.");
+			Long freeBoardId = freeBoardService.createFreeBoard(customUserDetails.getUsername(), title, content, images);
+			CreatePostResponse response = CreatePostResponse.of(freeBoardId, "게시글이 성공적으로 생성되었습니다.");
+			
+			return ResponseEntity.ok(ApiResponse.success("게시글이 성공적으로 생성되었습니다.", response));
 		} catch (RuntimeException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage(), null));
 		}
 	}
 

@@ -26,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.DiscussBoardUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.DiscussCommentRequest;
+import publicdata.hackathon.diplomats.domain.dto.response.ApiResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.CreatePostResponse;
 import publicdata.hackathon.diplomats.domain.enums.DiscussType;
 import publicdata.hackathon.diplomats.jwt.CustomUserDetails;
 import publicdata.hackathon.diplomats.service.DiscussBoardCommentService;
@@ -43,7 +45,7 @@ public class DiscussBoardController {
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(summary = "토론게시글 생성", description = "새로운 토론게시글을 생성합니다.")
-	public ResponseEntity<String> createDiscussBoard(Authentication authentication,
+	public ResponseEntity<ApiResponse<CreatePostResponse>> createDiscussBoard(Authentication authentication,
 		@RequestParam("title") String title,
 		@RequestParam("content") String content,
 		@RequestParam("discussType") DiscussType discussType,
@@ -52,14 +54,18 @@ public class DiscussBoardController {
 		try {
 			// 이미지 개수 검증
 			if (images != null && images.size() > 3) {
-				return ResponseEntity.badRequest().body("이미지는 최대 3장까지 업로드 가능합니다.");
+				return ResponseEntity.badRequest().body(
+					ApiResponse.error("이미지는 최대 3장까지 업로드 가능합니다.", null)
+				);
 			}
 
 			CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-			discussBoardService.createDiscussBoard(customUserDetails.getUsername(), title, content, discussType, images);
-			return ResponseEntity.ok("토론게시글이 성공적으로 생성되었습니다.");
+			Long discussBoardId = discussBoardService.createDiscussBoard(customUserDetails.getUsername(), title, content, discussType, images);
+			CreatePostResponse response = CreatePostResponse.of(discussBoardId, "토론게시글이 성공적으로 생성되었습니다.");
+			
+			return ResponseEntity.ok(ApiResponse.success("토론게시글이 성공적으로 생성되었습니다.", response));
 		} catch (RuntimeException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage(), null));
 		}
 	}
 

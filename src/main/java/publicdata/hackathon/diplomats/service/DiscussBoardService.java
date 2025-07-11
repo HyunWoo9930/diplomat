@@ -37,7 +37,7 @@ public class DiscussBoardService {
 	private final FileStorageUtil fileStorageUtil;
 	private final ImageUtil imageUtil;
 
-	public void createDiscussBoard(String username, String title, String content, DiscussType discussType,
+	public Long createDiscussBoard(String username, String title, String content, DiscussType discussType,
 		List<MultipartFile> images) {
 		User user = userRepository.findByUserId(username)
 			.orElseThrow(() -> new EntityNotFoundException("User not found"));
@@ -71,6 +71,8 @@ public class DiscussBoardService {
 				}
 			}
 		}
+		
+		return discussBoard.getId();
 	}
 
 	public List<DiscussBoardResponse> getDiscussBoards(String username, Pageable pageable, String sortBy) {

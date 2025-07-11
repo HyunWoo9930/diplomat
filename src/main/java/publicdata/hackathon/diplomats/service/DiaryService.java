@@ -45,7 +45,7 @@ public class DiaryService {
 	private final ImageUtil imageUtil;
 	private final StampService stampService;
 
-	public void createDiary(String username, String title, String content, String action,
+	public Long createDiary(String username, String title, String content, String action,
 		List<MultipartFile> images) {
 		
 		// 입력값 유효성 검사
@@ -83,6 +83,8 @@ public class DiaryService {
 			if (images != null && !images.isEmpty()) {
 				processImages(diary, images);
 			}
+			
+			return diary.getId();
 			
 		} catch (CustomException e) {
 			throw e;

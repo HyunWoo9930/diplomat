@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.ApiResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.CreatePostResponse;
 import publicdata.hackathon.diplomats.service.DiaryCommentService;
 import publicdata.hackathon.diplomats.service.DiaryService;
 import publicdata.hackathon.diplomats.utils.SecurityUtils;
@@ -43,7 +44,7 @@ public class DiaryController {
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(summary = "외교일지 생성", description = "새로운 외교일지를 생성합니다.")
-	public ResponseEntity<ApiResponse<String>> createDiary(
+	public ResponseEntity<ApiResponse<CreatePostResponse>> createDiary(
 		@RequestParam("title") String title,
 		@RequestParam("content") String content,
 		@RequestParam("실천항목") String action,
@@ -52,8 +53,10 @@ public class DiaryController {
 		String currentUserId = SecurityUtils.getCurrentUserIdString();
 		log.info("외교일지 생성 요청: userId={}, title={}", currentUserId, title);
 		
-		diaryService.createDiary(currentUserId, title, content, action, images);
-		return ResponseEntity.ok(ApiResponse.success("실천일지가 성공적으로 생성되었습니다."));
+		Long diaryId = diaryService.createDiary(currentUserId, title, content, action, images);
+		CreatePostResponse response = CreatePostResponse.of(diaryId, "실천일지가 성공적으로 생성되었습니다.");
+		
+		return ResponseEntity.ok(ApiResponse.success("실천일지가 성공적으로 생성되었습니다.", response));
 	}
 
 	@GetMapping("/")
