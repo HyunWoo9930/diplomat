@@ -15,7 +15,8 @@ public class DiscussBoardResponse {
 	private DiscussType discussType;
 	private Integer likes;
 	private Integer viewCount;
+	private String userId;
+	private boolean isOwner; // 현재 사용자가 작성자인지 여부
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	private String userId;
 }

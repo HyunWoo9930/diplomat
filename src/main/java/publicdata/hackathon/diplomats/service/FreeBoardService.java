@@ -15,6 +15,7 @@ import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardCommentRespon
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardDetailResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardImageResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.PagedResponse;
 import publicdata.hackathon.diplomats.domain.entity.FreeBoard;
 import publicdata.hackathon.diplomats.domain.entity.FreeBoardImage;
 import publicdata.hackathon.diplomats.domain.entity.User;
@@ -72,7 +73,7 @@ public class FreeBoardService {
 		return freeBoard.getId();
 	}
 
-	public List<FreeBoardResponse> getFreeBoards(String username, Pageable pageable, String sortBy) {
+	public PagedResponse<FreeBoardResponse> getFreeBoards(String username, Pageable pageable, String sortBy) {
 		Page<FreeBoard> freeBoardPage;
 		
 		// 정렬 기준에 따라 다른 메서드 호출
@@ -91,7 +92,7 @@ public class FreeBoardService {
 				break;
 		}
 		
-		return freeBoardPage.stream()
+		List<FreeBoardResponse> content = freeBoardPage.stream()
 			.map(freeBoard -> FreeBoardResponse.builder()
 				.id(freeBoard.getId())
 				.title(freeBoard.getTitle())
@@ -100,8 +101,11 @@ public class FreeBoardService {
 				.createdAt(freeBoard.getCreatedAt())
 				.updatedAt(freeBoard.getUpdatedAt())
 				.userId(freeBoard.getUser().getUserId())
+				.isOwner(username != null && username.equals(freeBoard.getUser().getUserId()))
 				.build())
 			.toList();
+			
+		return PagedResponse.of(content, freeBoardPage);
 	}
 
 	public FreeBoardDetailResponse getFreeBoardDetails(String username, Long id) {
@@ -110,8 +114,10 @@ public class FreeBoardService {
 		List<FreeBoardCommentResponse> freeBoardComments = freeBoardCommentRepository.findAllByFreeBoard(freeBoard)
 			.stream()
 			.map(freeBoardComment -> FreeBoardCommentResponse.builder()
+				.id(freeBoardComment.getId())
 				.content(freeBoardComment.getContent())
 				.userId(freeBoardComment.getUser().getUserId())
+				.isOwner(username != null && username.equals(freeBoardComment.getUser().getUserId()))
 				.updatedAt(freeBoardComment.getUpdatedAt())
 				.createdAt(freeBoardComment.getCreatedAt())
 				.build())

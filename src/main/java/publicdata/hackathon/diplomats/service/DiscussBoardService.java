@@ -15,6 +15,7 @@ import publicdata.hackathon.diplomats.domain.dto.response.DiscussBoardCommentRes
 import publicdata.hackathon.diplomats.domain.dto.response.DiscussBoardDetailResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiscussBoardImageResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiscussBoardResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.PagedResponse;
 import publicdata.hackathon.diplomats.domain.entity.DiscussBoard;
 import publicdata.hackathon.diplomats.domain.entity.DiscussBoardImage;
 import publicdata.hackathon.diplomats.domain.entity.User;
@@ -75,7 +76,7 @@ public class DiscussBoardService {
 		return discussBoard.getId();
 	}
 
-	public List<DiscussBoardResponse> getDiscussBoards(String username, Pageable pageable, String sortBy) {
+	public PagedResponse<DiscussBoardResponse> getDiscussBoards(String username, Pageable pageable, String sortBy) {
 		Page<DiscussBoard> discussBoardPage;
 		
 		// 정렬 기준에 따라 다른 메서드 호출
@@ -94,7 +95,7 @@ public class DiscussBoardService {
 				break;
 		}
 		
-		return discussBoardPage.stream()
+		List<DiscussBoardResponse> content = discussBoardPage.stream()
 			.map(discussBoard -> DiscussBoardResponse.builder()
 				.id(discussBoard.getId())
 				.title(discussBoard.getTitle())
@@ -105,8 +106,11 @@ public class DiscussBoardService {
 				.createdAt(discussBoard.getCreatedAt())
 				.updatedAt(discussBoard.getUpdatedAt())
 				.userId(discussBoard.getUser().getUserId())
+				.isOwner(username != null && username.equals(discussBoard.getUser().getUserId()))
 				.build())
 			.toList();
+			
+		return PagedResponse.of(content, discussBoardPage);
 	}
 
 	public DiscussBoardDetailResponse getDiscussBoardDetails(String username, Long id) {
@@ -119,6 +123,7 @@ public class DiscussBoardService {
 				.id(discussBoardComment.getId())
 				.content(discussBoardComment.getContent())
 				.userId(discussBoardComment.getUser().getUserId())
+				.isOwner(username != null && username.equals(discussBoardComment.getUser().getUserId()))
 				.commentType(discussBoardComment.getCommentType())
 				.createdAt(discussBoardComment.getCreatedAt())
 				.updatedAt(discussBoardComment.getUpdatedAt())

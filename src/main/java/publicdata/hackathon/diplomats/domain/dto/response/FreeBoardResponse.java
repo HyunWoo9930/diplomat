@@ -18,18 +18,20 @@ public class FreeBoardResponse {
 	private int likes;
 	private int viewCount;
 	private String userId;
+	private boolean isOwner; // 현재 사용자가 작성자인지 여부
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
 	@Builder
-	public FreeBoardResponse(Long id, String title, String content, int likes, int viewCount, String userId, LocalDateTime createdAt,
-		LocalDateTime updatedAt) {
+	public FreeBoardResponse(Long id, String title, String content, int likes, int viewCount, String userId, 
+			boolean isOwner, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.likes = likes;
 		this.viewCount = viewCount;
 		this.userId = userId;
+		this.isOwner = isOwner;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}

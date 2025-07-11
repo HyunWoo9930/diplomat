@@ -69,20 +69,26 @@ public class FreeBoardController {
 
 	@GetMapping("/")
 	@Operation(summary = "자유게시판 글 목록 조회", description = "자유게시판 글 목록을 페이징하여 조회합니다.")
-	public ResponseEntity<?> getFreeBoards(Authentication authentication,
+	public ResponseEntity<ApiResponse<?>> getFreeBoards(Authentication authentication,
 		@RequestParam(defaultValue = "0") int page,
 		@RequestParam(defaultValue = "10") int size,
 		@RequestParam(defaultValue = "latest") String sortBy) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 		Pageable pageable = PageRequest.of(page, size);
-		return ResponseEntity.ok(freeBoardService.getFreeBoards(customUserDetails.getUsername(), pageable, sortBy));
+		return ResponseEntity.ok(
+			ApiResponse.success("자유게시판 목록 조회 성공", 
+				freeBoardService.getFreeBoards(customUserDetails.getUsername(), pageable, sortBy))
+		);
 	}
 
 	@GetMapping("/{id}")
 	@Operation(summary = "자유게시판 글 상세 조회", description = "특정 자유게시판 글의 상세 내용을 조회합니다.")
-	public ResponseEntity<?> getFreeBoard(Authentication authentication, @PathVariable Long id) {
+	public ResponseEntity<ApiResponse<?>> getFreeBoard(Authentication authentication, @PathVariable Long id) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-		return ResponseEntity.ok(freeBoardService.getFreeBoardDetails(customUserDetails.getUsername(), id));
+		return ResponseEntity.ok(
+			ApiResponse.success("자유게시판 상세 조회 성공",
+				freeBoardService.getFreeBoardDetails(customUserDetails.getUsername(), id))
+		);
 	}
 
 	@PostMapping("/{id}/comment")

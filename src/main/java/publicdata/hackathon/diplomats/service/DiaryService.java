@@ -17,6 +17,7 @@ import publicdata.hackathon.diplomats.domain.dto.response.DiaryCommentResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryDetailResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryImageResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiaryResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.PagedResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.entity.Diary;
 import publicdata.hackathon.diplomats.domain.entity.DiaryImage;
@@ -94,7 +95,7 @@ public class DiaryService {
 		}
 	}
 
-	public List<DiaryResponse> getDiaries(String username, Pageable pageable, String sortBy) {
+	public PagedResponse<DiaryResponse> getDiaries(String username, Pageable pageable, String sortBy) {
 		try {
 			Page<Diary> diaryPage;
 
@@ -114,7 +115,7 @@ public class DiaryService {
 					break;
 			}
 
-			return diaryPage.stream()
+			List<DiaryResponse> content = diaryPage.stream()
 				.map(diary -> DiaryResponse.builder()
 					.id(diary.getId())
 					.title(diary.getTitle())
@@ -124,8 +125,11 @@ public class DiaryService {
 					.createdAt(diary.getCreatedAt())
 					.updatedAt(diary.getUpdatedAt())
 					.userId(diary.getWriter().getUserId())
+					.isOwner(username != null && username.equals(diary.getWriter().getUserId()))
 					.build())
 				.toList();
+				
+			return PagedResponse.of(content, diaryPage);
 				
 		} catch (Exception e) {
 			log.error("일지 목록 조회 실패: username={}, error={}", username, e.getMessage(), e);
@@ -148,6 +152,7 @@ public class DiaryService {
 					.id(diaryComment.getId())
 					.content(diaryComment.getContent())
 					.userId(diaryComment.getCommenter().getUserId())
+					.isOwner(username != null && username.equals(diaryComment.getCommenter().getUserId()))
 					.createdAt(diaryComment.getCreatedAt())
 					.updatedAt(diaryComment.getUpdatedAt())
 					.build())

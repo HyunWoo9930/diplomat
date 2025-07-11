@@ -71,20 +71,26 @@ public class DiscussBoardController {
 
 	@GetMapping("/")
 	@Operation(summary = "토론게시글 목록 조회", description = "토론게시글 목록을 페이징하여 조회합니다.")
-	public ResponseEntity<?> getDiscussBoards(Authentication authentication,
+	public ResponseEntity<ApiResponse<?>> getDiscussBoards(Authentication authentication,
 		@RequestParam(defaultValue = "0") int page,
 		@RequestParam(defaultValue = "10") int size,
 		@RequestParam(defaultValue = "latest") String sortBy) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 		Pageable pageable = PageRequest.of(page, size);
-		return ResponseEntity.ok(discussBoardService.getDiscussBoards(customUserDetails.getUsername(), pageable, sortBy));
+		return ResponseEntity.ok(
+			ApiResponse.success("토론게시판 목록 조회 성공",
+				discussBoardService.getDiscussBoards(customUserDetails.getUsername(), pageable, sortBy))
+		);
 	}
 
 	@GetMapping("/{id}")
 	@Operation(summary = "토론게시글 상세 조회", description = "특정 토론게시글의 상세 내용을 조회합니다.")
-	public ResponseEntity<?> getDiscussBoard(Authentication authentication, @PathVariable Long id) {
+	public ResponseEntity<ApiResponse<?>> getDiscussBoard(Authentication authentication, @PathVariable Long id) {
 		CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-		return ResponseEntity.ok(discussBoardService.getDiscussBoardDetails(customUserDetails.getUsername(), id));
+		return ResponseEntity.ok(
+			ApiResponse.success("토론게시판 상세 조회 성공",
+				discussBoardService.getDiscussBoardDetails(customUserDetails.getUsername(), id))
+		);
 	}
 
 	@PostMapping("/{id}/comment")

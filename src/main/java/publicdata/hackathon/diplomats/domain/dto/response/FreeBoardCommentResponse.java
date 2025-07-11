@@ -12,16 +12,21 @@ import publicdata.hackathon.diplomats.domain.entity.User;
 @Data
 @NoArgsConstructor
 public class FreeBoardCommentResponse {
+	private Long id; // 댓글 ID 추가
 	private String content;
+	private String userId;
+	private boolean isOwner; // 현재 사용자가 작성자인지 여부
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	private String userId;
 
 	@Builder
-	public FreeBoardCommentResponse(String content, LocalDateTime createdAt, LocalDateTime updatedAt, String userId) {
+	public FreeBoardCommentResponse(Long id, String content, String userId, boolean isOwner, 
+			LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.id = id;
 		this.content = content;
+		this.userId = userId;
+		this.isOwner = isOwner;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.userId = userId;
 	}
 }
