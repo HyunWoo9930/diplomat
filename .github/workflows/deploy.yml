@@ -20,7 +20,7 @@ jobs:
 
       - name: create application.properties file
         run: |
-          mkdir ./src/main/resources
+#          mkdir ./src/main/resources
           touch ./src/main/resources/application.yml
           echo "${{ secrets.APPLICATION_YML }}" >> src/main/resources/application.yml
 

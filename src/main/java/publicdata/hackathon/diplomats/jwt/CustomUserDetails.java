@@ -7,16 +7,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Getter;
 import publicdata.hackathon.diplomats.domain.entity.User;
 
+@Getter
 public class CustomUserDetails implements UserDetails {
 
+	private final User user;
 	private final String id;
 	private final String password;
 	private final String citizenType;
 	private final Collection<? extends GrantedAuthority> authorities;
 
 	public CustomUserDetails(User user) {
+		this.user = user;  // User 객체 저장
 		this.password = user.getPassword();
 		this.id = user.getUserId();
 		this.citizenType = user.getCitizenType();
@@ -40,6 +44,13 @@ public class CustomUserDetails implements UserDetails {
 
 	public String getCitizenType() {
 		return citizenType;
+	}
+
+	/**
+	 * User 엔티티 반환
+	 */
+	public User getUser() {
+		return user;
 	}
 
 	@Override
