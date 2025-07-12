@@ -17,6 +17,8 @@ import publicdata.hackathon.diplomats.domain.dto.request.JoinRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.LoginRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.RefreshTokenRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.CheckUserIdResponse;
+import publicdata.hackathon.diplomats.exception.CustomException;
+import publicdata.hackathon.diplomats.exception.ErrorCode;
 import publicdata.hackathon.diplomats.jwt.JwtAuthenticationResponse;
 import publicdata.hackathon.diplomats.service.AuthService;
 
@@ -71,9 +73,23 @@ public class AuthController {
 	public ResponseEntity<JwtAuthenticationResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
 		log.info("토큰 갱신 요청");
 		
-		JwtAuthenticationResponse response = authService.refreshToken(request.getRefreshToken());
-		log.info("토큰 갱신 성공");
-		
-		return ResponseEntity.ok(response);
+		try {
+			if (request.getRefreshToken() == null || request.getRefreshToken().trim().isEmpty()) {
+				log.error("리프레시 토큰이 비어있음");
+				throw new CustomException(ErrorCode.MISSING_REQUIRED_FIELD, "리프레시 토큰이 필요합니다.");
+			}
+			
+			JwtAuthenticationResponse response = authService.refreshToken(request.getRefreshToken());
+			log.info("토큰 갱신 성공");
+			
+			return ResponseEntity.ok(response);
+			
+		} catch (CustomException e) {
+			log.error("토큰 갱신 실패 - CustomException: {}", e.getMessage());
+			throw e;
+		} catch (Exception e) {
+			log.error("토큰 갱신 실패 - 예상치 못한 오류: {}", e.getMessage(), e);
+			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "토큰 갱신 중 오류가 발생했습니다.");
+		}
 	}
 }
