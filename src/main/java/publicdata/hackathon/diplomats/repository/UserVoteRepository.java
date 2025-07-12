@@ -11,10 +11,12 @@ import publicdata.hackathon.diplomats.domain.entity.UserVote;
 
 @Repository
 public interface UserVoteRepository extends JpaRepository<UserVote, Long> {
-	
+
 	Optional<UserVote> findByUserAndMonthlyVote(User user, MonthlyVote monthlyVote);
-	
+
 	boolean existsByUserAndMonthlyVote(User user, MonthlyVote monthlyVote);
-	
+
 	long countByMonthlyVote(MonthlyVote monthlyVote);
+
+	void deleteByUser(User user);
 }

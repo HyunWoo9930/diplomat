@@ -34,4 +34,7 @@ public interface NewsScrapRepository extends JpaRepository<NewsScrap, Long> {
 
 	// 사용자와 뉴스로 스크랩 삭제
 	void deleteByUserAndPressRelease(User user, PressRelease pressRelease);
+	
+	// 특정 사용자의 모든 스크랩 삭제 (회원 탈퇴시 사용)
+	void deleteByUser(User user);
 }

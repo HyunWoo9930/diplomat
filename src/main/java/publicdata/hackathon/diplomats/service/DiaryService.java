@@ -218,6 +218,43 @@ public class DiaryService {
 	}
 
 	/**
+	 * 실천일지 수정
+	 */
+	public void updateDiary(String username, Long id, publicdata.hackathon.diplomats.domain.dto.request.DiaryRequest request) {
+		if (id == null || id <= 0) {
+			throw new CustomException(ErrorCode.INVALID_INPUT, "유효하지 않은 일지 ID입니다.");
+		}
+
+		try {
+			Diary diary = diaryRepository.findById(id)
+				.orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND, "일지를 찾을 수 없습니다."));
+
+			// 작성자 확인
+			if (!diary.getWriter().getUserId().equals(username)) {
+				throw new CustomException(ErrorCode.ACCESS_DENIED, "일지 수정 권한이 없습니다.");
+			}
+
+			// 입력값 유효성 검사
+			validateDiaryInput(request.getTitle(), request.getContent(), request.getAction());
+
+			// 일지 수정
+			diary.setTitle(request.getTitle());
+			diary.setDescription(request.getContent());
+			diary.setAction(request.getAction());
+			diary.setUpdatedAt(LocalDateTime.now());
+
+			diaryRepository.save(diary);
+			log.info("일지 수정 완료: userId={}, diaryId={}", username, id);
+			
+		} catch (CustomException e) {
+			throw e;
+		} catch (Exception e) {
+			log.error("일지 수정 실패: userId={}, diaryId={}, error={}", username, id, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "일지 수정 중 오류가 발생했습니다.");
+		}
+	}
+
+	/**
 	 * 실천일지 삭제
 	 */
 	public void deleteDiary(String username, Long id) {

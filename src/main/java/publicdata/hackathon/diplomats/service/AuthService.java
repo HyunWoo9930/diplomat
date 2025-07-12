@@ -13,7 +13,13 @@ import publicdata.hackathon.diplomats.exception.CustomException;
 import publicdata.hackathon.diplomats.exception.ErrorCode;
 import publicdata.hackathon.diplomats.jwt.JwtAuthenticationResponse;
 import publicdata.hackathon.diplomats.jwt.JwtTokenProvider;
+import publicdata.hackathon.diplomats.repository.LikeRepository;
+import publicdata.hackathon.diplomats.repository.NewsScrapRepository;
+import publicdata.hackathon.diplomats.repository.UserLevelHistoryRepository;
+import publicdata.hackathon.diplomats.repository.UserOdaVoteRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
+import publicdata.hackathon.diplomats.repository.UserStampRepository;
+import publicdata.hackathon.diplomats.repository.UserVoteRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +30,13 @@ public class AuthService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtTokenProvider jwtTokenProvider;
+	
+	private final LikeRepository likeRepository;
+	private final NewsScrapRepository newsScrapRepository;
+	private final UserStampRepository userStampRepository;
+	private final UserLevelHistoryRepository userLevelHistoryRepository;
+	private final UserVoteRepository userVoteRepository;
+	private final UserOdaVoteRepository userOdaVoteRepository;
 
 	public JwtAuthenticationResponse register(JoinRequest joinRequest) {
 		return join(joinRequest);
@@ -154,6 +167,80 @@ public class AuthService {
 		} catch (Exception e) {
 			log.error("토큰 갱신 실패: error={}", e.getMessage(), e);
 			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "토큰 갱신 중 오류가 발생했습니다.");
+		}
+	}
+
+	/**
+	 * 회원 탈퇴
+	 */
+	public void withdrawUser(String userId, String password) {
+		log.info("회원 탈퇴 시작: userId={}", userId);
+		
+		try {
+			// 사용자 존재 확인
+			User user = userRepository.findByUserId(userId)
+				.orElseThrow(() -> {
+					log.error("탈퇴 요청한 사용자를 찾을 수 없음: userId={}", userId);
+					return new CustomException(ErrorCode.USER_NOT_FOUND);
+				});
+			
+			// 비밀번호 검증 (본인 확인)
+			if (!passwordEncoder.matches(password, user.getPassword())) {
+				log.error("회원 탈퇴 시 비밀번호 불일치: userId={}", userId);
+				throw new CustomException(ErrorCode.INVALID_CREDENTIALS, "비밀번호가 일치하지 않습니다.");
+			}
+			
+			// 연관된 데이터들을 순서대로 삭제
+			deleteUserRelatedData(user);
+			
+			// 사용자 삭제
+			userRepository.delete(user);
+			
+			log.info("회원 탈퇴 완료: userId={}", userId);
+			
+		} catch (CustomException e) {
+			throw e;
+		} catch (Exception e) {
+			log.error("회원 탈퇴 실패: userId={}, error={}", userId, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "회원 탈퇴 처리 중 오류가 발생했습니다.");
+		}
+	}
+
+	/**
+	 * 사용자와 연관된 모든 데이터 삭제
+	 */
+	private void deleteUserRelatedData(User user) {
+		Long userId = user.getId();
+		String userIdString = user.getUserId();
+		
+		try {
+			// 1. 좋아요 데이터 삭제
+			likeRepository.deleteByUser(user);
+			log.info("사용자 좋아요 데이터 삭제 완료: userId={}", userIdString);
+			
+			// 2. 뉴스 스크랩 데이터 삭제
+			newsScrapRepository.deleteByUser(user);
+			log.info("사용자 뉴스 스크랩 데이터 삭제 완료: userId={}", userIdString);
+			
+			// 3. 사용자 스탬프 데이터 삭제
+			userStampRepository.deleteByUser(user);
+			log.info("사용자 스탬프 데이터 삭제 완료: userId={}", userIdString);
+			
+			// 4. 사용자 레벨 히스토리 삭제
+			userLevelHistoryRepository.deleteByUser(user);
+			log.info("사용자 레벨 히스토리 삭제 완료: userId={}", userIdString);
+			
+			// 5. 사용자 투표 데이터 삭제
+			userVoteRepository.deleteByUser(user);
+			log.info("사용자 투표 데이터 삭제 완료: userId={}", userIdString);
+			
+			// 6. 사용자 ODA 투표 데이터 삭제
+			userOdaVoteRepository.deleteByUser(user);
+			log.info("사용자 ODA 투표 데이터 삭제 완료: userId={}", userIdString);
+			
+		} catch (Exception e) {
+			log.error("사용자 연관 데이터 삭제 실패: userId={}, error={}", userIdString, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "연관 데이터 삭제 중 오류가 발생했습니다.");
 		}
 	}
 

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import publicdata.hackathon.diplomats.domain.entity.User;
 import publicdata.hackathon.diplomats.domain.entity.UserOdaVote;
 
 @Repository
@@ -24,4 +25,6 @@ public interface UserOdaVoteRepository extends JpaRepository<UserOdaVote, Long> 
 	
 	@Query("SELECT COUNT(uov) FROM UserOdaVote uov WHERE uov.odaVoteCandidate.id = :candidateId")
 	long countByOdaVoteCandidateId(@Param("candidateId") Long candidateId);
+	
+	void deleteByUser(User user);
 }

@@ -25,4 +25,9 @@ public interface UserLevelHistoryRepository extends JpaRepository<UserLevelHisto
      * 사용자의 최근 레벨업 히스토리 조회 (10개)
      */
     List<UserLevelHistory> findTop10ByUserOrderByLevelUpAtDesc(User user);
+    
+    /**
+     * 특정 사용자의 모든 레벨 히스토리 삭제 (회원 탈퇴시 사용)
+     */
+    void deleteByUser(User user);
 }

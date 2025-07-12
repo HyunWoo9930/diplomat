@@ -68,4 +68,9 @@ public interface UserStampRepository extends JpaRepository<UserStamp, Long> {
      */
     boolean existsByUserAndStampTypeAndRelatedEntityTypeAndRelatedEntityId(
         User user, StampType stampType, String relatedEntityType, Long relatedEntityId);
+    
+    /**
+     * 특정 사용자의 모든 스탬프 삭제 (회원 탈퇴시 사용)
+     */
+    void deleteByUser(User user);
 }

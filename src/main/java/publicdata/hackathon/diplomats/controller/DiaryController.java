@@ -26,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.CommentUpdateRequest;
+import publicdata.hackathon.diplomats.domain.dto.request.DiaryRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.ApiResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.CreatePostResponse;
 import publicdata.hackathon.diplomats.service.DiaryCommentService;
@@ -126,6 +127,18 @@ public class DiaryController {
 		
 		var topDiaries = diaryService.getTopMonthlyDiaries();
 		return ResponseEntity.ok(ApiResponse.success("이번 달 인기 일지를 조회했습니다.", topDiaries));
+	}
+
+	@PutMapping("/{id}")
+	@Operation(summary = "외교일지 수정", description = "외교일지를 수정합니다.")
+	public ResponseEntity<ApiResponse<String>> updateDiary(@PathVariable Long id,
+		@Valid @RequestBody DiaryRequest request) {
+		
+		String currentUserId = SecurityUtils.getCurrentUserIdString();
+		log.info("외교일지 수정: userId={}, diaryId={}", currentUserId, id);
+		
+		diaryService.updateDiary(currentUserId, id, request);
+		return ResponseEntity.ok(ApiResponse.success("일지가 성공적으로 수정되었습니다."));
 	}
 
 	@DeleteMapping("/{id}")
