@@ -127,4 +127,14 @@ public class DiaryController {
 		var topDiaries = diaryService.getTopMonthlyDiaries();
 		return ResponseEntity.ok(ApiResponse.success("이번 달 인기 일지를 조회했습니다.", topDiaries));
 	}
+
+	@DeleteMapping("/{id}")
+	@Operation(summary = "외교일지 삭제", description = "외교일지를 삭제합니다.")
+	public ResponseEntity<ApiResponse<String>> deleteDiary(@PathVariable Long id) {
+		String currentUserId = SecurityUtils.getCurrentUserIdString();
+		log.info("외교일지 삭제: userId={}, diaryId={}", currentUserId, id);
+		
+		diaryService.deleteDiary(currentUserId, id);
+		return ResponseEntity.ok(ApiResponse.success("일지가 성공적으로 삭제되었습니다."));
+	}
 }

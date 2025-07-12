@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.CheckUserIdRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.JoinRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.LoginRequest;
+import publicdata.hackathon.diplomats.domain.dto.request.RefreshTokenRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.CheckUserIdResponse;
 import publicdata.hackathon.diplomats.jwt.JwtAuthenticationResponse;
 import publicdata.hackathon.diplomats.service.AuthService;
@@ -61,6 +62,17 @@ public class AuthController {
 		
 		JwtAuthenticationResponse response = authService.login(loginRequest);
 		log.info("로그인 성공: userId={}", loginRequest.getUserId());
+		
+		return ResponseEntity.ok(response);
+	}
+
+	@PostMapping("/refresh")
+	@Operation(summary = "토큰 갱신", description = "리프레시 토큰으로 새로운 액세스 토큰을 발급받습니다.")
+	public ResponseEntity<JwtAuthenticationResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
+		log.info("토큰 갱신 요청");
+		
+		JwtAuthenticationResponse response = authService.refreshToken(request.getRefreshToken());
+		log.info("토큰 갱신 성공");
 		
 		return ResponseEntity.ok(response);
 	}

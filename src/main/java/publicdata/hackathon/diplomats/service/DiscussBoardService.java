@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.DiscussBoardUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.DiscussBoardCommentResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.DiscussBoardDetailResponse;
@@ -24,17 +25,21 @@ import publicdata.hackathon.diplomats.repository.DiscussBoardCommentRepository;
 import publicdata.hackathon.diplomats.repository.DiscussBoardImageRepository;
 import publicdata.hackathon.diplomats.repository.DiscussBoardRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
+import publicdata.hackathon.diplomats.repository.LikeRepository;
 import publicdata.hackathon.diplomats.utils.FileStorageUtil;
 import publicdata.hackathon.diplomats.utils.ImageUtil;
+import publicdata.hackathon.diplomats.utils.ResponseUtil;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DiscussBoardService {
 
 	private final DiscussBoardRepository discussBoardRepository;
 	private final DiscussBoardCommentRepository discussBoardCommentRepository;
 	private final DiscussBoardImageRepository discussBoardImageRepository;
 	private final UserRepository userRepository;
+	private final LikeRepository likeRepository;
 	private final FileStorageUtil fileStorageUtil;
 	private final ImageUtil imageUtil;
 
@@ -101,7 +106,9 @@ public class DiscussBoardService {
 				.title(discussBoard.getTitle())
 				.content(discussBoard.getContent())
 				.discussType(discussBoard.getDiscussType())
+				.discussTypeDisplay(discussBoard.getDiscussType().getDisplayName())
 				.likes(discussBoard.getLikes())
+				.liked(ResponseUtil.isLiked(username, "DiscussBoard", discussBoard.getId(), likeRepository, userRepository))
 				.viewCount(discussBoard.getViewCount())
 				.createdAt(discussBoard.getCreatedAt())
 				.updatedAt(discussBoard.getUpdatedAt())
@@ -134,22 +141,24 @@ public class DiscussBoardService {
 			.stream()
 			.sorted((img1, img2) -> img1.getImageOrder().compareTo(img2.getImageOrder()))
 			.map(image -> {
-				String fullPath = "uploads/discussboard/" + image.getSavedFileName();
-				String base64Data = imageUtil.encodeImageToBase64(fullPath);
+				String imageUrl = imageUtil.generateImageUrl(image.getSavedFileName(), "discussboard");
 				String mimeType = imageUtil.getImageMimeType(image.getOriginalFileName());
 
-				// 이미지 인코딩 실패시 기본 이미지 사용
-				if (base64Data == null) {
-					base64Data = imageUtil.getDefaultImageBase64();
+				// 이미지 파일 존재 여부 확인
+				String fullPath = "uploads/discussboard/" + image.getSavedFileName();
+				if (!imageUtil.imageExists(fullPath)) {
+					log.warn("이미지 파일이 존재하지 않음, 기본 URL 사용: imageId={}, path={}", image.getId(), fullPath);
+					imageUrl = imageUtil.getDefaultImageUrl();
 					mimeType = "image/png";
 				}
 
 				return DiscussBoardImageResponse.builder()
 					.id(image.getId())
 					.originalFileName(image.getOriginalFileName())
-					.base64Data(base64Data)
+					.imageUrl(imageUrl)
 					.mimeType(mimeType)
 					.imageOrder(image.getImageOrder())
+					.fileSize(image.getFileSize())
 					.build();
 			})
 			.toList();

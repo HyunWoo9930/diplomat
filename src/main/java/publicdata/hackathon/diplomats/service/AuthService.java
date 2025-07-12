@@ -99,17 +99,61 @@ public class AuthService {
 
 			log.info("비밀번호 검증 성공");
 
-			// JWT 토큰 생성
-			String token = jwtTokenProvider.generateToken(user);
+			// JWT 토큰 생성 (액세스 토큰 + 리프레시 토큰)
+			String accessToken = jwtTokenProvider.generateToken(user);
+			String refreshToken = jwtTokenProvider.generateRefreshToken(user);
 			log.info("JWT 토큰 생성 완료");
 
-			return new JwtAuthenticationResponse(token);
+			return JwtAuthenticationResponse.builder()
+				.accessToken(accessToken)
+				.refreshToken(refreshToken)
+				.tokenType("Bearer")
+				.expiresIn(jwtTokenProvider.getAccessTokenExpirationInSeconds())
+				.build();
 
 		} catch (CustomException e) {
 			throw e;
 		} catch (Exception e) {
 			log.error("인증 실패: userId={}, error={}", userId, e.getMessage(), e);
 			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "인증 처리 중 오류가 발생했습니다.");
+		}
+	}
+	
+	/**
+	 * 리프레시 토큰으로 새로운 액세스 토큰 발급
+	 */
+	public JwtAuthenticationResponse refreshToken(String refreshToken) {
+		log.info("토큰 갱신 시작");
+		
+		try {
+			// 리프레시 토큰 유효성 검증
+			if (!jwtTokenProvider.validateRefreshToken(refreshToken)) {
+				throw new CustomException(ErrorCode.INVALID_TOKEN);
+			}
+			
+			// 리프레시 토큰에서 사용자 ID 추출
+			String userId = jwtTokenProvider.getUserIdFromJWT(refreshToken);
+			
+			// 사용자 존재 확인
+			User user = userRepository.findByUserId(userId)
+				.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+			
+			// 새로운 액세스 토큰 생성
+			String newAccessToken = jwtTokenProvider.generateToken(user);
+			log.info("새로운 액세스 토큰 생성 완료: userId={}", userId);
+			
+			return JwtAuthenticationResponse.builder()
+				.accessToken(newAccessToken)
+				.refreshToken(refreshToken) // 기존 리프레시 토큰 재사용
+				.tokenType("Bearer")
+				.expiresIn(jwtTokenProvider.getAccessTokenExpirationInSeconds())
+				.build();
+				
+		} catch (CustomException e) {
+			throw e;
+		} catch (Exception e) {
+			log.error("토큰 갱신 실패: error={}", e.getMessage(), e);
+			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR, "토큰 갱신 중 오류가 발생했습니다.");
 		}
 	}
 

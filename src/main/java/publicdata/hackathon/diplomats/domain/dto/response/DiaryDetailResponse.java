@@ -13,7 +13,9 @@ public class DiaryDetailResponse {
 	private String description;
 	private String action;
 	private Integer likes;
+	private boolean liked; // 현재 사용자의 좋아요 상태
 	private String userId;
+	private boolean isOwner; // 현재 사용자가 작성자인지 여부
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	private List<DiaryCommentResponse> diaryComments;

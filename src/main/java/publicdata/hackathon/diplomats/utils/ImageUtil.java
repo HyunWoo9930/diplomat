@@ -113,4 +113,23 @@ public class ImageUtil {
 		// 1x1 투명 PNG 이미지 (89bytes)
 		return "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 	}
+	
+	/**
+	 * 이미지 URL 생성
+	 */
+	public String generateImageUrl(String savedFileName, String uploadType) {
+		if (savedFileName == null || savedFileName.trim().isEmpty()) {
+			return null;
+		}
+		
+		// uploadType: "freeboard", "discussboard", "diary"
+		return String.format("/uploads/%s/%s", uploadType, savedFileName);
+	}
+	
+	/**
+	 * 기본 이미지 URL 반환
+	 */
+	public String getDefaultImageUrl() {
+		return "/uploads/default/placeholder.png";
+	}
 }

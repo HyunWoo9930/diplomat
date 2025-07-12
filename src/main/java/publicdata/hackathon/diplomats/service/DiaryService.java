@@ -28,9 +28,11 @@ import publicdata.hackathon.diplomats.repository.DiaryCommentRepository;
 import publicdata.hackathon.diplomats.repository.DiaryImageRepository;
 import publicdata.hackathon.diplomats.repository.DiaryRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
+import publicdata.hackathon.diplomats.repository.LikeRepository;
 import publicdata.hackathon.diplomats.utils.FileStorageUtil;
 import publicdata.hackathon.diplomats.utils.ImageUtil;
 import publicdata.hackathon.diplomats.utils.SecurityUtils;
+import publicdata.hackathon.diplomats.utils.ResponseUtil;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +44,7 @@ public class DiaryService {
 	private final DiaryCommentRepository diaryCommentRepository;
 	private final DiaryImageRepository diaryImageRepository;
 	private final UserRepository userRepository;
+	private final LikeRepository likeRepository;
 	private final FileStorageUtil fileStorageUtil;
 	private final ImageUtil imageUtil;
 	private final StampService stampService;
@@ -122,6 +125,7 @@ public class DiaryService {
 					.description(diary.getDescription())
 					.action(diary.getAction())
 					.likes(diary.getLikes())
+					.liked(ResponseUtil.isLiked(username, "Diary", diary.getId(), likeRepository, userRepository))
 					.createdAt(diary.getCreatedAt())
 					.updatedAt(diary.getUpdatedAt())
 					.userId(diary.getWriter().getUserId())
@@ -165,7 +169,9 @@ public class DiaryService {
 				.description(diary.getDescription())
 				.action(diary.getAction())
 				.likes(diary.getLikes())
+				.liked(ResponseUtil.isLiked(username, "Diary", diary.getId(), likeRepository, userRepository))
 				.userId(diary.getWriter().getUserId())
+				.isOwner(username != null && username.equals(diary.getWriter().getUserId()))
 				.createdAt(diary.getCreatedAt())
 				.updatedAt(diary.getUpdatedAt())
 				.diaryComments(diaryComments)
@@ -208,6 +214,46 @@ public class DiaryService {
 		} catch (Exception e) {
 			log.error("월간 인기 일지 조회 실패: error={}", e.getMessage(), e);
 			throw new CustomException(ErrorCode.DATABASE_ERROR, "월간 인기 일지 조회 중 오류가 발생했습니다.");
+		}
+	}
+
+	/**
+	 * 실천일지 삭제
+	 */
+	public void deleteDiary(String username, Long id) {
+		if (id == null || id <= 0) {
+			throw new CustomException(ErrorCode.INVALID_INPUT, "유효하지 않은 일지 ID입니다.");
+		}
+
+		try {
+			Diary diary = diaryRepository.findById(id)
+				.orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND, "일지를 찾을 수 없습니다."));
+
+			// 작성자 확인
+			if (!diary.getWriter().getUserId().equals(username)) {
+				throw new CustomException(ErrorCode.ACCESS_DENIED, "일지 삭제 권한이 없습니다.");
+			}
+
+			// 연관된 이미지들도 함께 삭제
+			List<DiaryImage> images = diaryImageRepository.findAllByDiary(diary);
+			for (DiaryImage image : images) {
+				try {
+					fileStorageUtil.deleteDiaryFile(image.getSavedFileName());
+				} catch (Exception e) {
+					log.warn("일지 이미지 파일 삭제 실패: imageId={}, fileName={}", 
+						image.getId(), image.getSavedFileName(), e);
+					// 파일 삭제 실패해도 DB는 삭제 진행
+				}
+			}
+
+			diaryRepository.delete(diary);
+			log.info("일지 삭제 완료: userId={}, diaryId={}", username, id);
+			
+		} catch (CustomException e) {
+			throw e;
+		} catch (Exception e) {
+			log.error("일지 삭제 실패: userId={}, diaryId={}, error={}", username, id, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "일지 삭제 중 오류가 발생했습니다.");
 		}
 	}
 
@@ -288,33 +334,35 @@ public class DiaryService {
 				.sorted((img1, img2) -> img1.getImageOrder().compareTo(img2.getImageOrder()))
 				.map(image -> {
 					try {
-						String fullPath = "uploads/diary/" + image.getSavedFileName();
-						String base64Data = imageUtil.encodeImageToBase64(fullPath);
+						String imageUrl = imageUtil.generateImageUrl(image.getSavedFileName(), "diary");
 						String mimeType = imageUtil.getImageMimeType(image.getOriginalFileName());
 
-						// 이미지 인코딩 실패시 기본 이미지 사용
-						if (base64Data == null) {
-							log.warn("이미지 인코딩 실패, 기본 이미지 사용: imageId={}, path={}", image.getId(), fullPath);
-							base64Data = imageUtil.getDefaultImageBase64();
+						// 이미지 파일 존재 여부 확인
+						String fullPath = "uploads/diary/" + image.getSavedFileName();
+						if (!imageUtil.imageExists(fullPath)) {
+							log.warn("이미지 파일이 존재하지 않음, 기본 URL 사용: imageId={}, path={}", image.getId(), fullPath);
+							imageUrl = imageUtil.getDefaultImageUrl();
 							mimeType = "image/png";
 						}
 
 						return DiaryImageResponse.builder()
 							.id(image.getId())
 							.originalFileName(image.getOriginalFileName())
-							.base64Data(base64Data)
+							.imageUrl(imageUrl)
 							.mimeType(mimeType)
 							.imageOrder(image.getImageOrder())
+							.fileSize(image.getFileSize())
 							.build();
 					} catch (Exception e) {
 						log.error("이미지 처리 실패: imageId={}, error={}", image.getId(), e.getMessage());
-						// 이미지 처리 실패시 기본 이미지로 응답 생성
+						// 이미지 처리 실패시 기본 URL로 응답 생성
 						return DiaryImageResponse.builder()
 							.id(image.getId())
 							.originalFileName(image.getOriginalFileName())
-							.base64Data(imageUtil.getDefaultImageBase64())
+							.imageUrl(imageUtil.getDefaultImageUrl())
 							.mimeType("image/png")
 							.imageOrder(image.getImageOrder())
+							.fileSize(0L)
 							.build();
 					}
 				})

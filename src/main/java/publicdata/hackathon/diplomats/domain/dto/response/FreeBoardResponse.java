@@ -16,6 +16,7 @@ public class FreeBoardResponse {
 	private String title;
 	private String content;
 	private int likes;
+	private boolean liked; // 현재 사용자의 좋아요 상태
 	private int viewCount;
 	private String userId;
 	private boolean isOwner; // 현재 사용자가 작성자인지 여부
@@ -23,12 +24,13 @@ public class FreeBoardResponse {
 	private LocalDateTime updatedAt;
 
 	@Builder
-	public FreeBoardResponse(Long id, String title, String content, int likes, int viewCount, String userId, 
+	public FreeBoardResponse(Long id, String title, String content, int likes, boolean liked, int viewCount, String userId, 
 			boolean isOwner, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.likes = likes;
+		this.liked = liked;
 		this.viewCount = viewCount;
 		this.userId = userId;
 		this.isOwner = isOwner;

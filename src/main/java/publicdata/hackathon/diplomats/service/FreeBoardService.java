@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.FreeBoardUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardCommentResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.FreeBoardDetailResponse;
@@ -23,17 +24,21 @@ import publicdata.hackathon.diplomats.repository.FreeBoardCommentRepository;
 import publicdata.hackathon.diplomats.repository.FreeBoardImageRepository;
 import publicdata.hackathon.diplomats.repository.FreeBoardRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
+import publicdata.hackathon.diplomats.repository.LikeRepository;
 import publicdata.hackathon.diplomats.utils.FileStorageUtil;
 import publicdata.hackathon.diplomats.utils.ImageUtil;
+import publicdata.hackathon.diplomats.utils.ResponseUtil;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FreeBoardService {
 
 	private final FreeBoardRepository freeBoardRepository;
 	private final FreeBoardCommentRepository freeBoardCommentRepository;
 	private final FreeBoardImageRepository freeBoardImageRepository;
 	private final UserRepository userRepository;
+	private final LikeRepository likeRepository;
 	private final FileStorageUtil fileStorageUtil;
 	private final ImageUtil imageUtil;
 
@@ -97,6 +102,7 @@ public class FreeBoardService {
 				.id(freeBoard.getId())
 				.title(freeBoard.getTitle())
 				.likes(freeBoard.getLikes())
+				.liked(ResponseUtil.isLiked(username, "FreeBoard", freeBoard.getId(), likeRepository, userRepository))
 				.content(freeBoard.getContent())
 				.createdAt(freeBoard.getCreatedAt())
 				.updatedAt(freeBoard.getUpdatedAt())
@@ -127,22 +133,24 @@ public class FreeBoardService {
 			.stream()
 			.sorted((img1, img2) -> img1.getImageOrder().compareTo(img2.getImageOrder()))
 			.map(image -> {
-				String fullPath = "uploads/freeboard/" + image.getSavedFileName();
-				String base64Data = imageUtil.encodeImageToBase64(fullPath);
+				String imageUrl = imageUtil.generateImageUrl(image.getSavedFileName(), "freeboard");
 				String mimeType = imageUtil.getImageMimeType(image.getOriginalFileName());
 
-				// 이미지 인코딩 실패시 기본 이미지 사용
-				if (base64Data == null) {
-					base64Data = imageUtil.getDefaultImageBase64();
+				// 이미지 파일 존재 여부 확인
+				String fullPath = "uploads/freeboard/" + image.getSavedFileName();
+				if (!imageUtil.imageExists(fullPath)) {
+					log.warn("이미지 파일이 존재하지 않음, 기본 URL 사용: imageId={}, path={}", image.getId(), fullPath);
+					imageUrl = imageUtil.getDefaultImageUrl();
 					mimeType = "image/png";
 				}
 
 				return FreeBoardImageResponse.builder()
 					.id(image.getId())
 					.originalFileName(image.getOriginalFileName())
-					.base64Data(base64Data)
+					.imageUrl(imageUrl)
 					.mimeType(mimeType)
 					.imageOrder(image.getImageOrder())
+					.fileSize(image.getFileSize())
 					.build();
 			})
 			.toList();
@@ -150,10 +158,13 @@ public class FreeBoardService {
 		return FreeBoardDetailResponse.builder()
 			.freeBoardComments(freeBoardComments)
 			.freeBoardImages(images)
-			.likes(freeBoard.getLikes())
 			.title(freeBoard.getTitle())
 			.content(freeBoard.getContent())
+			.likes(freeBoard.getLikes())
+			.liked(ResponseUtil.isLiked(username, "FreeBoard", freeBoard.getId(), likeRepository, userRepository))
+			.viewCount(freeBoard.getViewCount())
 			.userId(freeBoard.getUser().getUserId())
+			.isOwner(username != null && username.equals(freeBoard.getUser().getUserId()))
 			.createdAt(freeBoard.getCreatedAt())
 			.updatedAt(freeBoard.getUpdatedAt())
 			.build();
