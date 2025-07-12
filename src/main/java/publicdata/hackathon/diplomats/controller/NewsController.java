@@ -48,6 +48,7 @@ public class NewsController {
 			"""
 	)
 	public ResponseEntity<NewsListResponse> getNews(
+		Authentication authentication,
 		@Parameter(description = "필터 (ALL, ESG, CLIMATE, CULTURE, ODA)")
 		@RequestParam(defaultValue = "ALL") String filter,
 		@Parameter(description = "페이지 번호 (0부터 시작)")
@@ -56,7 +57,13 @@ public class NewsController {
 		@RequestParam(defaultValue = "20") int size
 	) {
 		try {
-			NewsListResponse response = newsService.getNews(filter, page, size);
+			String userId = null;
+			if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails) {
+				CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+				userId = userDetails.getUsername();
+			}
+			
+			NewsListResponse response = newsService.getNews(filter, page, size, userId);
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			NewsListResponse errorResponse = NewsListResponse.builder()

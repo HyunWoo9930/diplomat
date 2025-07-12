@@ -16,4 +16,5 @@ public class NewsItem {
 	private String category;        // 필터 카테고리
 	private String categoryDisplay; // 카테고리 한글명
 	private Integer matchScore;     // 매칭 점수
+	private boolean scrapped;       // 현재 사용자의 스크랩 상태
 }

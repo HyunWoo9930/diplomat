@@ -70,6 +70,17 @@ public class NewsScrapService {
 	}
 
 	@Transactional(readOnly = true)
+	public boolean isNewsScrappedByUser(String username, Long newsId) {
+		User user = userRepository.findByUserId(username)
+			.orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
+
+		PressRelease pressRelease = pressReleaseRepository.findById(newsId)
+			.orElseThrow(() -> new EntityNotFoundException("뉴스를 찾을 수 없습니다."));
+
+		return newsScrapRepository.existsByUserAndPressRelease(user, pressRelease);
+	}
+
+	@Transactional(readOnly = true)
 	public ScrapResponse getScrapStatus(String username, Long newsId) {
 		User user = userRepository.findByUserId(username)
 			.orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
@@ -85,6 +96,17 @@ public class NewsScrapService {
 			.scrapCount(scrapCount)
 			.message("스크랩 상태 조회 성공")
 			.build();
+	}
+
+	@Transactional(readOnly = true)
+	public boolean isNewsScrappedByUser(String username, Long newsId) {
+		User user = userRepository.findByUserId(username)
+			.orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
+
+		PressRelease pressRelease = pressReleaseRepository.findById(newsId)
+			.orElseThrow(() -> new EntityNotFoundException("뉴스를 찾을 수 없습니다."));
+
+		return newsScrapRepository.existsByUserAndPressRelease(user, pressRelease);
 	}
 
 	@Transactional(readOnly = true)
@@ -131,6 +153,7 @@ public class NewsScrapService {
 			.scrapedAt(scrap.getScrapedAt())
 			.category(category)
 			.categoryDisplay(getCategoryDisplay(category))
+			.scrapped(true) // 스크랩 목록에서는 항상 true
 			.build();
 	}
 

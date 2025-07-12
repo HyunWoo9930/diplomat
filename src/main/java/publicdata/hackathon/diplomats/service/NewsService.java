@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,15 +33,16 @@ public class NewsService {
 
 	private final PressReleaseRepository pressReleaseRepository;
 	private final UserRepository userRepository;
+	private final @Lazy NewsScrapService newsScrapService;
 
-	public NewsListResponse getNews(String filter, int page, int size) {
+	public NewsListResponse getNews(String filter, int page, int size, String userId) {
 		Pageable pageable = PageRequest.of(page, size);
 
 		NewsFilter newsFilter = parseFilter(filter);
 		Page<PressRelease> newsPage = getNewsByFilter(newsFilter, pageable);
 
 		List<NewsItem> newsItems = newsPage.getContent().stream()
-			.map(pressRelease -> convertToNewsItem(pressRelease, newsFilter))
+			.map(pressRelease -> convertToNewsItem(pressRelease, newsFilter, userId))
 			.collect(Collectors.toList());
 
 		PaginationInfo pagination = PaginationInfo.builder()
@@ -100,9 +101,20 @@ public class NewsService {
 		);
 	}
 
-	private NewsItem convertToNewsItem(PressRelease pressRelease, NewsFilter filter) {
+	private NewsItem convertToNewsItem(PressRelease pressRelease, NewsFilter filter, String userId) {
 		String category = determineCategory(pressRelease);
 		String summary = createSummary(pressRelease.getContent());
+		
+		// 스크랩 상태 확인
+		boolean scrapped = false;
+		if (userId != null) {
+			try {
+				scrapped = newsScrapService.isNewsScrappedByUser(userId, pressRelease.getId());
+			} catch (Exception e) {
+				// 스크랩 상태 조회 실패시 기본값 false
+				scrapped = false;
+			}
+		}
 
 		return NewsItem.builder()
 			.id(pressRelease.getId())
@@ -113,6 +125,7 @@ public class NewsService {
 			.category(category)
 			.categoryDisplay(getCategoryDisplay(category))
 			.matchScore(pressRelease.getMatchScore())
+			.scrapped(scrapped)
 			.build();
 	}
 
@@ -208,7 +221,7 @@ public class NewsService {
 		String filter = determineFilterByCitizenType(citizenType);
 
 		// 기존 getNews 메서드 활용
-		NewsListResponse response = getNews(filter, page, size);
+		NewsListResponse response = getNews(filter, page, size, username);
 
 		// 응답에 맞춤형 정보 추가
 		FilterInfo personalizedFilter = FilterInfo.builder()

@@ -18,4 +18,5 @@ public class ScrapItem {
 	private LocalDateTime scrapedAt;
 	private String category;
 	private String categoryDisplay;
+	private boolean scrapped; // 스크랩된 아이템이므로 항상 true
 }
