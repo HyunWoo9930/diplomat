@@ -138,6 +138,12 @@ public class DiscussBoardService {
 				String base64Data = imageUtil.encodeImageToBase64(fullPath);
 				String mimeType = imageUtil.getImageMimeType(image.getOriginalFileName());
 
+				// 이미지 인코딩 실패시 기본 이미지 사용
+				if (base64Data == null) {
+					base64Data = imageUtil.getDefaultImageBase64();
+					mimeType = "image/png";
+				}
+
 				return DiscussBoardImageResponse.builder()
 					.id(image.getId())
 					.originalFileName(image.getOriginalFileName())

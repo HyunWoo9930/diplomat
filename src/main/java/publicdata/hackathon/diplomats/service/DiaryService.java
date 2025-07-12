@@ -292,6 +292,13 @@ public class DiaryService {
 						String base64Data = imageUtil.encodeImageToBase64(fullPath);
 						String mimeType = imageUtil.getImageMimeType(image.getOriginalFileName());
 
+						// 이미지 인코딩 실패시 기본 이미지 사용
+						if (base64Data == null) {
+							log.warn("이미지 인코딩 실패, 기본 이미지 사용: imageId={}, path={}", image.getId(), fullPath);
+							base64Data = imageUtil.getDefaultImageBase64();
+							mimeType = "image/png";
+						}
+
 						return DiaryImageResponse.builder()
 							.id(image.getId())
 							.originalFileName(image.getOriginalFileName())
@@ -301,11 +308,16 @@ public class DiaryService {
 							.build();
 					} catch (Exception e) {
 						log.error("이미지 처리 실패: imageId={}, error={}", image.getId(), e.getMessage());
-						// 이미지 처리 실패시 null 반환하여 필터링
-						return null;
+						// 이미지 처리 실패시 기본 이미지로 응답 생성
+						return DiaryImageResponse.builder()
+							.id(image.getId())
+							.originalFileName(image.getOriginalFileName())
+							.base64Data(imageUtil.getDefaultImageBase64())
+							.mimeType("image/png")
+							.imageOrder(image.getImageOrder())
+							.build();
 					}
 				})
-				.filter(response -> response != null)
 				.toList();
 		} catch (Exception e) {
 			log.error("일지 이미지 목록 처리 실패: diaryId={}, error={}", diary.getId(), e.getMessage(), e);
