@@ -217,6 +217,30 @@ public class NewsService {
 		// 사용자의 시민력 유형 확인
 		String citizenType = user.getCitizenType();
 
+		// 시민력 테스트를 완료하지 않은 경우 빈 결과 반환
+		if (citizenType == null || citizenType.isEmpty()) {
+			PaginationInfo emptyPagination = PaginationInfo.builder()
+				.currentPage(page)
+				.totalPages(0)
+				.pageSize(size)
+				.totalCount(0)
+				.hasNext(false)
+				.hasPrev(false)
+				.build();
+
+			FilterInfo emptyFilter = FilterInfo.builder()
+				.currentFilter("PERSONALIZED")
+				.currentFilterDisplay("맞춤형 (테스트 미완료)")
+				.availableFilters(List.of())
+				.build();
+
+			return NewsListResponse.builder()
+				.news(List.of()) // 빈 뉴스 목록
+				.pagination(emptyPagination)
+				.filter(emptyFilter)
+				.build();
+		}
+
 		// 유형에 따른 필터 결정
 		String filter = determineFilterByCitizenType(citizenType);
 
