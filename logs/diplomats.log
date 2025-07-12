@@ -140,3 +140,50 @@
 2025-07-13 00:26:48.634 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
 2025-07-13 00:26:48.634 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
 2025-07-13 00:26:48.634 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 00:31:15.636 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-13 00:31:15.648 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-13 00:31:15.655 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 00:31:15.658 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 00:31:15.665 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 00:31:17.592 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 00:31:17.622 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 29716 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 00:31:17.622 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 00:31:18.070 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 00:31:18.107 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 26 JPA repository interfaces.
+2025-07-13 00:31:18.293 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 00:31:18.298 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 00:31:18.298 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 00:31:18.299 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 00:31:18.318 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 00:31:18.318 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 676 ms
+2025-07-13 00:31:18.367 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 00:31:18.385 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 00:31:18.395 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 00:31:18.499 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 00:31:18.511 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 00:31:18.648 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8585cdd
+2025-07-13 00:31:18.649 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 00:31:18.679 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 00:31:19.197 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 00:31:19.307 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 00:31:19.425 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 00:31:19.449 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 00:31:20.338 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 00:31:20.419 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 00:31:20.496 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 00:31:20.528 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 00:31:20.649 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 00:31:20.667 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-13 00:31:20.674 [main] INFO  p.h.diplomats.DiplomatsApplication - Started DiplomatsApplication in 3.29 seconds (process running for 3.494)
+2025-07-13 00:31:20.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 00:31:20.677 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 00:31:20.677 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 00:31:20.677 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 00:31:20.677 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다

@@ -129,16 +129,30 @@ public class DiaryController {
 		return ResponseEntity.ok(ApiResponse.success("이번 달 인기 일지를 조회했습니다.", topDiaries));
 	}
 
-	@PutMapping("/{id}")
-	@Operation(summary = "외교일지 수정", description = "외교일지를 수정합니다.")
+	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "외교일지 수정", description = "외교일지를 수정합니다. 이미지는 최대 5장까지 업로드 가능합니다.")
 	public ResponseEntity<ApiResponse<String>> updateDiary(@PathVariable Long id,
-		@Valid @RequestBody DiaryRequest request) {
+		@RequestParam("title") String title,
+		@RequestParam("content") String content,
+		@RequestParam("action") String action,
+		@RequestPart(value = "images", required = false) List<MultipartFile> images) {
 		
-		String currentUserId = SecurityUtils.getCurrentUserIdString();
-		log.info("외교일지 수정: userId={}, diaryId={}", currentUserId, id);
-		
-		diaryService.updateDiary(currentUserId, id, request);
-		return ResponseEntity.ok(ApiResponse.success("일지가 성공적으로 수정되었습니다."));
+		try {
+			// 이미지 개수 검증
+			if (images != null && images.size() > 5) {
+				return ResponseEntity.badRequest().body(
+					ApiResponse.error("이미지는 최대 5장까지 업로드 가능합니다.", null)
+				);
+			}
+
+			String currentUserId = SecurityUtils.getCurrentUserIdString();
+			log.info("외교일지 수정: userId={}, diaryId={}", currentUserId, id);
+			
+			diaryService.updateDiary(currentUserId, id, title, content, action, images);
+			return ResponseEntity.ok(ApiResponse.success("일지가 성공적으로 수정되었습니다."));
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage(), null));
+		}
 	}
 
 	@DeleteMapping("/{id}")

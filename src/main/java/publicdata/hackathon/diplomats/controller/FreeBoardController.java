@@ -100,15 +100,25 @@ public class FreeBoardController {
 	}
 
 	// 게시글 수정
-	@PutMapping("/{id}")
-	public ResponseEntity<String> updateFreeBoard(Authentication authentication, @PathVariable Long id,
-		@RequestBody FreeBoardUpdateRequest request) {
+	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "자유게시판 글 수정", description = "자유게시판 글을 수정합니다. 이미지는 최대 3장까지 업로드 가능합니다.")
+	public ResponseEntity<ApiResponse<String>> updateFreeBoard(Authentication authentication, @PathVariable Long id,
+		@RequestParam("title") String title,
+		@RequestParam("content") String content,
+		@RequestPart(value = "images", required = false) List<MultipartFile> images) {
 		try {
+			// 이미지 개수 검증
+			if (images != null && images.size() > 3) {
+				return ResponseEntity.badRequest().body(
+					ApiResponse.error("이미지는 최대 3장까지 업로드 가능합니다.", null)
+				);
+			}
+
 			CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-			freeBoardService.updateFreeBoard(customUserDetails.getUsername(), id, request);
-			return ResponseEntity.ok("게시글이 성공적으로 수정되었습니다.");
+			freeBoardService.updateFreeBoard(customUserDetails.getUsername(), id, title, content, images);
+			return ResponseEntity.ok(ApiResponse.success("게시글이 성공적으로 수정되었습니다."));
 		} catch (RuntimeException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage(), null));
 		}
 	}
 

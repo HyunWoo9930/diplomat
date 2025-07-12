@@ -103,16 +103,26 @@ public class DiscussBoardController {
 	}
 
 	// 게시글 수정
-	@PutMapping("/{id}")
-	@Operation(summary = "토론게시글 수정", description = "토론게시글을 수정합니다.")
-	public ResponseEntity<String> updateDiscussBoard(Authentication authentication, @PathVariable Long id,
-		@RequestBody DiscussBoardUpdateRequest request) {
+	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Operation(summary = "토론게시글 수정", description = "토론게시글을 수정합니다. 이미지는 최대 3장까지 업로드 가능합니다.")
+	public ResponseEntity<ApiResponse<String>> updateDiscussBoard(Authentication authentication, @PathVariable Long id,
+		@RequestParam("title") String title,
+		@RequestParam("content") String content,
+		@RequestParam("discussType") DiscussType discussType,
+		@RequestPart(value = "images", required = false) List<MultipartFile> images) {
 		try {
+			// 이미지 개수 검증
+			if (images != null && images.size() > 3) {
+				return ResponseEntity.badRequest().body(
+					ApiResponse.error("이미지는 최대 3장까지 업로드 가능합니다.", null)
+				);
+			}
+
 			CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
-			discussBoardService.updateDiscussBoard(customUserDetails.getUsername(), id, request);
-			return ResponseEntity.ok("게시글이 성공적으로 수정되었습니다.");
+			discussBoardService.updateDiscussBoard(customUserDetails.getUsername(), id, title, content, discussType, images);
+			return ResponseEntity.ok(ApiResponse.success("게시글이 성공적으로 수정되었습니다."));
 		} catch (RuntimeException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage(), null));
 		}
 	}
 

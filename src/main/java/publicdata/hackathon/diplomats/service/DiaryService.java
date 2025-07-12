@@ -220,7 +220,7 @@ public class DiaryService {
 	/**
 	 * 실천일지 수정
 	 */
-	public void updateDiary(String username, Long id, publicdata.hackathon.diplomats.domain.dto.request.DiaryRequest request) {
+	public void updateDiary(String username, Long id, String title, String content, String action, List<MultipartFile> images) {
 		if (id == null || id <= 0) {
 			throw new CustomException(ErrorCode.INVALID_INPUT, "유효하지 않은 일지 ID입니다.");
 		}
@@ -235,13 +235,29 @@ public class DiaryService {
 			}
 
 			// 입력값 유효성 검사
-			validateDiaryInput(request.getTitle(), request.getContent(), request.getAction());
+			validateDiaryInput(title, content, action);
 
-			// 일지 수정
-			diary.setTitle(request.getTitle());
-			diary.setDescription(request.getContent());
-			diary.setAction(request.getAction());
+			// 기본 정보 수정
+			diary.setTitle(title);
+			diary.setDescription(content);
+			diary.setAction(action);
 			diary.setUpdatedAt(LocalDateTime.now());
+
+			// 기존 이미지들 삭제
+			List<DiaryImage> existingImages = diaryImageRepository.findAllByDiary(diary);
+			for (DiaryImage image : existingImages) {
+				try {
+					fileStorageUtil.deleteDiaryFile(image.getSavedFileName());
+				} catch (Exception e) {
+					log.warn("기존 이미지 파일 삭제 실패: {}", image.getSavedFileName(), e);
+				}
+			}
+			diaryImageRepository.deleteAll(existingImages);
+
+			// 새 이미지들 추가
+			if (images != null && !images.isEmpty()) {
+				processImages(diary, images);
+			}
 
 			diaryRepository.save(diary);
 			log.info("일지 수정 완료: userId={}, diaryId={}", username, id);

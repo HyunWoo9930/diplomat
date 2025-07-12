@@ -178,7 +178,7 @@ public class DiscussBoardService {
 			.build();
 	}
 
-	public void updateDiscussBoard(String username, Long id, DiscussBoardUpdateRequest request) {
+	public void updateDiscussBoard(String username, Long id, String title, String content, DiscussType discussType, List<MultipartFile> images) {
 		DiscussBoard discussBoard = discussBoardRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
 
@@ -187,13 +187,48 @@ public class DiscussBoardService {
 			throw new RuntimeException("게시글 수정 권한이 없습니다.");
 		}
 
-		// 게시글 수정
-		discussBoard.setTitle(request.getTitle());
-		discussBoard.setContent(request.getContent());
-		discussBoard.setDiscussType(request.getDiscussType());
+		// 기본 정보 수정
+		discussBoard.setTitle(title);
+		discussBoard.setContent(content);
+		discussBoard.setDiscussType(discussType);
 		discussBoard.setUpdatedAt(LocalDateTime.now());
 
+		// 기존 이미지들 삭제
+		List<DiscussBoardImage> existingImages = discussBoardImageRepository.findAllByDiscussBoard(discussBoard);
+		for (DiscussBoardImage image : existingImages) {
+			try {
+				fileStorageUtil.deleteDiscussBoardFile(image.getSavedFileName());
+			} catch (Exception e) {
+				log.warn("기존 이미지 파일 삭제 실패: {}", image.getSavedFileName(), e);
+			}
+		}
+		discussBoardImageRepository.deleteAll(existingImages);
+
+		// 새 이미지들 추가
+		if (images != null && !images.isEmpty()) {
+			for (int i = 0; i < images.size(); i++) {
+				MultipartFile image = images.get(i);
+				if (!image.isEmpty()) {
+					String savedFileName = fileStorageUtil.saveDiscussBoardFile(image);
+
+					DiscussBoardImage discussBoardImage = DiscussBoardImage.builder()
+						.discussBoard(discussBoard)
+						.imagePath("/uploads/discussboard/" + savedFileName)
+						.originalFileName(image.getOriginalFilename())
+						.savedFileName(savedFileName)
+						.fileSize(image.getSize())
+						.contentType(image.getContentType())
+						.imageOrder(i + 1)
+						.uploadedAt(LocalDateTime.now())
+						.build();
+
+					discussBoardImageRepository.save(discussBoardImage);
+				}
+			}
+		}
+
 		discussBoardRepository.save(discussBoard);
+		log.info("토론게시글 수정 완료: discussBoardId={}, userId={}", id, username);
 	}
 
 	public void deleteDiscussBoard(String username, Long id) {

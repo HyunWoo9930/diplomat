@@ -170,7 +170,7 @@ public class FreeBoardService {
 			.build();
 	}
 
-	public void updateFreeBoard(String username, Long id, FreeBoardUpdateRequest request) {
+	public void updateFreeBoard(String username, Long id, String title, String content, List<MultipartFile> images) {
 		FreeBoard freeBoard = freeBoardRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
 
@@ -179,12 +179,47 @@ public class FreeBoardService {
 			throw new RuntimeException("게시글 수정 권한이 없습니다.");
 		}
 
-		// 게시글 수정
-		freeBoard.setTitle(request.getTitle());
-		freeBoard.setContent(request.getContent());
+		// 기본 정보 수정
+		freeBoard.setTitle(title);
+		freeBoard.setContent(content);
 		freeBoard.setUpdatedAt(LocalDateTime.now());
 
+		// 기존 이미지들 삭제
+		List<FreeBoardImage> existingImages = freeBoardImageRepository.findAllByFreeBoard(freeBoard);
+		for (FreeBoardImage image : existingImages) {
+			try {
+				fileStorageUtil.deleteFreeBoardFile(image.getSavedFileName());
+			} catch (Exception e) {
+				log.warn("기존 이미지 파일 삭제 실패: {}", image.getSavedFileName(), e);
+			}
+		}
+		freeBoardImageRepository.deleteAll(existingImages);
+
+		// 새 이미지들 추가
+		if (images != null && !images.isEmpty()) {
+			for (int i = 0; i < images.size(); i++) {
+				MultipartFile image = images.get(i);
+				if (!image.isEmpty()) {
+					String savedFileName = fileStorageUtil.saveFreeBoardFile(image);
+
+					FreeBoardImage freeBoardImage = FreeBoardImage.builder()
+						.freeBoard(freeBoard)
+						.imagePath("/uploads/freeboard/" + savedFileName)
+						.originalFileName(image.getOriginalFilename())
+						.savedFileName(savedFileName)
+						.fileSize(image.getSize())
+						.contentType(image.getContentType())
+						.imageOrder(i + 1)
+						.uploadedAt(LocalDateTime.now())
+						.build();
+
+					freeBoardImageRepository.save(freeBoardImage);
+				}
+			}
+		}
+
 		freeBoardRepository.save(freeBoard);
+		log.info("자유게시글 수정 완료: freeBoardId={}, userId={}", id, username);
 	}
 
 	public void deleteFreeBoard(String username, Long id) {
