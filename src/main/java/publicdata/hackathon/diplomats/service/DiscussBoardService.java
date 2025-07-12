@@ -205,17 +205,30 @@ public class DiscussBoardService {
 			throw new RuntimeException("게시글 삭제 권한이 없습니다.");
 		}
 
-		// 연관된 이미지들도 함께 삭제 (Cascade로 처리되지만 파일도 삭제)
+		// 연관된 이미지 파일들을 삭제하기 위해 미리 조회
 		List<DiscussBoardImage> images = discussBoardImageRepository.findAllByDiscussBoard(discussBoard);
+		
+		// 실제 파일들을 먼저 삭제
 		for (DiscussBoardImage image : images) {
-			// 실제 파일 삭제 (optional)
 			try {
 				fileStorageUtil.deleteDiscussBoardFile(image.getSavedFileName());
+				log.info("이미지 파일 삭제 완료: {}", image.getSavedFileName());
 			} catch (Exception e) {
+				log.warn("이미지 파일 삭제 실패: {}, 에러: {}", image.getSavedFileName(), e.getMessage());
 				// 파일 삭제 실패해도 DB는 삭제 진행
 			}
 		}
 
+		// 관련된 좋아요들 삭제
+		try {
+			likeRepository.deleteByTargetTypeAndTargetId("DiscussBoard", id);
+			log.info("토론게시글 관련 좋아요 삭제 완료: discussBoardId={}", id);
+		} catch (Exception e) {
+			log.warn("토론게시글 관련 좋아요 삭제 실패: discussBoardId={}, 에러: {}", id, e.getMessage());
+		}
+
+		// DiscussBoard 삭제 (CASCADE로 연관된 이미지와 댓글들이 자동 삭제됨)
 		discussBoardRepository.delete(discussBoard);
+		log.info("토론게시글 삭제 완료: discussBoardId={}, userId={}", id, username);
 	}
 }
