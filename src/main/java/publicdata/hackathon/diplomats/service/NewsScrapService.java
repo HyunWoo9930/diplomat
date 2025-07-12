@@ -99,17 +99,6 @@ public class NewsScrapService {
 	}
 
 	@Transactional(readOnly = true)
-	public boolean isNewsScrappedByUser(String username, Long newsId) {
-		User user = userRepository.findByUserId(username)
-			.orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
-
-		PressRelease pressRelease = pressReleaseRepository.findById(newsId)
-			.orElseThrow(() -> new EntityNotFoundException("뉴스를 찾을 수 없습니다."));
-
-		return newsScrapRepository.existsByUserAndPressRelease(user, pressRelease);
-	}
-
-	@Transactional(readOnly = true)
 	public MyScrapListResponse getMyScraps(String username, int page, int size) {
 		User user = userRepository.findByUserId(username)
 			.orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));

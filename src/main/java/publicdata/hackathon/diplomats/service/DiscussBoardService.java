@@ -170,6 +170,7 @@ public class DiscussBoardService {
 			.likes(discussBoard.getLikes())
 			.viewCount(discussBoard.getViewCount())
 			.userId(discussBoard.getUser().getUserId())
+			.owner(username != null && username.equals(discussBoard.getUser().getUserId()))
 			.createdAt(discussBoard.getCreatedAt())
 			.updatedAt(discussBoard.getUpdatedAt())
 			.discussBoardComments(discussBoardComments)

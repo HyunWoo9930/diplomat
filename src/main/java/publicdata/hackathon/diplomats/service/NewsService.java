@@ -61,6 +61,8 @@ public class NewsService {
 			.news(newsItems)
 			.pagination(pagination)
 			.filter(filterInfo)
+			.citizenType(null)
+			.citizenTypeDisplay(null)
 			.build();
 	}
 
@@ -238,6 +240,8 @@ public class NewsService {
 				.news(List.of()) // 빈 뉴스 목록
 				.pagination(emptyPagination)
 				.filter(emptyFilter)
+				.citizenType(null)
+				.citizenTypeDisplay("테스트 미완료")
 				.build();
 		}
 
@@ -258,6 +262,8 @@ public class NewsService {
 			.news(response.getNews())
 			.pagination(response.getPagination())
 			.filter(personalizedFilter)
+			.citizenType(citizenType)
+			.citizenTypeDisplay(getDisplayNameByCitizenType(citizenType))
 			.build();
 	}
 

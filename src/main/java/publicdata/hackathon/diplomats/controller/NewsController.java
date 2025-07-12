@@ -81,6 +81,8 @@ public class NewsController {
 					.currentFilterDisplay("전체")
 					.availableFilters(List.of())
 					.build())
+				.citizenType(null)
+				.citizenTypeDisplay(null)
 				.build();
 
 			return ResponseEntity.badRequest().body(errorResponse);
@@ -133,6 +135,8 @@ public class NewsController {
 					.currentFilterDisplay("맞춤형")
 					.availableFilters(List.of())
 					.build())
+				.citizenType(null)
+				.citizenTypeDisplay("오류 발생")
 				.build();
 
 			return ResponseEntity.badRequest().body(errorResponse);

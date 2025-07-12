@@ -36,11 +36,6 @@ public class LikeService {
         User user = userRepository.findByUserId(username)
             .orElseThrow(() -> new EntityNotFoundException("사용자를 찾을 수 없습니다."));
         
-        // 작성자 본인인지 확인
-        if (isAuthor(user, targetType, targetId)) {
-            throw new RuntimeException("자신의 게시글에는 좋아요를 누를 수 없습니다.");
-        }
-        
         // 게시글 존재 여부 확인
         validateTargetExists(targetType, targetId);
         
@@ -69,16 +64,19 @@ public class LikeService {
             likeRepository.save(like);
             updateLikeCount(targetType, targetId, 1);
             
-            // 🎯 실천일기에 좋아요를 받았을 때 작성자에게 스탬프 지급
+            // 🎯 실천일기에 좋아요를 받았을 때 작성자에게 스탬프 지급 (자기 글이 아닌 경우에만)
             if ("Diary".equals(targetType)) {
                 try {
                     Diary diary = diaryRepository.findById(targetId)
                         .orElseThrow(() -> new EntityNotFoundException("일지를 찾을 수 없습니다."));
                     
-                    StampEarnedResponse stampResponse = stampService.earnDiaryLikeStamp(diary.getWriter(), diary.getId());
-                    if (stampResponse.isSuccess()) {
-                        log.info("실천일기 좋아요 받기 스탬프 지급 완료: authorId={}, diaryId={}, likerId={}, leveledUp={}", 
-                            diary.getWriter().getUserId(), diary.getId(), username, stampResponse.isLeveledUp());
+                    // 자기 글이 아닌 경우에만 스탬프 지급
+                    if (!diary.getWriter().getId().equals(user.getId())) {
+                        StampEarnedResponse stampResponse = stampService.earnDiaryLikeStamp(diary.getWriter(), diary.getId());
+                        if (stampResponse.isSuccess()) {
+                            log.info("실천일기 좋아요 받기 스탬프 지급 완료: authorId={}, diaryId={}, likerId={}, leveledUp={}", 
+                                diary.getWriter().getUserId(), diary.getId(), username, stampResponse.isLeveledUp());
+                        }
                     }
                 } catch (Exception e) {
                     log.error("실천일기 좋아요 받기 스탬프 지급 실패: targetId={}, likerId={}", targetId, username, e);
@@ -106,28 +104,6 @@ public class LikeService {
             .likeCount(likeCount)
             .message("좋아요 상태 조회 성공")
             .build();
-    }
-    
-    private boolean isAuthor(User user, String targetType, Long targetId) {
-        switch (targetType) {
-            case "FreeBoard":
-                FreeBoard freeBoard = freeBoardRepository.findById(targetId)
-                    .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
-                return freeBoard.getUser().getId().equals(user.getId());
-                
-            case "DiscussBoard":
-                DiscussBoard discussBoard = discussBoardRepository.findById(targetId)
-                    .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
-                return discussBoard.getUser().getId().equals(user.getId());
-                
-            case "Diary":
-                Diary diary = diaryRepository.findById(targetId)
-                    .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
-                return diary.getWriter().getId().equals(user.getId());
-                
-            default:
-                throw new RuntimeException("지원하지 않는 타겟 타입입니다: " + targetType);
-        }
     }
     
     private void validateTargetExists(String targetType, Long targetId) {
