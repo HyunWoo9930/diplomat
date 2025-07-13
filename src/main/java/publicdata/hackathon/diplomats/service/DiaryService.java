@@ -20,8 +20,12 @@ import publicdata.hackathon.diplomats.domain.dto.response.DiaryResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.PagedResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.entity.Diary;
+import publicdata.hackathon.diplomats.domain.entity.DiaryComment;
 import publicdata.hackathon.diplomats.domain.entity.DiaryImage;
+import publicdata.hackathon.diplomats.domain.entity.Like;
 import publicdata.hackathon.diplomats.domain.entity.User;
+import publicdata.hackathon.diplomats.domain.entity.UserStamp;
+import publicdata.hackathon.diplomats.domain.entity.VoteCandidate;
 import publicdata.hackathon.diplomats.exception.CustomException;
 import publicdata.hackathon.diplomats.exception.ErrorCode;
 import publicdata.hackathon.diplomats.repository.DiaryCommentRepository;
@@ -29,6 +33,8 @@ import publicdata.hackathon.diplomats.repository.DiaryImageRepository;
 import publicdata.hackathon.diplomats.repository.DiaryRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
 import publicdata.hackathon.diplomats.repository.LikeRepository;
+import publicdata.hackathon.diplomats.repository.VoteCandidateRepository;
+import publicdata.hackathon.diplomats.repository.UserStampRepository;
 import publicdata.hackathon.diplomats.utils.FileStorageUtil;
 import publicdata.hackathon.diplomats.utils.ImageUtil;
 import publicdata.hackathon.diplomats.utils.SecurityUtils;
@@ -45,6 +51,8 @@ public class DiaryService {
 	private final DiaryImageRepository diaryImageRepository;
 	private final UserRepository userRepository;
 	private final LikeRepository likeRepository;
+	private final VoteCandidateRepository voteCandidateRepository;
+	private final UserStampRepository userStampRepository;
 	private final FileStorageUtil fileStorageUtil;
 	private final ImageUtil imageUtil;
 	private final StampService stampService;
@@ -287,7 +295,50 @@ public class DiaryService {
 				throw new CustomException(ErrorCode.ACCESS_DENIED, "일지 삭제 권한이 없습니다.");
 			}
 
-			// 연관된 이미지들도 함께 삭제
+			log.info("일지 삭제 시작: userId={}, diaryId={}", username, id);
+
+			// 🔧 1. 일지 관련 모든 연관 데이터 삭제 (순서 중요!)
+			deleteAllRelatedData(diary);
+
+			// 🔧 2. 일지 자체 삭제
+			diaryRepository.delete(diary);
+			log.info("일지 삭제 완료: userId={}, diaryId={}", username, id);
+			
+		} catch (CustomException e) {
+			throw e;
+		} catch (Exception e) {
+			log.error("일지 삭제 실패: userId={}, diaryId={}, error={}", username, id, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "일지 삭제 중 오류가 발생했습니다.");
+		}
+	}
+
+	/**
+	 * 일지와 관련된 모든 데이터를 삭제
+	 */
+	private void deleteAllRelatedData(Diary diary) {
+		Long diaryId = diary.getId();
+		
+		try {
+			// 1. 일지 댓글 삭제
+			List<DiaryComment> comments = diaryCommentRepository.findAllByDiary(diary);
+			if (!comments.isEmpty()) {
+				diaryCommentRepository.deleteAll(comments);
+				log.info("일지 댓글 삭제 완료: diaryId={}, count={}", diaryId, comments.size());
+			}
+
+			// 2. 일지 좋아요 삭제 (더 효율적인 방법 사용)
+			likeRepository.deleteByTargetTypeAndTargetId("Diary", diaryId);
+			log.info("일지 좋아요 삭제 완료: diaryId={}", diaryId);
+
+			// 3. 월간 투표 후보에서 삭제 (VoteCandidate)
+			voteCandidateRepository.deleteByDiary(diary);
+			log.info("일지 투표 후보 삭제 완료: diaryId={}", diaryId);
+
+			// 4. 일지 관련 스탬프 삭제 (UserStamp)
+			userStampRepository.deleteByRelatedEntityTypeAndRelatedEntityId("DIARY", diaryId);
+			log.info("일지 관련 스탬프 삭제 완료: diaryId={}", diaryId);
+
+			// 5. 일지 이미지 삭제 (이미 cascade로 처리됨)
 			List<DiaryImage> images = diaryImageRepository.findAllByDiary(diary);
 			for (DiaryImage image : images) {
 				try {
@@ -298,15 +349,11 @@ public class DiaryService {
 					// 파일 삭제 실패해도 DB는 삭제 진행
 				}
 			}
-
-			diaryRepository.delete(diary);
-			log.info("일지 삭제 완료: userId={}, diaryId={}", username, id);
+			log.info("일지 이미지 삭제 처리 완료: diaryId={}", diaryId);
 			
-		} catch (CustomException e) {
-			throw e;
 		} catch (Exception e) {
-			log.error("일지 삭제 실패: userId={}, diaryId={}, error={}", username, id, e.getMessage(), e);
-			throw new CustomException(ErrorCode.DATABASE_ERROR, "일지 삭제 중 오류가 발생했습니다.");
+			log.error("일지 연관 데이터 삭제 실패: diaryId={}, error={}", diaryId, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "연관 데이터 삭제 중 오류가 발생했습니다.");
 		}
 	}
 

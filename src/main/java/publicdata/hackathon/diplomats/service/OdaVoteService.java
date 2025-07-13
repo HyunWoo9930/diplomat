@@ -134,7 +134,7 @@ public class OdaVoteService {
 		User user = userRepository.findByUserId(userId)
 			.orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + userId));
 
-		if (userOdaVoteRepository.existsByUserIdAndOdaVoteId(user.getId(), currentVote.getId())) {
+		if (userOdaVoteRepository.existsByUserIdStringAndOdaVoteId(userId, currentVote.getId())) {
 			throw new RuntimeException("이미 이번 달 ODA 투표에 참여하셨습니다.");
 		}
 
@@ -166,6 +166,7 @@ public class OdaVoteService {
 			log.error("ODA 투표 참여 스탬프 지급 실패: userId={}, voteId={}", userId, currentVote.getId(), e);
 		}
 
+		log.info("ODA 투표 완료: userId={}, candidateId={}, voteId={}", userId, voteRequest.getCandidateId(), currentVote.getId());
 		return "투표가 완료되었습니다.";
 	}
 
@@ -256,5 +257,23 @@ public class OdaVoteService {
 
 		log.info("{}년 {}월 ODA 투표가 종료되었습니다.", currentVote.getYear(), currentVote.getMonth());
 		return "ODA 투표가 종료되었습니다.";
+	}
+
+	/**
+	 * 특정 월의 ODA 투표 결과를 조회합니다.
+	 * 
+	 * @param year 조회할 년도
+	 * @param month 조회할 월
+	 * @return ODA 투표 결과 응답
+	 * @throws RuntimeException 해당 월의 투표가 없는 경우
+	 */
+	@Transactional(readOnly = true)
+	public OdaVoteResponse getOdaVoteResultByMonth(Integer year, Integer month) {
+		log.info("특정 월 ODA 투표 결과 조회: year={}, month={}", year, month);
+		
+		OdaVote vote = odaVoteRepository.findByYearAndMonth(year, month)
+			.orElseThrow(() -> new RuntimeException(year + "년 " + month + "월 ODA 투표를 찾을 수 없습니다."));
+		
+		return convertToOdaVoteResponse(vote, null);
 	}
 }

@@ -29,8 +29,10 @@ import publicdata.hackathon.diplomats.domain.dto.request.CommentUpdateRequest;
 import publicdata.hackathon.diplomats.domain.dto.request.DiaryRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.ApiResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.CreatePostResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.MonthlyVoteResultResponse;
 import publicdata.hackathon.diplomats.service.DiaryCommentService;
 import publicdata.hackathon.diplomats.service.DiaryService;
+import publicdata.hackathon.diplomats.service.MonthlyVoteResultService;
 import publicdata.hackathon.diplomats.utils.SecurityUtils;
 
 @Slf4j
@@ -42,6 +44,7 @@ import publicdata.hackathon.diplomats.utils.SecurityUtils;
 public class DiaryController {
 	private final DiaryService diaryService;
 	private final DiaryCommentService diaryCommentService;
+	private final MonthlyVoteResultService monthlyVoteResultService;
 
 	@PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(summary = "외교일지 생성", description = "새로운 외교일지를 생성합니다.")
@@ -163,5 +166,31 @@ public class DiaryController {
 		
 		diaryService.deleteDiary(currentUserId, id);
 		return ResponseEntity.ok(ApiResponse.success("일지가 성공적으로 삭제되었습니다."));
+	}
+
+	@GetMapping("/monthly-result/{year}/{month}")
+	@Operation(
+		summary = "특정 월 통합 투표 결과 조회", 
+		description = "지정된 년도와 월의 일지 투표 결과, ODA 투표 결과, 인기 일지 목록을 통합하여 조회합니다.",
+		parameters = {
+			@io.swagger.v3.oas.annotations.Parameter(name = "year", description = "조회할 년도 (예: 2025)", example = "2025"),
+			@io.swagger.v3.oas.annotations.Parameter(name = "month", description = "조회할 월 (1-12)", example = "7")
+		}
+	)
+	public ResponseEntity<ApiResponse<MonthlyVoteResultResponse>> getMonthlyVoteResult(
+		@PathVariable Integer year,
+		@PathVariable Integer month) {
+		
+		log.info("특정 월 통합 투표 결과 조회 요청: year={}, month={}", year, month);
+		
+		try {
+			MonthlyVoteResultResponse response = monthlyVoteResultService.getMonthlyVoteResult(year, month);
+			return ResponseEntity.ok(ApiResponse.success(
+				year + "년 " + month + "월 통합 투표 결과를 조회했습니다.", response));
+		} catch (Exception e) {
+			log.error("월별 통합 투표 결과 조회 실패: year={}, month={}, error={}", year, month, e.getMessage());
+			return ResponseEntity.badRequest().body(
+				ApiResponse.error(e.getMessage(), null));
+		}
 	}
 }

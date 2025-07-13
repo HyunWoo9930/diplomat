@@ -1,5 +1,8 @@
 package publicdata.hackathon.diplomats.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,7 +17,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import publicdata.hackathon.diplomats.domain.dto.request.OdaVoteRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.OdaVoteResponse;
+import publicdata.hackathon.diplomats.domain.entity.OdaVote;
+import publicdata.hackathon.diplomats.domain.entity.UserOdaVote;
 import publicdata.hackathon.diplomats.jwt.CustomUserDetails;
+import publicdata.hackathon.diplomats.repository.OdaVoteRepository;
+import publicdata.hackathon.diplomats.repository.UserOdaVoteRepository;
 import publicdata.hackathon.diplomats.service.OdaVoteService;
 
 @RestController
@@ -25,6 +32,8 @@ import publicdata.hackathon.diplomats.service.OdaVoteService;
 public class OdaVoteController {
 
 	private final OdaVoteService odaVoteService;
+	private final OdaVoteRepository odaVoteRepository;
+	private final UserOdaVoteRepository userOdaVoteRepository;
 
 	@PostMapping("/create")
 	@Operation(summary = "월별 ODA 투표 생성", 
@@ -100,6 +109,55 @@ public class OdaVoteController {
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+
+	@GetMapping("/debug/user-votes")
+	@Operation(summary = "디버깅: 사용자 ODA 투표 내역 확인", 
+			   description = "현재 사용자의 ODA 투표 내역을 디버깅용으로 조회합니다.")
+	public ResponseEntity<String> debugUserVotes(Authentication authentication) {
+		try {
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			String userId = userDetails.getUsername();
+			
+			// 현재 활성 투표 확인
+			OdaVote currentVote = odaVoteRepository.findCurrentActiveVote().orElse(null);
+			if (currentVote == null) {
+				return ResponseEntity.ok("현재 활성 ODA 투표가 없습니다.");
+			}
+			
+			// 사용자 투표 내역 확인
+			Optional<UserOdaVote> userVote = userOdaVoteRepository.findByUserIdStringAndOdaVoteId(userId, currentVote.getId());
+			boolean hasVoted = userOdaVoteRepository.existsByUserIdStringAndOdaVoteId(userId, currentVote.getId());
+			
+			StringBuilder debug = new StringBuilder();
+			debug.append("=== ODA 투표 디버깅 정보 ===\n");
+			debug.append("사용자 ID: ").append(userId).append("\n");
+			debug.append("현재 투표 ID: ").append(currentVote.getId()).append("\n");
+			debug.append("투표 제목: ").append(currentVote.getTitle()).append("\n");
+			debug.append("투표 여부(exists): ").append(hasVoted).append("\n");
+			debug.append("투표 여부(optional): ").append(userVote.isPresent()).append("\n");
+			
+			if (userVote.isPresent()) {
+				UserOdaVote vote = userVote.get();
+				debug.append("투표한 후보 ID: ").append(vote.getOdaVoteCandidate().getId()).append("\n");
+				debug.append("투표 시간: ").append(vote.getVotedAt()).append("\n");
+			}
+			
+			// 모든 사용자 투표 내역 확인
+			List<UserOdaVote> allUserVotes = userOdaVoteRepository.findAll();
+			debug.append("\n=== 전체 사용자 투표 내역 ===\n");
+			for (UserOdaVote vote : allUserVotes) {
+				debug.append("사용자: ").append(vote.getUser().getUserId())
+					  .append(", 투표 ID: ").append(vote.getOdaVote().getId())
+					  .append(", 후보 ID: ").append(vote.getOdaVoteCandidate().getId())
+					  .append("\n");
+			}
+			
+			return ResponseEntity.ok(debug.toString());
+			
+		} catch (Exception e) {
+			return ResponseEntity.ok("디버깅 중 오류 발생: " + e.getMessage());
 		}
 	}
 

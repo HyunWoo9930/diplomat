@@ -1,5 +1,6 @@
 package publicdata.hackathon.diplomats.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,9 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
     
     // 특정 사용자가 특정 대상에 좋아요를 눌렀는지 확인
     Optional<Like> findByUserAndTargetTypeAndTargetId(User user, String targetType, Long targetId);
+    
+    // 특정 대상의 모든 좋아요 조회
+    List<Like> findByTargetTypeAndTargetId(String targetType, Long targetId);
     
     // 특정 대상의 좋아요 개수 조회
     long countByTargetTypeAndTargetId(String targetType, Long targetId);
