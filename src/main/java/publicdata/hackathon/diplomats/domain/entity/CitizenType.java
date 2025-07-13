@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.domain.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,5 +24,18 @@ public class CitizenType {
 	private String displayName;
 	private String description;
 	private String imageUrl;
+	
+	@Column(columnDefinition = "TEXT")
+	private String detailedDescription;
+	
+	@Column(columnDefinition = "TEXT")
+	private String characteristics;
+	
+	@Column(columnDefinition = "TEXT")
+	private String keywords;
+	
+	@Column(columnDefinition = "TEXT")
+	private String summary;
+	
 	private LocalDateTime createdAt;
 }

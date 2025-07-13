@@ -234,3 +234,616 @@
 2025-07-13 00:34:07.720 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
 2025-07-13 00:34:07.720 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
 2025-07-13 00:34:07.720 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 02:07:05.528 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s516ms).
+2025-07-13 02:15:51.293 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m45s769ms).
+2025-07-13 02:32:14.757 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m53s455ms).
+2025-07-13 10:24:08.037 [scheduling-1] INFO  p.h.diplomats.config.SchedulerConfig - 투표 상태 체크 실행
+2025-07-13 13:50:04.992 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-13 13:50:04.994 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-07-13 13:50:05.006 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2025-07-13 13:50:05.024 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.html
+2025-07-13 13:50:05.030 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.030 [http-nio-8080-exec-1] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.032 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.html
+2025-07-13 13:50:05.119 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.css
+2025-07-13 13:50:05.121 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.121 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui.css
+2025-07-13 13:50:05.121 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-bundle.js
+2025-07-13 13:50:05.121 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-initializer.js
+2025-07-13 13:50:05.121 [http-nio-8080-exec-3] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.121 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.121 [http-nio-8080-exec-2] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.121 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.121 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-07-13 13:50:05.121 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.css
+2025-07-13 13:50:05.121 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.121 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui.css
+2025-07-13 13:50:05.121 [http-nio-8080-exec-6] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.121 [http-nio-8080-exec-4] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.121 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.122 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-initializer.js
+2025-07-13 13:50:05.122 [http-nio-8080-exec-5] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.122 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-bundle.js
+2025-07-13 13:50:05.122 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-07-13 13:50:05.233 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs/swagger-config
+2025-07-13 13:50:05.234 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.234 [http-nio-8080-exec-7] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.235 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs/swagger-config
+2025-07-13 13:50:05.235 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/favicon-32x32.png
+2025-07-13 13:50:05.235 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.235 [http-nio-8080-exec-8] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.236 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/favicon-32x32.png
+2025-07-13 13:50:05.295 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs
+2025-07-13 13:50:05.295 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:05.296 [http-nio-8080-exec-9] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:05.296 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs
+2025-07-13 13:50:05.780 [http-nio-8080-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 475 ms
+2025-07-13 13:50:14.025 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2025-07-13 13:50:14.037 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:14.038 [http-nio-8080-exec-4] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:14.038 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2025-07-13 13:50:14.074 [http-nio-8080-exec-4] INFO  p.h.d.controller.AuthController - 로그인 요청: userId=string
+2025-07-13 13:50:14.093 [http-nio-8080-exec-4] INFO  p.h.diplomats.service.AuthService - 로그인 시작: userId=string
+2025-07-13 13:50:14.093 [http-nio-8080-exec-4] INFO  p.h.diplomats.service.AuthService - 인증 시작: userId=string
+2025-07-13 13:50:14.143 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.user_id=?
+2025-07-13 13:50:14.179 [http-nio-8080-exec-4] INFO  p.h.diplomats.service.AuthService - 사용자 찾기 성공: userId=string
+2025-07-13 13:50:14.290 [http-nio-8080-exec-4] INFO  p.h.diplomats.service.AuthService - 비밀번호 검증 성공
+2025-07-13 13:50:14.314 [http-nio-8080-exec-4] INFO  p.h.diplomats.service.AuthService - JWT 토큰 생성 완료
+2025-07-13 13:50:14.330 [http-nio-8080-exec-4] INFO  p.h.d.controller.AuthController - 로그인 성공: userId=string
+2025-07-13 13:50:24.702 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/refresh
+2025-07-13 13:50:24.702 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 13:50:24.703 [http-nio-8080-exec-8] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 13:50:24.703 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/refresh
+2025-07-13 13:50:24.706 [http-nio-8080-exec-8] INFO  p.h.d.controller.AuthController - 토큰 갱신 요청
+2025-07-13 13:50:24.707 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - 토큰 갱신 시작
+2025-07-13 13:50:24.707 [http-nio-8080-exec-8] DEBUG p.h.diplomats.jwt.JwtTokenProvider - 리프레시 토큰 파싱 시작
+2025-07-13 13:50:24.719 [http-nio-8080-exec-8] DEBUG p.h.diplomats.jwt.JwtTokenProvider - 리프레시 토큰 파싱 성공
+2025-07-13 13:50:24.719 [http-nio-8080-exec-8] DEBUG p.h.diplomats.jwt.JwtTokenProvider - 리프레시 토큰 검증 성공
+2025-07-13 13:50:24.722 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.user_id=?
+2025-07-13 13:50:24.725 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - 새로운 액세스 토큰 생성 완료: userId=string
+2025-07-13 13:50:24.726 [http-nio-8080-exec-8] INFO  p.h.d.controller.AuthController - 토큰 갱신 성공
+2025-07-13 14:09:31.647 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:09:31.661 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Starting DiplomatsApplicationTests using Java 17.0.15 with PID 6712 (started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:09:31.665 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:09:32.083 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:09:32.135 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:09:32.390 [Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:09:32.408 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:09:32.421 [Test worker] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:09:32.523 [Test worker] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:09:32.535 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:09:32.695 [Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@543ba2e1
+2025-07-13 14:09:32.695 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:09:32.751 [Test worker] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:09:33.359 [Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:09:33.503 [Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:09:33.626 [Test worker] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:09:34.710 [Test worker] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:09:34.814 [Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:09:34.931 [Test worker] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:09:34.967 [Test worker] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:09:35.140 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Started DiplomatsApplicationTests in 3.645 seconds (process running for 4.116)
+2025-07-13 14:09:35.141 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:09:35.142 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:09:35.142 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:09:35.142 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:09:35.142 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:09:35.406 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:09:35.407 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:09:35.411 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:10:04.857 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-13 14:10:04.868 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-13 14:10:04.877 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:10:04.885 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:10:04.889 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:10:06.590 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:10:06.606 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 7122 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:10:06.607 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:10:06.986 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:10:07.030 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:10:07.250 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 14:10:07.255 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:10:07.256 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 14:10:07.256 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 14:10:07.275 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 14:10:07.275 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 653 ms
+2025-07-13 14:10:07.327 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:10:07.342 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:10:07.364 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:10:07.508 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:10:07.521 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:10:07.693 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@504c415c
+2025-07-13 14:10:07.694 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:10:07.733 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:10:08.351 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:10:08.478 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:10:08.595 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 14:10:08.620 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:10:09.606 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:10:09.689 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:10:09.765 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:10:09.796 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:10:09.931 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:10:09.938 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-13 14:10:09.945 [main] INFO  p.h.diplomats.DiplomatsApplication - Started DiplomatsApplication in 3.55 seconds (process running for 3.82)
+2025-07-13 14:10:09.946 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:10:09.946 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:10:09.947 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:10:09.947 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:10:09.947 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:16:38.894 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:16:38.912 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Starting DiplomatsApplicationTests using Java 17.0.15 with PID 11844 (started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:16:38.913 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:16:39.357 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:16:39.418 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:16:39.677 [Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:16:39.701 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:16:39.714 [Test worker] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:16:39.817 [Test worker] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:16:39.830 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:16:39.966 [Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62581ef6
+2025-07-13 14:16:39.967 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:16:40.008 [Test worker] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:16:40.626 [Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:16:40.667 [Test worker] DEBUG org.hibernate.SQL - 
+    alter table citizen_types 
+       add column characteristics TEXT
+2025-07-13 14:16:40.720 [Test worker] DEBUG org.hibernate.SQL - 
+    alter table citizen_types 
+       add column detailed_description TEXT
+2025-07-13 14:16:40.729 [Test worker] DEBUG org.hibernate.SQL - 
+    alter table citizen_types 
+       add column keywords TEXT
+2025-07-13 14:16:40.733 [Test worker] DEBUG org.hibernate.SQL - 
+    alter table citizen_types 
+       add column summary TEXT
+2025-07-13 14:16:40.814 [Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:16:40.949 [Test worker] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:16:41.957 [Test worker] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:16:42.063 [Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:16:42.191 [Test worker] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:16:42.232 [Test worker] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:16:42.419 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Started DiplomatsApplicationTests in 3.702 seconds (process running for 4.225)
+2025-07-13 14:16:42.449 [Test worker] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        citizen_types ct1_0
+2025-07-13 14:16:42.461 [Test worker] INFO  p.h.d.config.CitizenTypeDataLoader - 시민 외교사 유형 데이터가 이미 존재합니다.
+2025-07-13 14:16:42.461 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:16:42.462 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:16:42.462 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:16:42.462 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:16:42.462 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:16:42.724 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:16:42.725 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:16:42.729 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:16:48.261 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:16:48.302 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 11971 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:16:48.302 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:16:48.727 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:16:48.777 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:16:49.011 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 14:16:49.016 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:16:49.017 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 14:16:49.017 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 14:16:49.037 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 14:16:49.038 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 718 ms
+2025-07-13 14:16:49.092 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:16:49.110 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:16:49.123 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:16:49.240 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:16:49.255 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:16:49.397 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@305289b3
+2025-07-13 14:16:49.398 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:16:49.433 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:16:50.017 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:16:50.162 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:16:50.291 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 14:16:50.323 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:16:51.304 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:16:51.394 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:16:51.479 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:16:51.521 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:16:51.705 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:16:51.709 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-07-13 14:16:51.713 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:16:51.714 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:16:51.717 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:16:51.725 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-07-13 14:16:51.733 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-07-13 14:17:14.149 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-13 14:17:14.172 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-13 14:17:14.184 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:17:14.189 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:17:14.226 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:17:25.257 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:17:25.274 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 12402 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:17:25.275 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:17:25.690 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:17:25.730 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:17:25.958 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 14:17:25.965 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:17:25.966 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 14:17:25.966 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 14:17:25.987 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 14:17:25.987 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 699 ms
+2025-07-13 14:17:26.043 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:17:26.067 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:17:26.082 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:17:26.200 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:17:26.213 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:17:26.337 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5bdb6ea8
+2025-07-13 14:17:26.338 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:17:26.404 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:17:27.016 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:17:27.166 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:17:27.292 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 14:17:27.323 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:17:28.283 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:17:28.372 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:17:28.458 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:17:28.493 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:17:28.626 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:17:28.634 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-13 14:17:28.641 [main] INFO  p.h.diplomats.DiplomatsApplication - Started DiplomatsApplication in 3.585 seconds (process running for 3.818)
+2025-07-13 14:17:28.667 [main] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        citizen_types ct1_0
+2025-07-13 14:17:28.674 [main] INFO  p.h.d.config.CitizenTypeDataLoader - 시민 외교사 유형 데이터가 이미 존재합니다.
+2025-07-13 14:17:28.674 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:17:28.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:17:28.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:17:28.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:17:28.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:26:41.411 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-13 14:26:41.425 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-13 14:26:41.433 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:26:41.437 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:26:41.443 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:26:50.068 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:26:50.090 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 19123 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:26:50.091 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:26:50.436 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:26:50.474 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:26:50.666 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 14:26:50.673 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:26:50.673 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 14:26:50.673 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 14:26:50.692 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 14:26:50.692 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 588 ms
+2025-07-13 14:26:50.755 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:26:50.778 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:26:50.791 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:26:50.885 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:26:50.896 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:26:51.020 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62c47480
+2025-07-13 14:26:51.021 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:26:51.054 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:26:51.618 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:26:51.759 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:26:51.870 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 14:26:51.891 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:26:52.832 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:26:52.914 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:26:52.980 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:26:53.008 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:26:53.129 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:26:53.137 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-13 14:26:53.143 [main] INFO  p.h.diplomats.DiplomatsApplication - Started DiplomatsApplication in 3.299 seconds (process running for 3.519)
+2025-07-13 14:26:53.144 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:26:53.144 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:26:53.144 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:26:53.144 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:26:53.144 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:28:01.219 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:28:01.250 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Starting DiplomatsApplicationTests using Java 17.0.15 with PID 20022 (started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:28:01.250 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:28:01.742 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:28:01.798 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:28:02.063 [Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:28:02.084 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:28:02.101 [Test worker] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:28:02.209 [Test worker] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:28:02.221 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:28:02.376 [Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74787609
+2025-07-13 14:28:02.377 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:28:02.419 [Test worker] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:28:03.067 [Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:28:03.223 [Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:28:03.354 [Test worker] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:28:04.485 [Test worker] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:28:04.578 [Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:28:04.694 [Test worker] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:28:04.734 [Test worker] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:28:04.902 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Started DiplomatsApplicationTests in 3.938 seconds (process running for 4.479)
+2025-07-13 14:28:04.903 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:28:04.903 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:28:04.903 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:28:04.903 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:28:04.904 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:28:05.154 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:28:05.155 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:28:05.158 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:28:47.399 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-13 14:28:47.405 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-13 14:28:47.411 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:28:47.413 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:28:47.416 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:28:48.714 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:28:48.730 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 20560 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:28:48.731 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:28:49.061 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:28:49.097 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:28:49.275 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 14:28:49.280 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:28:49.281 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 14:28:49.281 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 14:28:49.300 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 14:28:49.300 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 555 ms
+2025-07-13 14:28:49.342 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:28:49.356 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:28:49.366 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:28:49.453 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:28:49.462 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:28:49.588 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5030997b
+2025-07-13 14:28:49.589 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:28:49.616 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:28:50.094 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:28:50.255 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:28:50.364 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 14:28:50.386 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:28:51.297 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:28:51.391 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:28:51.489 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:28:51.531 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:28:51.660 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:28:51.668 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-13 14:28:51.674 [main] INFO  p.h.diplomats.DiplomatsApplication - Started DiplomatsApplication in 3.125 seconds (process running for 3.321)
+2025-07-13 14:28:51.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:28:51.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:28:51.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:28:51.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:28:51.675 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:28:56.522 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-13 14:28:56.523 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-07-13 14:28:56.524 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-07-13 14:28:56.531 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.html
+2025-07-13 14:28:56.534 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.534 [http-nio-8080-exec-1] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.535 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.html
+2025-07-13 14:28:56.596 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui.css
+2025-07-13 14:28:56.597 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-07-13 14:28:56.597 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.css
+2025-07-13 14:28:56.597 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-bundle.js
+2025-07-13 14:28:56.597 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-initializer.js
+2025-07-13 14:28:56.597 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.597 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.597 [http-nio-8080-exec-2] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.597 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.597 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.597 [http-nio-8080-exec-5] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.597 [http-nio-8080-exec-3] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.597 [http-nio-8080-exec-4] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.597 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.597 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-07-13 14:28:56.597 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui.css
+2025-07-13 14:28:56.597 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-bundle.js
+2025-07-13 14:28:56.597 [http-nio-8080-exec-6] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.597 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.css
+2025-07-13 14:28:56.597 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-initializer.js
+2025-07-13 14:28:56.698 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/favicon-32x32.png
+2025-07-13 14:28:56.698 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs/swagger-config
+2025-07-13 14:28:56.698 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.698 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.698 [http-nio-8080-exec-8] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.698 [http-nio-8080-exec-7] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.698 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/favicon-32x32.png
+2025-07-13 14:28:56.698 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs/swagger-config
+2025-07-13 14:28:56.722 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs
+2025-07-13 14:28:56.723 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:28:56.723 [http-nio-8080-exec-9] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:28:56.723 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs
+2025-07-13 14:28:57.120 [http-nio-8080-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 391 ms
+2025-07-13 14:29:05.835 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/citizen-test/test/peace-mediation
+2025-07-13 14:29:05.839 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:29:05.840 [http-nio-8080-exec-4] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:29:05.844 [http-nio-8080-exec-4] WARN  p.h.d.j.JwtAuthenticationEntryPoint - Unauthorized access attempt: GET /api/v1/citizen-test/test/peace-mediation
+2025-07-13 14:29:05.845 [http-nio-8080-exec-4] DEBUG p.h.d.j.JwtAuthenticationEntryPoint - Authentication exception: Full authentication is required to access this resource
+2025-07-13 14:29:05.845 [http-nio-8080-exec-4] WARN  p.h.d.j.JwtAuthenticationEntryPoint - No Authorization header provided
+2025-07-13 14:29:27.846 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing POST /api/v1/auth/login
+2025-07-13 14:29:27.862 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:29:27.863 [http-nio-8080-exec-8] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:29:27.863 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured POST /api/v1/auth/login
+2025-07-13 14:29:27.913 [http-nio-8080-exec-8] INFO  p.h.d.controller.AuthController - 로그인 요청: userId=string
+2025-07-13 14:29:27.923 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - 로그인 시작: userId=string
+2025-07-13 14:29:27.923 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - 인증 시작: userId=string
+2025-07-13 14:29:27.964 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.user_id=?
+2025-07-13 14:29:27.977 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - 사용자 찾기 성공: userId=string
+2025-07-13 14:29:28.051 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - 비밀번호 검증 성공
+2025-07-13 14:29:28.061 [http-nio-8080-exec-8] INFO  p.h.diplomats.service.AuthService - JWT 토큰 생성 완료
+2025-07-13 14:29:28.068 [http-nio-8080-exec-8] INFO  p.h.d.controller.AuthController - 로그인 성공: userId=string
+2025-07-13 14:29:58.119 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/citizen-test/test/peace-mediation
+2025-07-13 14:29:58.164 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.user_id=?
+2025-07-13 14:29:58.168 [http-nio-8080-exec-9] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Successfully authenticated user: string
+2025-07-13 14:29:58.168 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/citizen-test/test/peace-mediation
+2025-07-13 14:29:58.172 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.id,
+        ct1_0.characteristics,
+        ct1_0.created_at,
+        ct1_0.description,
+        ct1_0.detailed_description,
+        ct1_0.display_name,
+        ct1_0.image_url,
+        ct1_0.keywords,
+        ct1_0.summary,
+        ct1_0.type_name 
+    from
+        citizen_types ct1_0 
+    where
+        ct1_0.type_name=?
+2025-07-13 14:29:58.176 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        pr1_0.id,
+        pr1_0.citizen_type,
+        pr1_0.content,
+        pr1_0.created_at,
+        pr1_0.match_score,
+        pr1_0.publish_date,
+        pr1_0.title,
+        pr1_0.updated_at,
+        pr1_0.url 
+    from
+        press_releases pr1_0 
+    where
+        pr1_0.citizen_type=? 
+    order by
+        pr1_0.match_score desc,
+        pr1_0.publish_date desc 
+    limit
+        ?
+2025-07-13 14:29:58.193 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        pdp1_0.id,
+        pdp1_0.business_eng_name,
+        pdp1_0.business_name,
+        pdp1_0.business_purpose,
+        pdp1_0.business_target,
+        pdp1_0.business_year,
+        pdp1_0.citizen_type,
+        pdp1_0.country_eng_name,
+        pdp1_0.country_iso_code,
+        pdp1_0.country_name,
+        pdp1_0.created_at,
+        pdp1_0.detail_business,
+        pdp1_0.match_score,
+        pdp1_0.multi_year_type,
+        pdp1_0.unit_business,
+        pdp1_0.updated_at 
+    from
+        public_diplomacy_programs pdp1_0 
+    where
+        pdp1_0.citizen_type=? 
+    order by
+        pdp1_0.match_score desc,
+        pdp1_0.business_year desc 
+    limit
+        ?

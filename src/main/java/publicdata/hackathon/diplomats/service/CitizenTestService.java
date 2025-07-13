@@ -103,8 +103,13 @@ public class CitizenTestService {
 			.resultType(citizenType.getTypeName())
 			.displayName(citizenType.getDisplayName())
 			.description(citizenType.getDescription())
+			.imageUrl(citizenType.getImageUrl())
+			.detailedDescription(citizenType.getDetailedDescription())
+			.characteristics(citizenType.getCharacteristics())
+			.keywords(citizenType.getKeywords())
+			.summary(citizenType.getSummary())
 			.recommendedNews(recommendedNews)
-			.recommendedPrograms(recommendedPrograms)  // 추가
+			.recommendedPrograms(recommendedPrograms)
 			.message("시민력 테스트가 완료되었습니다!")
 			.build();
 	}
@@ -140,6 +145,11 @@ public class CitizenTestService {
 				.resultType(null)
 				.displayName(null)
 				.description(null)
+				.imageUrl(null)
+				.detailedDescription(null)
+				.characteristics(null)
+				.keywords(null)
+				.summary(null)
 				.recommendedNews(Collections.emptyList())
 				.message("아직 시민력 테스트를 완료하지 않았습니다. 테스트를 통해 나만의 시민력 유형을 확인해보세요!")
 				.build();
@@ -157,9 +167,36 @@ public class CitizenTestService {
 			.resultType(citizenType.getTypeName())
 			.displayName(citizenType.getDisplayName())
 			.description(citizenType.getDescription())
+			.imageUrl(citizenType.getImageUrl())
+			.detailedDescription(citizenType.getDetailedDescription())
+			.characteristics(citizenType.getCharacteristics())
+			.keywords(citizenType.getKeywords())
+			.summary(citizenType.getSummary())
 			.recommendedNews(recommendedNews)
-			.recommendedPrograms(recommendedPrograms)  // 추가
+			.recommendedPrograms(recommendedPrograms)
 			.message("시민력 테스트가 완료되었습니다!")
+			.build();
+	}
+
+	public CitizenTestResultResponse getTestResult(String typeName) {
+		CitizenType citizenType = citizenTypeRepository.findByTypeName(typeName)
+			.orElseThrow(() -> new EntityNotFoundException("시민력 유형을 찾을 수 없습니다: " + typeName));
+
+		List<RecommendedPressRelease> recommendedNews = pressReleaseService.getRecommendedPressReleases(typeName);
+		List<RecommendedDiplomacyProgram> recommendedPrograms = publicDiplomacyService.getRecommendedPrograms(typeName);
+
+		return CitizenTestResultResponse.builder()
+			.resultType(citizenType.getTypeName())
+			.displayName(citizenType.getDisplayName())
+			.description(citizenType.getDescription())
+			.imageUrl(citizenType.getImageUrl())
+			.detailedDescription(citizenType.getDetailedDescription())
+			.characteristics(citizenType.getCharacteristics())
+			.keywords(citizenType.getKeywords())
+			.summary(citizenType.getSummary())
+			.recommendedNews(recommendedNews)
+			.recommendedPrograms(recommendedPrograms)
+			.message("시민력 유형 정보 조회 완료!")
 			.build();
 	}
 }
