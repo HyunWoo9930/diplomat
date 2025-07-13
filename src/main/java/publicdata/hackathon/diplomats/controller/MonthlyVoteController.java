@@ -79,4 +79,37 @@ public class MonthlyVoteController {
 		MonthlyVoteResponse response = monthlyVoteService.getVoteResult();
 		return ResponseEntity.ok(ApiResponse.success("투표 결과를 조회했습니다.", response));
 	}
+
+	@GetMapping("/result/{year}/{month}")
+	@Operation(
+		summary = "특정 월 투표 결과 조회", 
+		description = "지정된 년도와 월의 투표 결과를 조회합니다.",
+		parameters = {
+			@io.swagger.v3.oas.annotations.Parameter(name = "year", description = "조회할 년도 (예: 2025)", example = "2025"),
+			@io.swagger.v3.oas.annotations.Parameter(name = "month", description = "조회할 월 (1-12)", example = "7")
+		}
+	)
+	public ResponseEntity<ApiResponse<MonthlyVoteResponse>> getVoteResultByMonth(
+		@org.springframework.web.bind.annotation.PathVariable Integer year,
+		@org.springframework.web.bind.annotation.PathVariable Integer month) {
+		
+		log.info("특정 월 투표 결과 조회 요청: year={}, month={}", year, month);
+		
+		// 입력값 검증
+		if (year < 2020 || year > 2030) {
+			return ResponseEntity.badRequest().body(
+				ApiResponse.fail("유효하지 않은 년도입니다. (2020-2030)")
+			);
+		}
+		
+		if (month < 1 || month > 12) {
+			return ResponseEntity.badRequest().body(
+				ApiResponse.fail("유효하지 않은 월입니다. (1-12)")
+			);
+		}
+		
+		MonthlyVoteResponse response = monthlyVoteService.getVoteResultByMonth(year, month);
+		return ResponseEntity.ok(ApiResponse.success(
+			year + "년 " + month + "월 투표 결과를 조회했습니다.", response));
+	}
 }

@@ -847,3 +847,398 @@ Identify and stop the process that's listening on port 8080 or configure this ap
         pdp1_0.business_year desc 
     limit
         ?
+2025-07-13 14:32:11.325 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:32:11.350 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Starting DiplomatsApplicationTests using Java 17.0.15 with PID 23205 (started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:32:11.351 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:32:12.450 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:32:12.534 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:32:12.790 [Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:32:12.809 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:32:12.823 [Test worker] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:32:12.937 [Test worker] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:32:12.951 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:32:13.107 [Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@47374fa5
+2025-07-13 14:32:13.108 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:32:13.150 [Test worker] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:32:13.772 [Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:32:13.927 [Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:32:14.073 [Test worker] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:32:15.185 [Test worker] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:32:15.300 [Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:32:15.423 [Test worker] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:32:15.463 [Test worker] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:32:15.660 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Started DiplomatsApplicationTests in 4.527 seconds (process running for 5.023)
+2025-07-13 14:32:15.662 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:32:15.663 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:32:15.663 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:32:15.663 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:32:15.663 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:32:15.925 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:32:15.926 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:32:15.930 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:32:25.038 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-13 14:32:25.043 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-07-13 14:32:25.050 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:32:25.052 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:32:25.056 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-07-13 14:32:26.419 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:32:26.437 [main] INFO  p.h.diplomats.DiplomatsApplication - Starting DiplomatsApplication using Java 17.0.15 with PID 23368 (/Users/hyunwoo/Desktop/Project/diplomats/build/classes/java/main started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:32:26.437 [main] INFO  p.h.diplomats.DiplomatsApplication - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:32:26.817 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:32:26.860 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:32:27.076 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-07-13 14:32:27.080 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:32:27.081 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-07-13 14:32:27.081 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-07-13 14:32:27.101 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-07-13 14:32:27.101 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 648 ms
+2025-07-13 14:32:27.152 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:32:27.168 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:32:27.180 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:32:27.282 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:32:27.296 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:32:27.433 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c9e74f3
+2025-07-13 14:32:27.434 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:32:27.467 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:32:28.024 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:32:28.165 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:32:28.283 [main] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-07-13 14:32:28.310 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:32:29.258 [main] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:32:29.347 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:32:29.431 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:32:29.468 [main] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:32:29.611 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-07-13 14:32:29.620 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-07-13 14:32:29.629 [main] INFO  p.h.diplomats.DiplomatsApplication - Started DiplomatsApplication in 3.4 seconds (process running for 3.645)
+2025-07-13 14:32:29.630 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:32:29.630 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:32:29.630 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:32:29.631 [main] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:32:29.631 [main] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:32:37.050 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-13 14:32:37.050 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-07-13 14:32:37.053 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-07-13 14:32:37.062 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.html
+2025-07-13 14:32:37.065 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.065 [http-nio-8080-exec-1] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.066 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.html
+2025-07-13 14:32:37.127 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui.css
+2025-07-13 14:32:37.127 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/index.css
+2025-07-13 14:32:37.127 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.128 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-07-13 14:32:37.128 [http-nio-8080-exec-2] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.127 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-ui-bundle.js
+2025-07-13 14:32:37.128 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.128 [http-nio-8080-exec-5] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.128 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.128 [http-nio-8080-exec-3] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.128 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-07-13 14:32:37.128 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui.css
+2025-07-13 14:32:37.128 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/swagger-initializer.js
+2025-07-13 14:32:37.128 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.128 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.129 [http-nio-8080-exec-6] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.128 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/index.css
+2025-07-13 14:32:37.129 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-initializer.js
+2025-07-13 14:32:37.128 [http-nio-8080-exec-4] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.132 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/swagger-ui-bundle.js
+2025-07-13 14:32:37.228 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /swagger-ui/favicon-32x32.png
+2025-07-13 14:32:37.229 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.229 [http-nio-8080-exec-8] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.229 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /swagger-ui/favicon-32x32.png
+2025-07-13 14:32:37.229 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs/swagger-config
+2025-07-13 14:32:37.229 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.230 [http-nio-8080-exec-7] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.230 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs/swagger-config
+2025-07-13 14:32:37.284 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Securing GET /v3/api-docs
+2025-07-13 14:32:37.285 [http-nio-8080-exec-9] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-07-13 14:32:37.285 [http-nio-8080-exec-9] DEBUG o.s.s.w.s.SessionManagementFilter - Request requested invalid session id DA92D1628133D3E25C6EC869265E6F8A
+2025-07-13 14:32:37.285 [http-nio-8080-exec-9] DEBUG o.s.security.web.FilterChainProxy - Secured GET /v3/api-docs
+2025-07-13 14:32:37.803 [http-nio-8080-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 493 ms
+2025-07-13 14:33:01.560 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/monthly-vote/result/2025/7
+2025-07-13 14:33:01.682 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.user_id=?
+2025-07-13 14:33:01.699 [http-nio-8080-exec-4] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Successfully authenticated user: string
+2025-07-13 14:33:01.700 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/monthly-vote/result/2025/7
+2025-07-13 14:33:01.702 [http-nio-8080-exec-4] INFO  p.h.d.c.MonthlyVoteController - 특정 월 투표 결과 조회 요청: year=2025, month=7
+2025-07-13 14:33:01.710 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        mv1_0.id,
+        mv1_0.created_at,
+        mv1_0.description,
+        mv1_0.end_date,
+        mv1_0.month,
+        mv1_0.start_date,
+        mv1_0.status,
+        mv1_0.title,
+        mv1_0.year 
+    from
+        monthly_vote mv1_0 
+    where
+        mv1_0.year=? 
+        and mv1_0.month=?
+2025-07-13 14:33:01.722 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        vc1_0.id,
+        vc1_0.diary_id,
+        vc1_0.monthly_vote_id,
+        vc1_0.ranking,
+        vc1_0.vote_count 
+    from
+        vote_candidate vc1_0 
+    where
+        vc1_0.monthly_vote_id=? 
+    order by
+        vc1_0.vote_count desc,
+        vc1_0.ranking
+2025-07-13 14:33:01.729 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        d1_0.id,
+        d1_0.action,
+        d1_0.created_at,
+        d1_0.description,
+        d1_0.likes,
+        d1_0.title,
+        d1_0.updated_at,
+        d1_0.view_count,
+        d1_0.user_id 
+    from
+        diary d1_0 
+    where
+        d1_0.id=?
+2025-07-13 14:33:01.733 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        d1_0.id,
+        d1_0.action,
+        d1_0.created_at,
+        d1_0.description,
+        d1_0.likes,
+        d1_0.title,
+        d1_0.updated_at,
+        d1_0.view_count,
+        d1_0.user_id 
+    from
+        diary d1_0 
+    where
+        d1_0.id=?
+2025-07-13 14:33:01.735 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        d1_0.id,
+        d1_0.action,
+        d1_0.created_at,
+        d1_0.description,
+        d1_0.likes,
+        d1_0.title,
+        d1_0.updated_at,
+        d1_0.view_count,
+        d1_0.user_id 
+    from
+        diary d1_0 
+    where
+        d1_0.id=?
+2025-07-13 14:33:01.738 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(uv1_0.id) 
+    from
+        user_vote uv1_0 
+    where
+        uv1_0.monthly_vote_id=?
+2025-07-13 14:33:01.741 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.id=?
+2025-07-13 14:33:08.719 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /api/v1/monthly-vote/result/2025/6
+2025-07-13 14:33:08.725 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.citizen_type,
+        u1_0.current_level,
+        u1_0.password,
+        u1_0.total_stamps,
+        u1_0.user_id 
+    from
+        user u1_0 
+    where
+        u1_0.user_id=?
+2025-07-13 14:33:08.728 [http-nio-8080-exec-8] DEBUG p.h.d.jwt.JwtAuthenticationFilter - Successfully authenticated user: string
+2025-07-13 14:33:08.729 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Secured GET /api/v1/monthly-vote/result/2025/6
+2025-07-13 14:33:08.731 [http-nio-8080-exec-8] INFO  p.h.d.c.MonthlyVoteController - 특정 월 투표 결과 조회 요청: year=2025, month=6
+2025-07-13 14:33:08.734 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        mv1_0.id,
+        mv1_0.created_at,
+        mv1_0.description,
+        mv1_0.end_date,
+        mv1_0.month,
+        mv1_0.start_date,
+        mv1_0.status,
+        mv1_0.title,
+        mv1_0.year 
+    from
+        monthly_vote mv1_0 
+    where
+        mv1_0.year=? 
+        and mv1_0.month=?
+2025-07-13 14:33:08.743 [http-nio-8080-exec-8] ERROR p.h.d.e.GlobalExceptionHandler - CustomException: 2025년 6월 투표를 찾을 수 없습니다.
+publicdata.hackathon.diplomats.exception.CustomException: 2025년 6월 투표를 찾을 수 없습니다.
+	at publicdata.hackathon.diplomats.service.MonthlyVoteService.lambda$getVoteResultByMonth$3(MonthlyVoteService.java:305)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at publicdata.hackathon.diplomats.service.MonthlyVoteService.getVoteResultByMonth(MonthlyVoteService.java:305)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+	at publicdata.hackathon.diplomats.service.MonthlyVoteService$$SpringCGLIB$$0.getVoteResultByMonth(<generated>)
+	at publicdata.hackathon.diplomats.controller.MonthlyVoteController.getVoteResultByMonth(MonthlyVoteController.java:111)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at publicdata.hackathon.diplomats.jwt.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:70)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at publicdata.hackathon.diplomats.config.CorsFilter.doFilter(CorsFilter.java:43)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)

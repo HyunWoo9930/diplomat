@@ -296,6 +296,44 @@ public class MonthlyVoteService {
 	}
 
 	/**
+	 * 특정 월 투표 결과 조회
+	 */
+	@Transactional(readOnly = true)
+	public MonthlyVoteResponse getVoteResultByMonth(Integer year, Integer month) {
+		try {
+			MonthlyVote monthlyVote = monthlyVoteRepository.findByYearAndMonth(year, month)
+				.orElseThrow(() -> new CustomException(ErrorCode.VOTE_NOT_FOUND, 
+					year + "년 " + month + "월 투표를 찾을 수 없습니다."));
+
+			List<VoteCandidate> candidates = voteCandidateRepository.findByMonthlyVoteOrderByVoteCountDesc(monthlyVote);
+			Long totalVotes = userVoteRepository.countByMonthlyVote(monthlyVote);
+
+			List<VoteCandidateResponse> candidateResponses = candidates.stream()
+				.map(this::mapToVoteCandidateResponse)
+				.toList();
+
+			return MonthlyVoteResponse.builder()
+				.id(monthlyVote.getId())
+				.year(monthlyVote.getYear())
+				.month(monthlyVote.getMonth())
+				.title(monthlyVote.getTitle())
+				.description(monthlyVote.getDescription())
+				.status(monthlyVote.getStatus())
+				.startDate(monthlyVote.getStartDate())
+				.endDate(monthlyVote.getEndDate())
+				.totalVotes(totalVotes)
+				.candidates(candidateResponses)
+				.build();
+				
+		} catch (CustomException e) {
+			throw e;
+		} catch (Exception e) {
+			log.error("특정 월 투표 결과 조회 실패: year={}, month={}, error={}", year, month, e.getMessage(), e);
+			throw new CustomException(ErrorCode.DATABASE_ERROR, "투표 결과 조회 중 오류가 발생했습니다.");
+		}
+	}
+
+	/**
 	 * 메인페이지 투표 배너 정보
 	 */
 	@Transactional(readOnly = true)
