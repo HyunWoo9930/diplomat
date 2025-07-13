@@ -13,6 +13,7 @@ public class DiscussBoardDetailResponse {
 	private String title;
 	private String content;
 	private DiscussType discussType;
+	private String discussTypeDisplay;
 	private Integer likes;
 	private Integer viewCount;
 	private String userId;

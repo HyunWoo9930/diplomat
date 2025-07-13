@@ -167,6 +167,7 @@ public class DiscussBoardService {
 			.title(discussBoard.getTitle())
 			.content(discussBoard.getContent())
 			.discussType(discussBoard.getDiscussType())
+			.discussTypeDisplay(discussBoard.getDiscussType().getDisplayName())
 			.likes(discussBoard.getLikes())
 			.viewCount(discussBoard.getViewCount())
 			.userId(discussBoard.getUser().getUserId())
