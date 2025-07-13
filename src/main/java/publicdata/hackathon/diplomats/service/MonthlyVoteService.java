@@ -2,6 +2,7 @@ package publicdata.hackathon.diplomats.service;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,19 +15,27 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import publicdata.hackathon.diplomats.domain.dto.request.VoteRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.MonthlyVoteResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.OdaProjectResponse;
+import publicdata.hackathon.diplomats.domain.dto.response.OdaVoteCandidateResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.StampEarnedResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.UserVoteResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.VoteBannerResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.VoteCandidateResponse;
 import publicdata.hackathon.diplomats.domain.entity.Diary;
 import publicdata.hackathon.diplomats.domain.entity.MonthlyVote;
+import publicdata.hackathon.diplomats.domain.entity.OdaVote;
+import publicdata.hackathon.diplomats.domain.entity.OdaVoteCandidate;
 import publicdata.hackathon.diplomats.domain.entity.User;
+import publicdata.hackathon.diplomats.domain.entity.UserOdaVote;
 import publicdata.hackathon.diplomats.domain.entity.UserVote;
 import publicdata.hackathon.diplomats.domain.entity.VoteCandidate;
 import publicdata.hackathon.diplomats.exception.CustomException;
 import publicdata.hackathon.diplomats.exception.ErrorCode;
 import publicdata.hackathon.diplomats.repository.DiaryRepository;
 import publicdata.hackathon.diplomats.repository.MonthlyVoteRepository;
+import publicdata.hackathon.diplomats.repository.OdaVoteCandidateRepository;
+import publicdata.hackathon.diplomats.repository.OdaVoteRepository;
+import publicdata.hackathon.diplomats.repository.UserOdaVoteRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
 import publicdata.hackathon.diplomats.repository.UserVoteRepository;
 import publicdata.hackathon.diplomats.repository.VoteCandidateRepository;
@@ -44,6 +53,9 @@ public class MonthlyVoteService {
 	private final DiaryRepository diaryRepository;
 	private final UserRepository userRepository;
 	private final StampService stampService;
+	private final OdaVoteRepository odaVoteRepository;
+	private final OdaVoteCandidateRepository odaVoteCandidateRepository;
+	private final UserOdaVoteRepository userOdaVoteRepository;
 
 	/**
 	 * 월별 투표 생성 (이번 달 인기 일지 상위 10개로)
@@ -327,37 +339,91 @@ public class MonthlyVoteService {
 	}
 
 	/**
-	 * 특정 월 투표 결과 조회
+	 * 특정 월 투표 결과 조회 (다이어리 투표 + ODA 투표)
 	 */
 	@Transactional(readOnly = true)
 	public MonthlyVoteResponse getVoteResultByMonth(Integer year, Integer month) {
 		try {
-			MonthlyVote monthlyVote = monthlyVoteRepository.findByYearAndMonth(year, month)
-				.orElseThrow(() -> new CustomException(ErrorCode.VOTE_NOT_FOUND, 
-					year + "년 " + month + "월 투표를 찾을 수 없습니다."));
+			// 다이어리 투표 조회
+			Optional<MonthlyVote> monthlyVoteOpt = monthlyVoteRepository.findByYearAndMonth(year, month);
+			
+			// ODA 투표 조회
+			Optional<OdaVote> odaVoteOpt = odaVoteRepository.findByYearAndMonth(year, month);
+			
+			// 둘 다 없으면 예외
+			if (monthlyVoteOpt.isEmpty() && odaVoteOpt.isEmpty()) {
+				throw new CustomException(ErrorCode.VOTE_NOT_FOUND, 
+					year + "년 " + month + "월 투표를 찾을 수 없습니다.");
+			}
 
-			List<VoteCandidate> candidates = voteCandidateRepository.findByMonthlyVoteOrderByVoteCountDesc(monthlyVote);
-			Long totalVotes = userVoteRepository.countByMonthlyVote(monthlyVote);
+			MonthlyVoteResponse.MonthlyVoteResponseBuilder responseBuilder = MonthlyVoteResponse.builder()
+				.year(year)
+				.month(month);
 
-			List<VoteCandidateResponse> candidateResponses = candidates.stream()
-				.map(this::mapToVoteCandidateResponse)
-				.toList();
+			// 다이어리 투표 정보 처리
+			if (monthlyVoteOpt.isPresent()) {
+				MonthlyVote monthlyVote = monthlyVoteOpt.get();
+				List<VoteCandidate> candidates = voteCandidateRepository.findByMonthlyVoteOrderByVoteCountDesc(monthlyVote);
+				Long totalVotes = userVoteRepository.countByMonthlyVote(monthlyVote);
 
-			return MonthlyVoteResponse.builder()
-				.id(monthlyVote.getId())
-				.year(monthlyVote.getYear())
-				.month(monthlyVote.getMonth())
-				.title(monthlyVote.getTitle())
-				.description(monthlyVote.getDescription())
-				.status(monthlyVote.getStatus())
-				.startDate(monthlyVote.getStartDate())
-				.endDate(monthlyVote.getEndDate())
-				.totalVotes(totalVotes)
-				.candidates(candidateResponses)
-				.hasUserVoted(null) // 과거 투표 결과에서는 사용자 정보 없음
+				List<VoteCandidateResponse> candidateResponses = candidates.stream()
+					.map(this::mapToVoteCandidateResponse)
+					.toList();
+
+				responseBuilder
+					.id(monthlyVote.getId())
+					.title(monthlyVote.getTitle())
+					.description(monthlyVote.getDescription())
+					.status(monthlyVote.getStatus())
+					.startDate(monthlyVote.getStartDate())
+					.endDate(monthlyVote.getEndDate())
+					.totalVotes(totalVotes)
+					.candidates(candidateResponses);
+			}
+
+			// ODA 투표 정보 처리
+			if (odaVoteOpt.isPresent()) {
+				OdaVote odaVote = odaVoteOpt.get();
+				List<OdaVoteCandidate> odaCandidates = odaVoteCandidateRepository.findByOdaVoteOrderByVoteCountDesc(odaVote);
+				Long odaTotalVotes = userOdaVoteRepository.countByOdaVote(odaVote);
+
+				List<OdaVoteCandidateResponse> odaCandidateResponses = new ArrayList<>();
+				for (int i = 0; i < odaCandidates.size(); i++) {
+					OdaVoteCandidate candidate = odaCandidates.get(i);
+					double percentage = odaTotalVotes > 0 ? (double) candidate.getVoteCount() / odaTotalVotes * 100 : 0.0;
+					
+					OdaVoteCandidateResponse response = OdaVoteCandidateResponse.builder()
+						.id(candidate.getId())
+						.odaProject(mapToOdaProjectResponse(candidate.getOdaProject()))
+						.voteCount(candidate.getVoteCount())
+						.votePercentage(Math.round(percentage * 100.0) / 100.0)
+						.rank(i + 1) // 실제 순위 설정 (1위부터)
+						.build();
+					
+					odaCandidateResponses.add(response);
+				}
+
+				responseBuilder
+					.odaVoteId(odaVote.getId())
+					.odaVoteTitle(odaVote.getTitle())
+					.odaVoteDescription(odaVote.getDescription())
+					.odaVoteStatus(odaVote.getStatus())
+					.odaVoteStartDate(odaVote.getStartDate())
+					.odaVoteEndDate(odaVote.getEndDate())
+					.odaTotalVotes(odaTotalVotes)
+					.odaCandidates(odaCandidateResponses);
+			}
+
+			// 과거 투표 결과에서는 사용자 정보 없음
+			responseBuilder
+				.hasUserVoted(null)
 				.userVotedCandidateId(null)
 				.userVotedAt(null)
-				.build();
+				.hasUserVotedOda(null)
+				.userVotedOdaCandidateId(null)
+				.userVotedOdaAt(null);
+
+			return responseBuilder.build();
 				
 		} catch (CustomException e) {
 			throw e;
@@ -420,6 +486,39 @@ public class MonthlyVoteService {
 			.diaryViewCount(diary.getViewCount())
 			.voteCount(candidate.getVoteCount())
 			.ranking(candidate.getRanking())
+			.build();
+	}
+
+	private OdaVoteCandidateResponse mapToOdaVoteCandidateResponse(OdaVoteCandidate candidate, Long totalVotes) {
+		double percentage = totalVotes > 0 ? (double) candidate.getVoteCount() / totalVotes * 100 : 0.0;
+		
+		return OdaVoteCandidateResponse.builder()
+			.id(candidate.getId())
+			.odaProject(mapToOdaProjectResponse(candidate.getOdaProject()))
+			.voteCount(candidate.getVoteCount())
+			.votePercentage(Math.round(percentage * 100.0) / 100.0) // 소수점 둘째자리까지
+			.rank(1) // 임시값, 나중에 정렬 후 실제 순위로 업데이트
+			.build();
+	}
+
+	private OdaProjectResponse mapToOdaProjectResponse(
+		publicdata.hackathon.diplomats.domain.entity.OdaProject project) {
+		String summary = project.getContent() != null && project.getContent().length() > 150 ? 
+			project.getContent().substring(0, 150) + "..." : project.getContent();
+
+		return OdaProjectResponse.builder()
+			.id(project.getId())
+			.title(project.getTitle())
+			.content(project.getContent())
+			.url(project.getUrl())
+			.category(project.getCategory())
+			.countryName(project.getCountryName())
+			.projectStartDate(project.getProjectStartDate())
+			.projectEndDate(project.getProjectEndDate())
+			.budget(project.getBudget())
+			.publishDate(project.getPublishDate())
+			.matchScore(project.getMatchScore())
+			.summary(summary)
 			.build();
 	}
 }

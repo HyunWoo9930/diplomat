@@ -27,6 +27,9 @@ public interface UserOdaVoteRepository extends JpaRepository<UserOdaVote, Long> 
 	@Query("SELECT COUNT(uov) FROM UserOdaVote uov WHERE uov.odaVote.id = :voteId")
 	long countByOdaVoteId(@Param("voteId") Long voteId);
 	
+	@Query("SELECT COUNT(uov) FROM UserOdaVote uov WHERE uov.odaVote = :odaVote")
+	Long countByOdaVote(@Param("odaVote") publicdata.hackathon.diplomats.domain.entity.OdaVote odaVote);
+	
 	@Query("SELECT COUNT(uov) FROM UserOdaVote uov WHERE uov.odaVoteCandidate.id = :candidateId")
 	long countByOdaVoteCandidateId(@Param("candidateId") Long candidateId);
 	

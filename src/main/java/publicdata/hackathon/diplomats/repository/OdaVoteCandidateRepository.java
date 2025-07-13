@@ -15,6 +15,9 @@ public interface OdaVoteCandidateRepository extends JpaRepository<OdaVoteCandida
 	
 	List<OdaVoteCandidate> findByOdaVoteIdOrderByVoteCountDesc(Long odaVoteId);
 	
+	@Query("SELECT ovc FROM OdaVoteCandidate ovc WHERE ovc.odaVote = :odaVote ORDER BY ovc.voteCount DESC")
+	List<OdaVoteCandidate> findByOdaVoteOrderByVoteCountDesc(@Param("odaVote") publicdata.hackathon.diplomats.domain.entity.OdaVote odaVote);
+	
 	Optional<OdaVoteCandidate> findByOdaVoteIdAndOdaProjectId(Long odaVoteId, Long odaProjectId);
 	
 	@Query("SELECT ovc FROM OdaVoteCandidate ovc WHERE ovc.odaVote.id = :voteId ORDER BY ovc.voteCount DESC, ovc.odaProject.matchScore DESC")

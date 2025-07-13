@@ -92,7 +92,7 @@ public class MonthlyVoteController {
 	@GetMapping("/result/{year}/{month}")
 	@Operation(
 		summary = "특정 월 투표 결과 조회", 
-		description = "지정된 년도와 월의 투표 결과를 조회합니다.",
+		description = "지정된 년도와 월의 다이어리 투표와 ODA 투표 결과를 모두 조회합니다.",
 		parameters = {
 			@io.swagger.v3.oas.annotations.Parameter(name = "year", description = "조회할 년도 (예: 2025)", example = "2025"),
 			@io.swagger.v3.oas.annotations.Parameter(name = "month", description = "조회할 월 (1-12)", example = "7")
