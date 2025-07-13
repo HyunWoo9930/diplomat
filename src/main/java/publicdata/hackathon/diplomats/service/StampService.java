@@ -25,6 +25,7 @@ import publicdata.hackathon.diplomats.domain.entity.UserLevelHistory;
 import publicdata.hackathon.diplomats.domain.entity.UserStamp;
 import publicdata.hackathon.diplomats.domain.enums.StampType;
 import publicdata.hackathon.diplomats.domain.enums.UserLevel;
+import publicdata.hackathon.diplomats.domain.enums.CitizenTypeEnum;
 import publicdata.hackathon.diplomats.repository.UserLevelHistoryRepository;
 import publicdata.hackathon.diplomats.repository.UserRepository;
 import publicdata.hackathon.diplomats.repository.UserStampRepository;
@@ -170,6 +171,9 @@ public class StampService {
      */
     @Transactional(readOnly = true)
     public MyPageResponse getMyPageInfo(User user) {
+        // citizenType을 한글로 변환
+        String displayCitizenType = CitizenTypeEnum.toDisplayName(user.getCitizenType());
+        
         return MyPageResponse.builder()
             .userId(user.getUserId())
             .maskedPassword(maskPassword(user.getPassword()))
@@ -177,7 +181,7 @@ public class StampService {
             .currentLevelDisplay(user.getCurrentLevel().getDisplayName())
             .totalStamps(user.getTotalStamps())
             .stampsToNextLevel(user.getStampsToNextLevel())
-            .citizenType(user.getCitizenType() != null ? user.getCitizenType() : "미진단")
+            .citizenType(displayCitizenType)
             .isMaxLevel(user.getCurrentLevel() == UserLevel.LEVEL_5)
             .build();
     }
