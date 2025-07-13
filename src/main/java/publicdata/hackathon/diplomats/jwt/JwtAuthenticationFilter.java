@@ -36,6 +36,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		FilterChain filterChain) throws IOException, ServletException {
 		
 		try {
+			// refresh 엔드포인트는 JWT 검증을 건너뛰고 바로 다음 필터로 진행
+			if (isRefreshTokenEndpoint(request)) {
+				log.debug("Skipping JWT validation for refresh token endpoint");
+				filterChain.doFilter(request, response);
+				return;
+			}
+
 			String jwt = getJwtFromRequest(request);
 
 			if (jwt != null && !jwt.trim().isEmpty()) {
@@ -73,6 +80,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			log.error("Unexpected error during JWT authentication: {}", e.getMessage(), e);
 			handleAuthenticationError(response, ErrorCode.INTERNAL_SERVER_ERROR, request.getRequestURI());
 		}
+	}
+
+	/**
+	 * refresh token 엔드포인트인지 확인
+	 */
+	private boolean isRefreshTokenEndpoint(HttpServletRequest request) {
+		String requestURI = request.getRequestURI();
+		String method = request.getMethod();
+		return "POST".equals(method) && "/api/v1/auth/refresh".equals(requestURI);
 	}
 
 	private String getJwtFromRequest(HttpServletRequest request) {
