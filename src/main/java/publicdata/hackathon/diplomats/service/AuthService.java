@@ -268,16 +268,6 @@ public class AuthService {
 		if (joinRequest.getPassword() == null || joinRequest.getPassword().trim().isEmpty()) {
 			throw new CustomException(ErrorCode.MISSING_REQUIRED_FIELD, "비밀번호는 필수 입력값입니다.");
 		}
-		
-		// 아이디 길이 검증
-		if (joinRequest.getUserId().length() < 4 || joinRequest.getUserId().length() > 20) {
-			throw new CustomException(ErrorCode.INVALID_INPUT, "아이디는 4자 이상 20자 이하로 입력해주세요.");
-		}
-		
-		// 비밀번호 길이 검증
-		if (joinRequest.getPassword().length() < 6) {
-			throw new CustomException(ErrorCode.INVALID_INPUT, "비밀번호는 6자 이상으로 입력해주세요.");
-		}
 	}
 
 	private void validateLoginRequest(LoginRequest loginRequest) {
