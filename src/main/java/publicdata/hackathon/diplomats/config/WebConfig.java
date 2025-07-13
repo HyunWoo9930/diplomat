@@ -33,7 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
                 
         // 시민 외교사 유형 이미지들을 정적 리소스로 서빙
         registry.addResourceHandler("/type-image/**")
-                .addResourceLocations("file:type image/")
+                .addResourceLocations("file:type-image/")
                 .setCachePeriod(86400); // 하루 캐시
     }
 }
