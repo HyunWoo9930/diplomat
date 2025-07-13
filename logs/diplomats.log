@@ -1242,3 +1242,39 @@ publicdata.hackathon.diplomats.exception.CustomException: 2025년 6월 투표를
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+2025-07-13 14:35:49.345 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-07-13 14:35:49.365 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Starting DiplomatsApplicationTests using Java 17.0.15 with PID 25848 (started by hyunwoo in /Users/hyunwoo/Desktop/Project/diplomats)
+2025-07-13 14:35:49.367 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-13 14:35:49.775 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-13 14:35:49.827 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 26 JPA repository interfaces.
+2025-07-13 14:35:50.081 [Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-13 14:35:50.101 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-07-13 14:35:50.117 [Test worker] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-07-13 14:35:50.222 [Test worker] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-13 14:35:50.233 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-07-13 14:35:50.376 [Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@35cf91df
+2025-07-13 14:35:50.377 [Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-07-13 14:35:50.417 [Test worker] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-07-13 14:35:51.028 [Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-13 14:35:51.183 [Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:35:51.311 [Test worker] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-13 14:35:52.518 [Test worker] INFO  p.h.diplomats.utils.FileStorageUtil - 파일 업로드 디렉토리 초기화 완료
+2025-07-13 14:35:52.628 [Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-13 14:35:52.759 [Test worker] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-07-13 14:35:52.799 [Test worker] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-07-13 14:35:52.989 [Test worker] INFO  p.h.d.DiplomatsApplicationTests - Started DiplomatsApplicationTests in 3.802 seconds (process running for 4.287)
+2025-07-13 14:35:52.991 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 파일 시스템 상태 확인 시작
+2025-07-13 14:35:52.991 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/freeboard/
+2025-07-13 14:35:52.992 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/discussboard/
+2025-07-13 14:35:52.992 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - ✅ 디렉토리 정상: uploads/diary/
+2025-07-13 14:35:52.992 [Test worker] INFO  p.h.d.utils.FileSystemHealthCheck - 🎉 모든 업로드 디렉토리가 정상 상태입니다
+2025-07-13 14:35:53.252 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 14:35:53.253 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 14:35:53.257 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

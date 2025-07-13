@@ -108,6 +108,14 @@ public class MonthlyVoteService {
 	 */
 	@Transactional(readOnly = true)
 	public MonthlyVoteResponse getCurrentVote() {
+		return getCurrentVote(null);
+	}
+
+	/**
+	 * 현재 활성 투표 조회 (사용자 정보 포함)
+	 */
+	@Transactional(readOnly = true)
+	public MonthlyVoteResponse getCurrentVote(String username) {
 		try {
 			Optional<MonthlyVote> currentVote = monthlyVoteRepository.findCurrentActiveVote();
 			
@@ -123,6 +131,23 @@ public class MonthlyVoteService {
 				.map(this::mapToVoteCandidateResponse)
 				.toList();
 
+			// 사용자 투표 정보 조회
+			Boolean hasUserVoted = false;
+			Long userVotedCandidateId = null;
+			LocalDateTime userVotedAt = null;
+			
+			if (username != null) {
+				User user = userRepository.findByUserId(username).orElse(null);
+				if (user != null) {
+					Optional<UserVote> userVote = userVoteRepository.findByUserAndMonthlyVote(user, vote);
+					if (userVote.isPresent()) {
+						hasUserVoted = true;
+						userVotedCandidateId = userVote.get().getVoteCandidate().getId();
+						userVotedAt = userVote.get().getVotedAt();
+					}
+				}
+			}
+
 			return MonthlyVoteResponse.builder()
 				.id(vote.getId())
 				.year(vote.getYear())
@@ -134,6 +159,9 @@ public class MonthlyVoteService {
 				.endDate(vote.getEndDate())
 				.totalVotes(totalVotes)
 				.candidates(candidateResponses)
+				.hasUserVoted(hasUserVoted)
+				.userVotedCandidateId(userVotedCandidateId)
+				.userVotedAt(userVotedAt)
 				.build();
 				
 		} catch (Exception e) {
@@ -285,6 +313,9 @@ public class MonthlyVoteService {
 				.endDate(currentVote.getEndDate())
 				.totalVotes(totalVotes)
 				.candidates(candidateResponses)
+				.hasUserVoted(null) // 결과 조회에서는 사용자 정보 없음
+				.userVotedCandidateId(null)
+				.userVotedAt(null)
 				.build();
 				
 		} catch (CustomException e) {
@@ -323,6 +354,9 @@ public class MonthlyVoteService {
 				.endDate(monthlyVote.getEndDate())
 				.totalVotes(totalVotes)
 				.candidates(candidateResponses)
+				.hasUserVoted(null) // 과거 투표 결과에서는 사용자 정보 없음
+				.userVotedCandidateId(null)
+				.userVotedAt(null)
 				.build();
 				
 		} catch (CustomException e) {

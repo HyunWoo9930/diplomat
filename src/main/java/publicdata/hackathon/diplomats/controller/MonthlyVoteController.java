@@ -1,6 +1,7 @@
 package publicdata.hackathon.diplomats.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import publicdata.hackathon.diplomats.domain.dto.request.VoteRequest;
 import publicdata.hackathon.diplomats.domain.dto.response.ApiResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.MonthlyVoteResponse;
 import publicdata.hackathon.diplomats.domain.dto.response.UserVoteResponse;
+import publicdata.hackathon.diplomats.jwt.CustomUserDetails;
 import publicdata.hackathon.diplomats.service.MonthlyVoteService;
 import publicdata.hackathon.diplomats.utils.SecurityUtils;
 
@@ -40,11 +42,18 @@ public class MonthlyVoteController {
 	}
 
 	@GetMapping("/current")
-	@Operation(summary = "현재 투표 조회", description = "현재 진행중인 투표 정보와 후보 목록을 조회합니다.")
-	public ResponseEntity<ApiResponse<MonthlyVoteResponse>> getCurrentVote() {
+	@Operation(summary = "현재 투표 조회", description = "현재 진행중인 투표 정보와 후보 목록, 사용자 투표 정보를 조회합니다.")
+	public ResponseEntity<ApiResponse<MonthlyVoteResponse>> getCurrentVote(Authentication authentication) {
 		log.info("현재 투표 조회 요청");
 		
-		MonthlyVoteResponse response = monthlyVoteService.getCurrentVote();
+		String username = null;
+		if (authentication != null && authentication.isAuthenticated() && 
+			!"anonymousUser".equals(authentication.getPrincipal())) {
+			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+			username = userDetails.getUsername();
+		}
+		
+		MonthlyVoteResponse response = monthlyVoteService.getCurrentVote(username);
 		if (response == null) {
 			return ResponseEntity.ok(ApiResponse.success("현재 진행중인 투표가 없습니다.", null));
 		}

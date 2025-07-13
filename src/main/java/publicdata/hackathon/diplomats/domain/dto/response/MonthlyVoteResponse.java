@@ -20,4 +20,9 @@ public class MonthlyVoteResponse {
 	private LocalDateTime endDate;
 	private Long totalVotes;
 	private List<VoteCandidateResponse> candidates;
+	
+	// 사용자 투표 정보
+	private Boolean hasUserVoted;
+	private Long userVotedCandidateId;
+	private LocalDateTime userVotedAt;
 }
