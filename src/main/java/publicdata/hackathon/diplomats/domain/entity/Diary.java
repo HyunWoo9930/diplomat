@@ -53,4 +53,14 @@ public class Diary { // 외교 실천 일지
 		this.likes = 0;
 		this.viewCount = 0;
 	}
+
+	/**
+	 * 조회수 증가
+	 */
+	public void incrementViewCount() {
+		if (this.viewCount == null) {
+			this.viewCount = 0;
+		}
+		this.viewCount++;
+	}
 }

@@ -53,4 +53,11 @@ public class FreeBoard {
 		this.images = new ArrayList<>();
 		this.comments = new ArrayList<>();
 	}
+
+	/**
+	 * 조회수 증가
+	 */
+	public void incrementViewCount() {
+		this.viewCount++;
+	}
 }

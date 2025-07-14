@@ -127,18 +127,23 @@ public class DiaryService {
 			}
 
 			List<DiaryResponse> content = diaryPage.stream()
-				.map(diary -> DiaryResponse.builder()
-					.id(diary.getId())
-					.title(diary.getTitle())
-					.description(diary.getDescription())
-					.action(diary.getAction())
-					.likes(diary.getLikes())
-					.liked(ResponseUtil.isLiked(username, "Diary", diary.getId(), likeRepository, userRepository))
-					.createdAt(diary.getCreatedAt())
-					.updatedAt(diary.getUpdatedAt())
-					.userId(diary.getWriter().getUserId())
-					.isOwner(username != null && username.equals(diary.getWriter().getUserId()))
-					.build())
+				.map(diary -> {
+					int commentCount = (int) diaryCommentRepository.countByDiary(diary);
+					return DiaryResponse.builder()
+						.id(diary.getId())
+						.title(diary.getTitle())
+						.description(diary.getDescription())
+						.action(diary.getAction())
+						.likes(diary.getLikes())
+						.liked(ResponseUtil.isLiked(username, "Diary", diary.getId(), likeRepository, userRepository))
+						.viewCount(diary.getViewCount())
+						.commentCount(commentCount) // 🔧 댓글 수 추가
+						.createdAt(diary.getCreatedAt())
+						.updatedAt(diary.getUpdatedAt())
+						.userId(diary.getWriter().getUserId())
+						.isOwner(username != null && username.equals(diary.getWriter().getUserId()))
+						.build();
+				})
 				.toList();
 				
 			return PagedResponse.of(content, diaryPage);
@@ -157,6 +162,13 @@ public class DiaryService {
 		try {
 			Diary diary = diaryRepository.findById(id)
 				.orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND, "일지를 찾을 수 없습니다."));
+
+			// 🔧 조회수 증가 (본인이 아닌 경우에만)
+			if (username == null || !diary.getWriter().getUserId().equals(username)) {
+				diary.incrementViewCount();
+				diaryRepository.save(diary);
+				log.debug("일지 조회수 증가: diaryId={}, newViewCount={}", id, diary.getViewCount());
+			}
 
 			List<DiaryCommentResponse> diaryComments = diaryCommentRepository.findAllByDiary(diary)
 				.stream()
@@ -178,6 +190,7 @@ public class DiaryService {
 				.action(diary.getAction())
 				.likes(diary.getLikes())
 				.liked(ResponseUtil.isLiked(username, "Diary", diary.getId(), likeRepository, userRepository))
+				.viewCount(diary.getViewCount()) // 🔧 조회수도 응답에 포함
 				.userId(diary.getWriter().getUserId())
 				.isOwner(username != null && username.equals(diary.getWriter().getUserId()))
 				.createdAt(diary.getCreatedAt())

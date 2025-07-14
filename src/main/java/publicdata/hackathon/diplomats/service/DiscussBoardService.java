@@ -124,6 +124,13 @@ public class DiscussBoardService {
 		DiscussBoard discussBoard = discussBoardRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("DiscussBoard not found"));
 		
+		// 🔧 조회수 증가 (본인이 아닌 경우에만)
+		if (username == null || !discussBoard.getUser().getUserId().equals(username)) {
+			discussBoard.incrementViewCount();
+			discussBoardRepository.save(discussBoard);
+			log.debug("토론게시글 조회수 증가: boardId={}, newViewCount={}", id, discussBoard.getViewCount());
+		}
+		
 		List<DiscussBoardCommentResponse> discussBoardComments = discussBoardCommentRepository.findAllByDiscussBoard(discussBoard)
 			.stream()
 			.map(discussBoardComment -> DiscussBoardCommentResponse.builder()
@@ -169,7 +176,7 @@ public class DiscussBoardService {
 			.discussType(discussBoard.getDiscussType())
 			.discussTypeDisplay(discussBoard.getDiscussType().getDisplayName())
 			.likes(discussBoard.getLikes())
-			.viewCount(discussBoard.getViewCount())
+			.viewCount(discussBoard.getViewCount()) // 🔧 조회수 추가
 			.userId(discussBoard.getUser().getUserId())
 			.owner(username != null && username.equals(discussBoard.getUser().getUserId()))
 			.createdAt(discussBoard.getCreatedAt())

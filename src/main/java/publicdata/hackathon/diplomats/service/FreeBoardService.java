@@ -117,6 +117,14 @@ public class FreeBoardService {
 	public FreeBoardDetailResponse getFreeBoardDetails(String username, Long id) {
 		FreeBoard freeBoard = freeBoardRepository.findById(id)
 			.orElseThrow(() -> new EntityNotFoundException("FreeBoard not found"));
+		
+		// 🔧 조회수 증가 (본인이 아닌 경우에만)
+		if (username == null || !freeBoard.getUser().getUserId().equals(username)) {
+			freeBoard.incrementViewCount();
+			freeBoardRepository.save(freeBoard);
+			log.debug("자유게시글 조회수 증가: boardId={}, newViewCount={}", id, freeBoard.getViewCount());
+		}
+		
 		List<FreeBoardCommentResponse> freeBoardComments = freeBoardCommentRepository.findAllByFreeBoard(freeBoard)
 			.stream()
 			.map(freeBoardComment -> FreeBoardCommentResponse.builder()
@@ -162,7 +170,7 @@ public class FreeBoardService {
 			.content(freeBoard.getContent())
 			.likes(freeBoard.getLikes())
 			.liked(ResponseUtil.isLiked(username, "FreeBoard", freeBoard.getId(), likeRepository, userRepository))
-			.viewCount(freeBoard.getViewCount())
+			.viewCount(freeBoard.getViewCount()) // 🔧 업데이트된 조회수 반영
 			.userId(freeBoard.getUser().getUserId())
 			.isOwner(username != null && username.equals(freeBoard.getUser().getUserId()))
 			.createdAt(freeBoard.getCreatedAt())
